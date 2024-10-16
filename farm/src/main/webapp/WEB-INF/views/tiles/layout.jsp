@@ -61,6 +61,7 @@
     <div class=" container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
+     
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="<c:url value='/img/logogo1.png'/>" alt="AgriCulture">
         <!-- <h1 class="sitename">AgriCulture</h1>  -->
@@ -97,7 +98,14 @@
           </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        
       </nav>
+        <nav class="d-flex navmenu">
+       	 <ul>
+             <li class="dropdown"><a href="#">로그인</a></li>
+             <li class="dropdown"><a href="#">회원가입</a></li>
+      	 </ul>
+        </nav>
     </div>
   </header>
 
