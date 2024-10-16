@@ -3,33 +3,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+
 <c:choose>
-	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
-	<c:when test="${category eq 'fa'}"> <c:set var="title" value="- 나의농장"/>  </c:when>
-	<c:when test="${category eq 'li'}"> <c:set var="title" value="- 모니터링"/>  </c:when>
-	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 온습도 관리"/>  </c:when>
-	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
-	<c:when test="${category eq 'wt'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
-	<c:when test="${category eq 'login'}"> <c:set var="title" value="- 농사정보"/>  </c:when>
-	<c:when test="${category eq 'change'}"> <c:set var="title" value="- 재배 가이드"/>  </c:when>
-	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 게시판"/>  </c:when>
-	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
+
+   <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
+   <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
+   <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
 </c:choose>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<!-- <html lang="en"> -->
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>초보농부</title>
+  <title>초보농부 ${title}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="<c:url value='/img/2.png'/>" rel="icon">
-  <link href="<c:url value='/img/apple-touch-icon.png'/>" rel="초보농부">
+  <link href="<c:url value='/img/2222.png'/>" rel="icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -60,13 +54,14 @@
   <header id="header" class="header d-flex align-items-center position-relative">
     <div class=" container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/farm" class="logo d-flex align-items-center">
      
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="<c:url value='/img/logogo1.png'/>" alt="AgriCulture">
         <!-- <h1 class="sitename">AgriCulture</h1>  -->
       </a>
-
+			
+                
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.jsp" class="active">홈</a></li>
@@ -87,9 +82,9 @@
               <li><a href="#">공지사항</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="#"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="plants/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">작물관리</a></li>
+              <li><a href="plants/list">작물관리</a></li>
               <li><a href="#">실시간모니터링</a></li>
               <li><a href="#">온도/습도/조도</a></li>
               <li><a href="#">급수관리</a></li>
@@ -108,6 +103,8 @@
         </nav>
     </div>
   </header>
+
+ 
 
   <main class="main">
 	<tiles:insertAttribute name="container"/>	
@@ -142,7 +139,12 @@
 
       </div>
     </div>
-
+    
+	<!-- Page content-->
+	<div class="container-fluid my-4">
+                	<tiles:insertAttribute name="container" />
+                </div>
+	
   </footer>
 
   <!-- Scroll Top -->
