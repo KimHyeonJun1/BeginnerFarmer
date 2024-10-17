@@ -12,17 +12,17 @@
 
 <c:choose>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
-	<c:when test="${category eq 'li'}"> <c:set var="title" value="- 모니터링"/>  </c:when>
-	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 온습도 관리"/>  </c:when>
-	<c:when test="${category eq 'cr'}"> <c:set var="title" value="- 아나"/>  </c:when>
+	<c:when test="${category eq 'pl'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
+	<c:when test="${category eq 'we'}"> <c:set var="title" value="- 주간농사정보"/>  </c:when>
+	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 농업기술동영상"/>  </c:when>
+	<c:when test="${category eq 'bo'}"> <c:set var="title" value="- 게시판"/>  </c:when>
+	<c:when test="${category eq 'no'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
+	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 작물관리"/>  </c:when>
+	<c:when test="${category eq 'mo'}"> <c:set var="title" value="- 실시간모니터링"/>  </c:when>
+	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도/조도"/>  </c:when>
 	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
-	<c:when test="${category eq 'wt'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
-	<c:when test="${category eq 'pl'}"> <c:set var="title" value="- 작물관리"/>  </c:when>
-	<c:when test="${category eq 'change'}"> <c:set var="title" value="- 재배 가이드"/>  </c:when>
-	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 게시판"/>  </c:when>
-	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
+	<c:when test="${category eq 'di'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
 </c:choose>
-
 
 <!DOCTYPE html>
 <html>
@@ -49,9 +49,13 @@
   <link href="<c:url value='/vendor/aos/aos.css" rel="stylesheet'/>">
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
+  
+  <!-- 제이쿼리 선언 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
+  <link href="<c:url value='/css/common.css'/>" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: AgriCulture
@@ -77,7 +81,7 @@
                 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.jsp" class="active">홈</a></li>
+          <li><a href="/farm" class="active">홈</a></li>
           <li class="dropdown"><a href="#"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">작물가이드</a></li>
@@ -106,8 +110,8 @@
           </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        
       </nav>
+      
         <nav class="d-flex navmenu">
        	 <ul>
              <li class="dropdown"><a href="#">로그인</a></li>
@@ -115,6 +119,7 @@
       	 </ul>
         </nav>
     </div>
+    
   </header>
  <!-- Page Title -->
  <c:if test="${category != 'home'}">
@@ -123,10 +128,34 @@
   		</div>
 	</div>
 </c:if>
+    
+    <div>
+    	<img src="<c:url value='/img/hero_4.jpg'/>" style="width: 100%; height: 70px;">
+    </div>
+
+
+<div class="d-flex" id="wrapper">
+<!-- Sidebar-->
+          <c:if test="${ category != 'home' }">
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">
+				</div>
+				
+                <div class="list-group list-group-flush">
+                    <a class="${category == 'cu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/customer/list'/>">농사정보<i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a class="${category eq 'hr' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/hr/list'/>">소통공간<i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <a class="${category eq 'no' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/notice/list'/>">나의농장<i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                </div>
+            </div>
+          </c:if>
 
   <main class="main">
 	<tiles:insertAttribute name="container"/>	
   </main>
+</div>
 
 <c:if test="${category != 'home'}">
   <div class="d-flex" id="wrapper">
@@ -183,10 +212,10 @@
       </div>
     </div>
     
-	<!-- Page content-->
+	<!-- Page content 제거하기 두번 반복되는 원인 -->
 <!-- 	<div class="container-fluid my-4"> -->
-<%--                 	<tiles:insertAttribute name="container" /> --%>
-<!--                 </div> -->
+<%--     	<tiles:insertAttribute name="container" /> --%>
+<!--     </div> -->
 	
   </footer>
 

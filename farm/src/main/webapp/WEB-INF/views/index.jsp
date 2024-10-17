@@ -4,7 +4,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -648,6 +647,5 @@
     </section><!-- /Call To Action Section -->
 	</div>
 	</div>
-
 </body>
 </html>
