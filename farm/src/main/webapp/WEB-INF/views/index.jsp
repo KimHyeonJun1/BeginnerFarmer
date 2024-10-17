@@ -44,7 +44,7 @@
 
       </div>
 	
-    </section>/Hero Section
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services section">
