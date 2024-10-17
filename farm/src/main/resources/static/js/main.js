@@ -6,7 +6,24 @@
 * License: https://bootstrapmade.com/license/
 */
 
+$(document).ready(function() {
+    // 각 .dropdown-toggle 클릭 시 동작
+    $('.dropdown-toggle').click(function(event) {
+        event.preventDefault(); // 기본 링크 동작 방지
+        
+        // 클릭된 메뉴의 하위 메뉴를 선택
+        var $submenu = $(this).next('.dropdown-menu');
+
+        // 이미 열려 있는 다른 모든 하위 메뉴는 닫기 (슬라이드 업)
+        $('.dropdown-menu').not($submenu).slideUp();
+
+        // 클릭한 하위 메뉴는 열기 또는 닫기 (슬라이드 토글)
+        $submenu.slideToggle();
+    });
+});
+
 (function() {
+	
   "use strict";
 
   /**

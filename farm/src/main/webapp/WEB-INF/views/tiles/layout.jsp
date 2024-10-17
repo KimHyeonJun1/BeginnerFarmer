@@ -50,9 +50,14 @@
   <link href="<c:url value='/vendor/aos/aos.css" rel="stylesheet'/>">
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
+  
+<!--   제이쿼리 선언 -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
+  <link href="<c:url value='/css/common.css'/>" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: AgriCulture
@@ -78,7 +83,7 @@
                 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.jsp" class="active">홈</a></li>
+          <li><a href="/farm" class="active">홈</a></li>
           <li class="dropdown"><a href="#"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">작물가이드</a></li>
@@ -130,22 +135,41 @@
   </main>
 
 <!-- Sidebar-->
-          <c:if test="${ category != 'home' }">
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">
-				</div>
-				
-                <div class="list-group list-group-flush">
-                    <a class="${category == 'cu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/customer/list'/>">농사정보<i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <a class="${category eq 'hr' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/hr/list'/>">소통공간<i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <a class="${category eq 'no' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/notice/list'/>">나의농장<i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                </div>
-            </div>
-          </c:if>
+<div class="d-flex" id="wrapper">
+    <div class="border-end bg-white w-px200" id="sidebar-wrapper">
+<c:if test="${ category != 'home' }">
+    <div class="border-end bg-white w-px200" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light"></div>
 
+        <div class="list-group list-group-flush">
+            <!-- 농사정보 -->
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a>
+            <ul class="dropdown-menu" style="display: none;">
+                <li><a href="/customer/list">작물가이드</a></li>
+                <li><a href="#">농사Tip</a></li>
+            </ul>
+
+            <!-- 소통공간 -->
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a>
+            <ul class="dropdown-menu" style="display: none;">
+                <li><a href="/hr/list">게시판</a></li>
+                <li><a href="#">공지사항</a></li>
+            </ul>
+
+            <!-- 나의농장 -->
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
+            <ul class="dropdown-menu" style="display: none;">
+                <li><a href="/notice/list">작물관리</a></li>
+                <li><a href="#">실시간모니터링</a></li>
+                <li><a href="#">온도/습도/조도</a></li>
+                <li><a href="#">급수관리</a></li>
+                <li><a href="#">관찰일지</a></li>
+            </ul>
+        </div>
+    </div>
+</c:if>
+</div>
+</div>
 
 
   <footer id="footer" class="footer dark-background">
