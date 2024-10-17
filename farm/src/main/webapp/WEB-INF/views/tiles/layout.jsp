@@ -157,29 +157,27 @@
   </main>
 </div>
 
-<c:if test="${category != 'home'}">
-  <div class="d-flex" id="wrapper">
+<!-- Sidebar-->
+          <c:if test="${ category != 'home' }">
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">
 				</div>
+				
                 <div class="list-group list-group-flush">
-                    <a class="${category == 'ho' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/customer/list'/>">고객관리</a>
+                    <a class="${category == 'cu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/customer/list'/>">농사정보<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <a class="${category eq 'hr' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/hr/list'/>">사원관리</a>
+                    	href="<c:url value='/hr/list'/>">소통공간<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <a class="${category eq 'no' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/notice/list'/>">공지사항</a>
-                    <a class="${category eq 'pl' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/plants/list'/>">작물관리</a>
-                    <a class="${category eq 'da' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/data/list'/>">공공데이터</a>
-                    <a class="${category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
-                    	href="<c:url value='/visual/list'/>">시각화</a>
+                    	href="<c:url value='/notice/list'/>">나의농장<i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 </div>
             </div>
-            </div>
-</c:if>
+          </c:if>
 
+<!-- 	Page content -->
+<!-- 	<div class="container-fluid my-4"> -->
+<%--                 	<tiles:insertAttribute name="container" /> --%>
+<!--                 </div> -->
 
 
   <footer id="footer" class="footer dark-background">
