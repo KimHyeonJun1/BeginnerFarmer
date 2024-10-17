@@ -101,8 +101,8 @@
         
       </nav>
         <nav class="d-flex navmenu">
-       	 <ul>
-             <li class="dropdown"><a href="#">로그인</a></li>
+       	 <ul> 
+             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
              <li class="dropdown"><a href="#">회원가입</a></li>
       	 </ul>
         </nav>

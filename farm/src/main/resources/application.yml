@@ -6,7 +6,7 @@ spring:
        prefix: /WEB-INF/views/
        suffix: .jsp
   config:
-    import: classpath:info.yml  
+    import: classpath:info.yml
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: ${oracle.url}
@@ -15,3 +15,7 @@ spring:
 server:
   servlet:
      context-path: /farm
+
+mybatis:
+  mapper-locations: classpath:sqlmap/*Mapper.xml
+#  config-location: classpath:sqlmap/typeConfig.xml
