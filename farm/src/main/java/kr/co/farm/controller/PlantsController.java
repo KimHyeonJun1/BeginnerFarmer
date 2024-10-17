@@ -10,7 +10,7 @@ public class PlantsController {
 	
 	@RequestMapping("/list")
 	public String list(HttpSession session) {
-		session.setAttribute("category", "pl");
+		session.setAttribute("category", "ma");
 		
 		return "plants/list";
 	}

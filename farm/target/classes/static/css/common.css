@@ -90,3 +90,5 @@ a:link, a:visited, .pagination a, .nav-pills a, .nav-tabs a { text-decoration: n
 .date + .date-remove { position: relative; right: 35px }
 
 textarea.form-control { resize: none; height:250px }
+
+
