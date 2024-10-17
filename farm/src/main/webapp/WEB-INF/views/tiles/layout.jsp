@@ -5,11 +5,24 @@
 
 
 <c:choose>
-
    <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
    <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
    <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
 </c:choose>
+
+<c:choose>
+	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
+	<c:when test="${category eq 'li'}"> <c:set var="title" value="- 모니터링"/>  </c:when>
+	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 온습도 관리"/>  </c:when>
+	<c:when test="${category eq 'cr'}"> <c:set var="title" value="- 아나"/>  </c:when>
+	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
+	<c:when test="${category eq 'wt'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
+	<c:when test="${category eq 'pl'}"> <c:set var="title" value="- 작물관리"/>  </c:when>
+	<c:when test="${category eq 'change'}"> <c:set var="title" value="- 재배 가이드"/>  </c:when>
+	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 게시판"/>  </c:when>
+	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
+</c:choose>
+
 
 <!DOCTYPE html>
 <html>
@@ -82,13 +95,13 @@
               <li><a href="#">공지사항</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="plants/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="/farm/plants/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="plants/list">작물관리</a></li>
-              <li><a href="#">실시간모니터링</a></li>
-              <li><a href="#">온도/습도/조도</a></li>
-              <li><a href="#">급수관리</a></li>
-              <li><a href="#">관찰일지</a></li>
+                <li><a href="<c:url value='/plants/list'/>">작물관리</a></li>
+				<li><a href="<c:url value='/monitoring'/>">실시간모니터링</a></li>
+				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
+				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
+				<li><a href="<c:url value='/observation-diary'/>">관찰일지</a></li>
             </ul>
           </li>
         </ul>
@@ -103,12 +116,42 @@
         </nav>
     </div>
   </header>
-
- 
+ <!-- Page Title -->
+ <c:if test="${category != 'home'}">
+ 	<div class="page-title dark-background" data-aos="fade" style="background-image: url('<c:url value="/img/page-title-bg.jpg"/>');">
+  		<div class="container position-relative">
+  		</div>
+	</div>
+</c:if>
 
   <main class="main">
 	<tiles:insertAttribute name="container"/>	
   </main>
+
+<c:if test="${category != 'home'}">
+  <div class="d-flex" id="wrapper">
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">
+				</div>
+                <div class="list-group list-group-flush">
+                    <a class="${category == 'ho' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/customer/list'/>">고객관리</a>
+                    <a class="${category eq 'hr' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/hr/list'/>">사원관리</a>
+                    <a class="${category eq 'no' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/notice/list'/>">공지사항</a>
+                    <a class="${category eq 'pl' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/plants/list'/>">작물관리</a>
+                    <a class="${category eq 'da' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/data/list'/>">공공데이터</a>
+                    <a class="${category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4" 
+                    	href="<c:url value='/visual/list'/>">시각화</a>
+                </div>
+            </div>
+            </div>
+</c:if>
+
+
 
   <footer id="footer" class="footer dark-background">
 
@@ -141,9 +184,9 @@
     </div>
     
 	<!-- Page content-->
-	<div class="container-fluid my-4">
-                	<tiles:insertAttribute name="container" />
-                </div>
+<!-- 	<div class="container-fluid my-4"> -->
+<%--                 	<tiles:insertAttribute name="container" /> --%>
+<!--                 </div> -->
 	
   </footer>
 

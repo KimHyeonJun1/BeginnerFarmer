@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FarmController {
 	@RequestMapping("/")
 	public String home(HttpSession session) {
-		session.removeAttribute("category");
+		session.setAttribute("category", "home");
 		return "index";
 	}
 	
