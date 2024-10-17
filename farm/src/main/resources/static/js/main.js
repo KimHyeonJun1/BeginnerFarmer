@@ -19,7 +19,35 @@ $(document).ready(function() {
 
         // 클릭한 하위 메뉴는 열기 또는 닫기 (슬라이드 토글)
         $submenu.slideToggle();
+		
+		// 모든 메뉴에서 active 클래스 제거
+        $('.dropdown-toggle').removeClass('active');
+
+        // 클릭된 메뉴에 active 클래스 추가
+        $(this).addClass('active');
     });
+	
+	// 페이지 로딩 시 현재 URL에 맞는 메뉴 활성화
+    var currentPath = window.location.pathname;
+
+    // 만약 URL에 '/guide/list'가 포함되어 있으면 '농사정보' 메뉴 열기 및 '작물가이드' 활성화
+    if (currentPath.includes('/guide/list')) {
+        $('.dropdown-toggle:contains("농사정보")').addClass('active'); // 농사정보 메뉴 활성화
+        $('.dropdown-toggle:contains("농사정보")').next('.dropdown-menu').slideDown(); // 하위 메뉴 열기
+        $('.dropdown-menu a[href="/guide/list"]').addClass('active'); // 작물가이드 활성화
+    }
+	// 소통공간 관련 URL 처리
+    if (currentPath.includes('/hr/list')) {
+        $('.dropdown-toggle:contains("소통공간")').addClass('active'); // 소통공간 메뉴 활성화
+        $('.dropdown-toggle:contains("소통공간")').next('.dropdown-menu').slideDown(); // 하위 메뉴 열기
+        $('.dropdown-menu a[href="/hr/list"]').addClass('active'); // 게시판 활성화
+    }
+    // 나의 농장 관련 URL 처리
+    if (currentPath.includes('/plants/list')) {
+        $('.dropdown-toggle:contains("나의농장")').addClass('active'); // 나의 농장 메뉴 활성화
+        $('.dropdown-toggle:contains("나의농장")').next('.dropdown-menu').slideDown(); // 하위 메뉴 열기
+        $('.dropdown-menu a[href="/plants/list"]').addClass('active'); // 작물관리 활성화
+    }
 });
 
 (function() {
