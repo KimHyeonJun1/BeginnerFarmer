@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.user" var="auth_user"/>
+</sec:authorize>
+
 
 <c:choose>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
@@ -18,6 +24,7 @@
 
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -102,8 +109,33 @@
       </nav>
         <nav class="d-flex navmenu">
        	 <ul> 
-             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
-             <li class="dropdown"><a href="#">회원가입</a></li>
+       	 	<c:if test="${empty auth_user  }"  >
+	             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
+	             <li class="dropdown"><a href="#">회원가입</a></li>
+       	 	</c:if>
+       	 	
+       	 	<c:if test="${not empty auth_user }">
+
+<!-- 			<a><i class="fa-regular fa-bell" style="color: #2bb74c;"></i></a> -->
+
+	             <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
+                      	
+                 <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+                      	data-bs-toggle="dropdown" aria-haspopup="true" 
+                      	aria-expanded="false">${auth_user.name }</a>
+                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+<%--                      	<c:if test="${empty auth_user.social }"> --%>
+<%--                          <a class="dropdown-item" href="#!">아이디: ${auth_user.userid}</a> --%>
+                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+                         <a class="dropdown-item" href="<c:url value=''/>">비밀번호 변경</a>
+<!--                          <div class="dropdown-divider"></div> -->
+<%--                          </c:if> --%>
+<%--                          <a class="dropdown-item" href="<c:url value='/member/logout'/>">로그아웃</a> --%>
+                     </div>
+                 </li>
+
+       	 	</c:if>
       	 </ul>
         </nav>
     </div>
