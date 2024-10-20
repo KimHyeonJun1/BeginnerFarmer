@@ -122,6 +122,7 @@
         </nav>
     </div>
   </header>
+  
  <!-- Page Title -->
  <c:if test="${category != 'home'}">
  	<div class="page-title dark-background" data-aos="fade" style="background-image: url('<c:url value="/img/page-title-bg.jpg"/>');">
@@ -130,47 +131,45 @@
 	</div>
 </c:if>
 
-  <main class="main">
-	<tiles:insertAttribute name="container"/>	
-  </main>
 
-<!-- Sidebar-->
 <div class="d-flex" id="wrapper">
-    <div class="border-end bg-white w-px200" id="sidebar-wrapper">
-		<c:if test="${ category != 'home' }">
-    		<div class="border-end bg-white w-px200" id="sidebar-wrapper">
-        		<div class="sidebar-heading border-bottom bg-light"></div>
+    <!-- Sidebar -->
+    <c:if test="${ category != 'home' }">
+        <div class="border-end bg-white" id="sidebar-wrapper" style="width: 200px;">
+            <div class="sidebar-heading border-bottom bg-light"></div>
+            <div class="list-group list-group-flush">
+                <!-- 농사정보 -->
+                <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'gu' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'gu' ? 'active' : ''} list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a></li>
+                    <li><a href="#">농사Tip</a></li>
+                </ul>
 
-       			<div class="list-group list-group-flush">
-            		<!-- 농사정보 -->
-            		<a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a>
-            		<ul class="dropdown-menu" style="display: ${category eq 'gu' ? 'block' : 'none'};">
-                		<li><a class="${ category eq 'gu' ? 'active' : ''} list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a></li>
-                		<li><a href="#">농사Tip</a></li>
-            		</ul>
+                <!-- 소통공간 -->
+                <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'bo' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'bo' ? 'active' : ''} list-group-item-action" href="/board/list">게시판</a></li>
+                    <li><a href="#">공지사항</a></li>
+                </ul>
 
-	            <!-- 소통공간 -->
-		            <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a>
-		            <ul class="dropdown-menu" style="display: ${category eq 'bo' ? 'block' : 'none'};">
-		                <li><a class="${ category eq 'bo' ? 'active' : ''} list-group-item-action" href="/board/list">게시판</a></li>
-		                <li><a href="#">공지사항</a></li>
-		            </ul>
+                <!-- 나의농장 -->
+                <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/plants/list'/>">작물관리</a></li>
+                    <li><a href="#">실시간모니터링</a></li>
+                    <li><a href="#">온도/습도/조도</a></li>
+                    <li><a href="#">급수관리</a></li>
+                    <li><a href="#">관찰일지</a></li>
+                </ul>
+            </div>
+        </div>
+    </c:if>
 
-	            <!-- 나의농장 -->
-		            <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
-		            <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};">
-		                <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/plants/list'/>">작물관리</a></li>
-		                <li><a href="#">실시간모니터링</a></li>
-		                <li><a href="#">온도/습도/조도</a></li>
-		                <li><a href="#">급수관리</a></li>
-		                <li><a href="#">관찰일지</a></li>
-		            </ul>
-       			</div>
-    		</div>
-		</c:if>
-	</div>
+    <!-- Main Content -->
+    <main id="content" class="main ${ category == 'home' ? 'full-width' : ''}" style="flex-grow: 1;">
+        <tiles:insertAttribute name="container"/>
+    </main>
 </div>
-
 
   <footer id="footer" class="footer dark-background">
 

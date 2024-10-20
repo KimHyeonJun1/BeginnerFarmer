@@ -12,5 +12,4 @@ public class FarmController {
 		session.setAttribute("category", "home");
 		return "index";
 	}
-	
 }
