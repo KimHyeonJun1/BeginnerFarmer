@@ -1,4 +1,4 @@
 oracle:
-  url: jdbc:oracle:thin:@localhost:1521:xe
-  username: hr
-  password: '0000'
+  url: jdbc:oracle:thin:@121.179.5.33:1521:xe
+  username: farm
+  password: '159357'

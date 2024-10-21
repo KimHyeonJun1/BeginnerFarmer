@@ -3,14 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-
 <c:choose>
-   <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
-   <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
-   <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
-</c:choose>
-
-<c:choose>
+	<c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
+	<c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
+	<c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
 	<c:when test="${category eq 'gu'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
 	<c:when test="${category eq 'in'}"> <c:set var="title" value="- 주간농사정보"/>  </c:when>
@@ -41,7 +37,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -124,7 +120,7 @@
   </header>
   
  <!-- Page Title -->
- <c:if test="${category != 'home'}">
+<c:if test="${category != 'home'}">
  	<div class="page-title dark-background" data-aos="fade" style="background-image: url('<c:url value="/img/page-title-bg.jpg"/>');">
   		<div class="container position-relative">
   		</div>
