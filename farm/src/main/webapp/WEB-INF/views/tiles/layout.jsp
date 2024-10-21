@@ -12,9 +12,9 @@
 
 <c:choose>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
-	<c:when test="${category eq 'pl'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
-	<c:when test="${category eq 'we'}"> <c:set var="title" value="- 주간농사정보"/>  </c:when>
-	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 농업기술동영상"/>  </c:when>
+	<c:when test="${category eq 'gu'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
+	<c:when test="${category eq 'in'}"> <c:set var="title" value="- 주간농사정보"/>  </c:when>
+	<c:when test="${category eq 'vi'}"> <c:set var="title" value="- 농업기술동영상"/>  </c:when>
 	<c:when test="${category eq 'bo'}"> <c:set var="title" value="- 게시판"/>  </c:when>
 	<c:when test="${category eq 'no'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
 	<c:when test="${category eq 'fa'}"> <c:set var="title" value="- 나의농장"/>  </c:when>
@@ -82,9 +82,9 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/farm" class="active">홈</a></li>
-          <li class="dropdown"><a href="#"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="/farm/guide/list"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">작물가이드</a></li>
+              <li><a href="<c:url value='/guide/list'/>">작물가이드</a></li>
               <li class="dropdown"><a href="#"><span>농사Tip</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="#">주간농사정보</a></li>
@@ -110,8 +110,8 @@
           </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        
       </nav>
+      
         <nav class="d-flex navmenu">
        	 <ul>
              <li class="dropdown"><a href="#">로그인</a></li>
@@ -121,7 +121,6 @@
     </div>
   </header>
   
-  <body>
  <!-- Page Title -->
  <c:if test="${category != 'home'}">
  	<div class="page-title dark-background" data-aos="fade" style="background-image: url('<c:url value="/img/page-title-bg.jpg"/>');">
@@ -131,81 +130,44 @@
 </c:if>
 
 
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <c:if test="${ category != 'home' }">
+        <div class="border-end bg-white" id="sidebar-wrapper" style="width: 200px;">
+            <div class="sidebar-heading border-bottom bg-light"></div>
+            <div class="list-group list-group-flush">
+                <!-- 농사정보 -->
+                <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'gu' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'gu' ? 'active' : ''} list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a></li>
+                    <li><a href="#">농사Tip</a></li>
+                </ul>
 
-  <main class="main">
-	<tiles:insertAttribute name="container"/>	
-  </main>
+                <!-- 소통공간 -->
+                <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'bo' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'bo' ? 'active' : ''} list-group-item-action" href="/board/list">게시판</a></li>
+                    <li><a href="#">공지사항</a></li>
+                </ul>
 
-	<!-- Sidebar-->
-	<div class="d-flex" id="wrapper">
-		<c:if test="${ category != 'home' }">
-			<div class="border-end bg-white w-px200" id="sidebar-wrapper">
-				<div class="list-group list-group-flush">
-					<c:if test="${ category eq 'fa'}">
-						<a
-							class="${category eq 'fa' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle"
-							href="<c:url value='/farm/plants/list'/>">나의농장</a>
-						<ul class="dropdown-menu" style="display:  'none'};">
-							<li><a
-								class="${category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 toggle"
-								href="<c:url value='/plants/list'/>">작물관리</a></li>
-							<li><a
-								class="${category eq 'mo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 toggle"
-								href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
-							<li><a
-								class="${category eq 'te' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 toggle"
-								href="<c:url value='/notice/list'/>">온도/습도/조도</a></li>
-							<li><a
-								class="${category eq 'wa' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 toggle"
-								href="<c:url value='/notice/list'/>">급수관리</a></li>
-							<li><a
-								class="${category eq 'di' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 toggle"
-								href="<c:url value='/notice/list'/>">관찰일지</a></li>
-						</ul>
-					</c:if>
-				</div>
-			</div>
-			
-			
-		</c:if>
-	</div>
+                <!-- 나의농장 -->
+                <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
+                <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};">
+                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/plants/list'/>">작물관리</a></li>
+                    <li><a href="#">실시간모니터링</a></li>
+                    <li><a href="#">온도/습도/조도</a></li>
+                    <li><a href="#">급수관리</a></li>
+                    <li><a href="#">관찰일지</a></li>
+                </ul>
+            </div>
+        </div>
+    </c:if>
 
-<!-- 	 			농사정보 -->
-	 
-<%-- 		            <c:if test="${ category eq 'pl'}"> --%>
-<%-- 		            <a class="${ category eq 'pl' ? 'active' : '' } list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a> --%>
-<!-- 		            <ul class="dropdown-menu" style="display: none;"> -->
-<!-- 		                <li><a href="/customer/list">작물가이드</a></li> -->
-<!-- 		                <li><a href="#">농사Tip</a></li> -->
-<!-- 		            </ul> -->
-<%-- 		            </c:if> --%>
-<!-- <!-- 				 소통공간 --> -->
-<%-- 					<c:if test="${ category eq 'bo' }">  --%>
-<%-- 		            <a class="${ category eq 'bo' ? 'active' : '' } list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a> --%>
-<!-- 		            <ul class="dropdown-menu" style="display: none;"> -->
-<!-- 		                <li><a href="/hr/list">게시판</a></li> -->
-<!-- 		                <li><a href="#">공지사항</a></li> -->
-<!-- 		            </ul> -->
-<%-- 					</c:if> --%>
-
-
-<!-- <!-- 				나의농장 --> -->
-<%-- 						<c:if test="${ category eq 'fa' }">  --%>
-<%-- 		            <a class="${ category eq 'fa' ? 'active' : '' } list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="/plants/list">나의농장</a> --%>
-<!-- 		            <ul class="dropdown-menu"> -->
-<%-- 		                 <li><a class="${ category eq 'ma' ? 'active' : '' } list-group-item list-group-item-action" href="/farm/plants/list">작물관리</a></li> --%>
-<%-- 		              	<li>	 <a class="${category == 'ma' ? 'active' : ''}" href="/farm/plants/list">작물관리</a></li> --%>
-<!-- 		                <li><a href="#">실시간모니터링</a></li> -->
-<!-- 		                <li><a href="#">온도/습도/조도</a></li> -->
-<!-- 		                <li><a href="#">급수관리</a></li>  -->
-<!-- 		                <li><a href="#">관찰일지</a></li>  -->
-<!-- 		             </ul> -->
-<%-- 					 </c:if> --%>
-<!-- <!-- 				</div>		  --> -->
-<!-- <!-- 			</div> --> -->
-<%-- 		</c:if> --%>
-<!-- 			</div> -->
-
+    <!-- Main Content -->
+    <main id="content" class="main ${ category == 'home' ? 'full-width' : ''}" style="flex-grow: 1;">
+        <tiles:insertAttribute name="container"/>
+    </main>
+</div>
 
 
 	
