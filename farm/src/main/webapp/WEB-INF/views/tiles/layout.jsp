@@ -2,14 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<html>
+<c:choose>
+	<c:when>
+	</c:when>
+</c:choose>
+</html>
 
 <c:choose>
-   <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
-   <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
-   <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
+    <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
+    <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
+    <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
 </c:choose>
-
 <c:choose>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
 	<c:when test="${category eq 'gu'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
@@ -17,7 +21,6 @@
 	<c:when test="${category eq 'vi'}"> <c:set var="title" value="- 농업기술동영상"/>  </c:when>
 	<c:when test="${category eq 'bo'}"> <c:set var="title" value="- 게시판"/>  </c:when>
 	<c:when test="${category eq 'no'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
-	<c:when test="${category eq 'fa'}"> <c:set var="title" value="- 나의농장"/>  </c:when>
 	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 작물관리"/>  </c:when>
 	<c:when test="${category eq 'mo'}"> <c:set var="title" value="- 실시간모니터링"/>  </c:when>
 	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도/조도"/>  </c:when>
@@ -42,7 +45,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Marcellus:wght@400&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -99,9 +102,9 @@
               <li><a href="#">공지사항</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="/farm/plants/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="/farm/manager/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-                <li><a href="<c:url value='/plants/list'/>">작물관리</a></li>
+                <li><a href="<c:url value='/manager/list'/>">작물관리</a></li>
 				<li><a href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
 				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
 				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
@@ -122,7 +125,7 @@
   </header>
   
  <!-- Page Title -->
- <c:if test="${category != 'home'}">
+<c:if test="${category != 'home'}">
  	<div class="page-title dark-background" data-aos="fade" style="background-image: url('<c:url value="/img/page-title-bg.jpg"/>');">
   		<div class="container position-relative">
   		</div>
@@ -153,7 +156,7 @@
                 <!-- 나의농장 -->
                 <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
                 <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};">
-                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/plants/list'/>">작물관리</a></li>
+                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manager/list'/>">작물관리</a></li>
                     <li><a href="#">실시간모니터링</a></li>
                     <li><a href="#">온도/습도/조도</a></li>
                     <li><a href="#">급수관리</a></li>

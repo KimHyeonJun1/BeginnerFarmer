@@ -5,14 +5,24 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller	@RequestMapping("/plants")
-public class PlantsController {
+@Controller	@RequestMapping("/manager")
+public class ManagerController {
+	
+	
+	
+	
+	
+	@RequestMapping("/register")
+	public String register() {
+		return "manager/register";
+	}
+	
 	
 	@RequestMapping("/list")
 	public String list(HttpSession session) {
 		session.setAttribute("category", "ma");
 		
-		return "plants/list";
+		return "manager/list";
 	}
 	
 	

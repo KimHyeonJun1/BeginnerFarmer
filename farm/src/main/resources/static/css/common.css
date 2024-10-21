@@ -108,4 +108,64 @@ a:link, a:visited, .pagination a, .nav-pills a, .nav-tabs a { text-decoration: n
 
 textarea.form-control { resize: none; height:250px }
 
+.box {
+    width: 50%;
+     border: 2px solid green;
+    background-color: white;
+    margin-left: 20%;
+    padding: 20px;
+    border-radius: 5px;
+    margin-right: auto;
+    color: black;
+    text-align: center;
+    position: relative;
+}
 
+.plant-mg {
+    display: flex; /* 이미지와 말풍선을 가로로 나란히 배치 */
+    align-items: center; 
+    justify-content: center; /* 이미지와 말풍선을 왼쪽 정렬 */
+    position: relative; /* 자식 요소인 말풍선의 위치 기준 */
+    padding-left: 100px;
+}
+
+.box img {
+    width: 50%; /* 이미지 크기를 조정 */
+    height: auto;
+    object-fit: contain;
+    
+}
+
+.speech-bubble {
+    position: relative;
+    background-color: #ffffff;
+    top: 10%;
+/*     left: -5px; */
+    border-radius: 15px;
+    color: #000000;
+    padding: 50px;
+    margin-left: 10px; /* 이미지와 말풍선 사이의 간격 */
+    border: 2px solid green;
+    font-size: 25px;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -16px;
+    border-right: 16px solid #ff80ff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    transform: translateY(-50%);
+    border-right-color: green;
+}
+
+.text-box {
+    margin-top: 20px; /* 이미지와 텍스트 사이의 여백 */
+}
+
+.text-box h3 {
+    margin: 0;
+    font-size: 30px;
+}
