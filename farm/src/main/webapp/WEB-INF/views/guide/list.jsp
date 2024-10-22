@@ -8,13 +8,48 @@
 <title>작물가이드</title>
 </head>
 <body>
-<h3>작물</h3>
-<h3>작물</h3>
-<h3>작물</h3>
-<h3>작물</h3>
-<h3>작물</h3>
-<h3>작물</h3>
-<h3>작물</h3>
+<div class="container text-center mt-5">
+  <div class="row">
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+    <div class="col">
+      <figure class="border border-3 border-success">
+        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
+        <figcaption class="mt-4 fs-5">상추</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
 
 
 </body>
