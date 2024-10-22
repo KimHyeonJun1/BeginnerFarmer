@@ -15,7 +15,7 @@ public interface MemberMapper {
 	int deleteMember(String userid);         //회원탈퇴시 삭제
 	
 	int registerMemberForTest(MemberVO vo);  //테스트용 회원정보 저장
-	MemberVO getOneMemberByUseridAndEmail(MemberVO vo);//아이디와 이메일이 일치하는 회원정보 조회
-	int updatePassword(MemberVO vo);         //비밀번호 변경저장
+	MemberVO getOneMemberByUseridAndEmail(MemberVO vo);//아이디와 이메일이 일치하는 회원정보 조회 (비밀번호찾기)
+	int updatePassword(MemberVO vo);         //비밀번호 변경저장 (비밀번호찾기)
 	
 }

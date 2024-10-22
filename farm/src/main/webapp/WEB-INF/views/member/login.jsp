@@ -8,7 +8,6 @@
 </head>
 
 <body>
-   <h3>로그인</h3>
    
    
    <div class="row justify-content-center">

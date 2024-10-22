@@ -1,4 +1,14 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          naver:
+            client-id: ${naver.client-id}  
+            client-secret: ${naver.client-secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: ${baseURL}/login/oauth2/code/naver
+          kakao:
   application:
     name: farm
   mvc:
@@ -7,15 +17,27 @@ spring:
        suffix: .jsp
   config:
     import: classpath:info.yml
+
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: ${oracle.url}
     username: ${oracle.username}
     password: ${oracle.password}
+
+  mail:
+   host: smtp.naver.com
+   username: ${naver.email.username}
+   password: ${naver.email.password} 
+   default-encoding: utf-8
+  servlet:
+   multipart:
+    max-file-size: 10MB
+
 server:
   servlet:
      context-path: /farm
 
+#매퍼파일 위치 지정
 mybatis:
   mapper-locations: classpath:sqlmap/*Mapper.xml
 #  config-location: classpath:sqlmap/typeConfig.xml

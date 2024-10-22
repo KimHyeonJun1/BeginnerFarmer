@@ -18,7 +18,7 @@ public class LogoutSuccess implements LogoutSuccessHandler{@Override
 			throws IOException, ServletException {
 		
 	
-		//로그인 성공시 웰컴페이지 설정
+		//로그아웃 시 웰컴페이지 설정
 		response.sendRedirect("/farm");
 	}
 
