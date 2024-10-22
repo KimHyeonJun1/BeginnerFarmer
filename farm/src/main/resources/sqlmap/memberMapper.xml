@@ -8,13 +8,13 @@ update member set userpw = #{userpw} where userid = #{userid}
 </update>
 
 <!-- 아이디와 이메일이 일치하는 회원정보 조회 -->
-<select id="getOneMemberByUseridAndEmail" resultType="kr.co.farm.member.MemberVO">  
+<select id="getOneMemberByUseridAndEmail" resultType="member">  
 select * from member
 where userid = #{userid} and email = #{email}
 </select>
 
 <!-- 회원정보 조회: 로그인,내정보 조회 -->
-<select id="getOneMember" resultType="kr.co.farm.member.MemberVO">
+<select id="getOneMember" resultType="member">
 select * from member where userid = #{userid}
 </select>
 

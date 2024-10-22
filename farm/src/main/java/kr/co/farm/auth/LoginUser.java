@@ -2,10 +2,12 @@ package kr.co.farm.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import kr.co.farm.member.MemberVO;
 import lombok.AllArgsConstructor;
@@ -13,8 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor @Getter @Setter
-public class LoginUser implements UserDetails{
-	private static final long serialVersionUID = 1L;
+public class LoginUser implements UserDetails, OAuth2User {
 	
 	private MemberVO user;
 	
@@ -57,6 +58,18 @@ public class LoginUser implements UserDetails{
 	@Override
 	public boolean isEnabled() { //유효한 패스워드인지
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

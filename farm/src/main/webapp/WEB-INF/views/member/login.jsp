@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#naver { 
+	background: url("<c:url value='/img/naver.png'/>")
+}
+
+#kakao {
+	background: url("<c:url value='/img/kakao.png'/>")
+}
+
+</style>
+
+
 </head>
 
 <body>
@@ -27,19 +39,20 @@
                      <input class="form-control" name="userpw" type="password"
                         placeholder="비밀번호"> <label>비밀번호</label>
                   </div>
-                  
-                  
 <!--                   <div class="form-check mb-3"> -->
-<!--                      <input class="form-check-input" id="inputRememberPassword" -->
-<!--                         type="checkbox" value=""> <label -->
-<!--                         class="form-check-label" for="inputRememberPassword">Remember -->
-<!--                         Password</label> -->
-<!--                   </div> 
-                  </div>
-                  -->
-                     
+<!-- 					 <label> -->
+<!-- 					 	<input class="form-check-input" name="remember-me" -->
+<!-- 							type="checkbox" checked>로그인 상태 유지 -->
+<!-- 					 </label> -->
+<!-- 				  </div> -->
                      <button class="btn btn-success form-control py-3">로그인</button>
                </form>
+               
+               <div class="mt-3 d-flex gap-4">
+					<input type="button" class="btn form-control" id="naver"> 
+					<input type="button" class="btn form-control" id="kakao">
+				</div>
+               
             </div>
             <div class="card-footer text-center py-3">
                   <div class="d-flex align-items-center justify-content-between my-2">
@@ -51,6 +64,14 @@
          </div>
       </div>
    </div>
-   
 </body>
+
+<script>
+	$("#naver, #kakao").on("click", function(){
+		location = "<c:url value='/oauth2/authorization/' />" + $(this).attr("id")	
+	})
+</script>
+
+
+
 </html>

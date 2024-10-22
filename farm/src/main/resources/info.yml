@@ -11,6 +11,6 @@ naver:
    password: lhaej4257!
 
 kakao:
- client-id: cd0c82c01827e15239af840abb8cf6ab
+ client-id: 91bf4ac093e1b519ef6c6633bdd5808d
    
 baseURL: http://localhost:8080/farm
