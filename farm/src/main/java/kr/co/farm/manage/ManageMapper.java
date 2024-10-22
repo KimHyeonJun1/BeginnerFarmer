@@ -1,9 +1,9 @@
-package kr.co.farm.manager;
+package kr.co.farm.manage;
 
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ManagerMapper {
+public interface ManageMapper {
 //작물관리
 	
 }

@@ -10,7 +10,7 @@
 <body>
 <h3 class="m-2 pb-5">작물관리</h3>
 <div class="box">
-       <a class="link" href="/farm/manager/register">
+       <a class="link" href="/farm/manage/register">
        <div class="plant-mg my-2">
        		 <img src="<c:url value='/img/clover.png'/>" alt="식물">
         <div class="speech-bubble"> 여기를 클릭!</div>

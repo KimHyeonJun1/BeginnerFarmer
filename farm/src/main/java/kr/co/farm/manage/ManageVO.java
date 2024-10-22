@@ -1,11 +1,11 @@
-package kr.co.farm.manager;
+package kr.co.farm.manage;
 
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter	@Setter
-public class ManagerVO {
+public class ManageVO {
 	
 	
 	

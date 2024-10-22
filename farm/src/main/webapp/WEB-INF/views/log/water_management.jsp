@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3 class="my-4">등록화면</h3>
-<div>작물을 등록하세요</div>
+<h3 class="my-3">급수관리</h3>
 </body>
 </html>
