@@ -10,11 +10,25 @@
 # Font & Color Variables
 # Help: https://bootstrapmade.com/color-system/
 --------------------------------------------------------------*/
+@font-face {
+    font-family: 'HakgyoansimAllimjangTTF-B';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimAllimjangTTF-B.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+#wrapper {
+  overflow-x: hidden;
+  display: flex; /* Flexbox 사용 */
+  min-height: 100vh; /* 최소 높이를 화면 전체로 설정 */
+}
+
 /* Fonts */
 :root {
-  --default-font: "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Marcellus",  sans-serif;
-  --nav-font: "Marcellus",  sans-serif;
+	
+  --default-font: "HakgyoansimAllimjangTTF-B", "Open Sans",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "HakgyoansimAllimjangTTF-B", "Marcellus",  sans-serif;
+  --nav-font: "HakgyoansimAllimjangTTF-B", "Marcellus",  sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
@@ -42,6 +56,17 @@
 .light-background {
   --background-color: #f9f9f9;
   --surface-color: #ffffff;
+}
+
+.dark-background {
+
+
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --accent-color: #2ea359;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
 }
 
 
@@ -706,9 +731,11 @@ h6 {
 /*--------------------------------------------------------------
 # Global Page Titles & Breadcrumbs
 --------------------------------------------------------------*/
+
 .page-title {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: var(--background-color); /* 필요에 따라 삭제 가능 */
+  background-image: url(/img/page-title-bg.jpg); /* 이미지 배경 */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -717,12 +744,29 @@ h6 {
   position: relative;
 }
 
-.page-title:before {
-  content: "";
-  background-color: color-mix(in srgb, var(--background-color), transparent 50%);
-  position: absolute;
-  inset: 0;
+.page-title h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: white; /* 배경 이미지 위에 텍스트를 가독성 있게 표시 */
 }
+
+/* .page-title { */
+/*   color: var(--default-color); */
+/*   background-color: var(--background-color); */
+/*   background-size: cover; */
+/*   background-position: center; */
+/*   background-repeat: no-repeat; */
+/*   padding: 80px 0; */
+/*   text-align: center; */
+/*   position: relative; */
+/* } */
+
+/* .page-title:before { */
+/*   content: ""; */
+/*   background-color: color-mix(in srgb, var(--background-color), transparent 50%); */
+/*   position: absolute; */
+/*   inset: 0; */
+/* } */
 
 .page-title h1 {
   font-size: 42px;

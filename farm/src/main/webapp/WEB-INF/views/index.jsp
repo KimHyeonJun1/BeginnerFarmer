@@ -1,31 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>초보농부 ${title}</title>
 </head>
 <body>
-
-
-    <!-- Hero Section -->
+        
+ <div id="page-content-wrapper">
+   <div class="container-fluid">
+    
     <section id="hero" class="hero section dark-background1">
 
       <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
         <div class="carousel-item active">
           <img src="<c:url value='/img/001.png'/>" alt="">
-        </div><!-- End Carousel Item -->
+        </div>End Carousel Item
 
         <div class="carousel-item">
           <img src="<c:url value='/img/002.png'/>" alt="">
-        </div><!-- End Carousel Item -->
+        </div>End Carousel Item
 
         <div class="carousel-item">
           <img src="<c:url value='/img/003.png'/>" alt="">
-        </div><!-- End Carousel Item -->
+        </div>End Carousel Item
 
         <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
           <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
@@ -38,8 +42,8 @@
         <ol class="carousel-indicators"></ol>
 
       </div>
-
-    </section><!-- /Hero Section -->
+	
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services section">
@@ -641,6 +645,7 @@
         </div>
       </div>
     </section><!-- /Call To Action Section -->
-
+	</div>
+	</div>
 </body>
 </html>
