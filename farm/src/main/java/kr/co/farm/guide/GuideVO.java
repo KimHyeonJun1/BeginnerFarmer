@@ -7,5 +7,6 @@ import lombok.Setter;
 public class GuideVO {
 	//작물가이드
 	private int plant_id, standard_temp, standard_hum, standard_soil;
-	private String plant_name, feature, plant_groth, food, file_name, filepath;
+	private String plant_name, feature, plant_groth, food;
+	private byte[] image;
 }

@@ -3,6 +3,7 @@
 <configuration>
 <typeAliases>
 	<typeAlias type="kr.co.farm.manager.ManagerVO" alias="manager"/>
+	<typeAlias type="kr.co.farm.guide.GuideVO" alias="guide"/>
 <!-- 	<typeAlias type="kr.co.smart.hr.EmployeeVO" alias="employee"/> -->
 <!-- 	<typeAlias type="kr.co.smart.hr.DepartmentVO" alias="department"/> -->
 <!-- 	<typeAlias type="kr.co.smart.hr.JobVO" alias="job"/> -->
