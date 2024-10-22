@@ -2,19 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<html>
-<c:choose>
-	<c:when>
-	</c:when>
-</c:choose>
-</html>
 
 <c:choose>
     <c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
     <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
     <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
-</c:choose>
-<c:choose>
 	<c:when test="${category eq 'ho'}"> <c:set var="title" value="- 홈"/>  </c:when>
 	<c:when test="${category eq 'gu'}"> <c:set var="title" value="- 작물가이드"/>  </c:when>
 	<c:when test="${category eq 'in'}"> <c:set var="title" value="- 주간농사정보"/>  </c:when>
