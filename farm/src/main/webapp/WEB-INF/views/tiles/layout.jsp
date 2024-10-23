@@ -2,6 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.user" var="auth_user"/>
+</sec:authorize>
+
 
 <c:choose>
 	<c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
@@ -108,9 +114,34 @@
       </nav>
       
         <nav class="d-flex navmenu">
-       	 <ul>
-             <li class="dropdown"><a href="#">로그인</a></li>
-             <li class="dropdown"><a href="#">회원가입</a></li>
+       	 <ul> 
+       	 	<c:if test="${empty auth_user  }"  >
+	             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
+	             <li class="dropdown"><a href="<c:url value='/member/join' />">회원가입</a></li>
+       	 	</c:if>
+       	 	
+       	 	<c:if test="${not empty auth_user }">
+       	 	
+       	 		 <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
+                      	
+                 <c:if test="${empty auth_user.social }">
+	                 <li class="nav-item dropdown">
+	                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
+	                      	aria-expanded="false">${auth_user.name }</a>
+	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+	                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
+	                     </div>
+	                 </li>
+                 </c:if>
+                 
+                 <c:if test="${not empty auth_user.social }">
+	                         <a href="#!">${auth_user.name}</a>
+
+                 </c:if>
+
+       	 	</c:if>
       	 </ul>
         </nav>
     </div>
