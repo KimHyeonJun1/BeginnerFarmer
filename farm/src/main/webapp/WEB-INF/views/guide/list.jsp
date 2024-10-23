@@ -9,52 +9,18 @@
 </head>
 <body>
 <div class="container text-center mt-5">
-  <c:forEach items="${ list }" var="vo">
-    <div class="row">
-      <div class="col">
+  <div class="row">
+    <c:forEach items="${ list }" var="vo">
+      <div class="col-md-4 mb-4">
         <figure class="border border-3 border-success">
           <a class="text-link" href="info?plant_id=${ vo.plant_id }">
             <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-            <figcaption class="mt-4 fs-5">${ vo.plant_name }</figcaption>
+            <span class="mt-4 fs-5 d-block">${ vo.plant_name }</span>
           </a>
         </figure>
       </div>
-      <div class="col">
-        <figure class="border border-3 border-success">
-          <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-          <figcaption class="mt-4 fs-5">상추</figcaption>
-        </figure>
-      </div>
-      <div class="col">
-        <figure class="border border-3 border-success">
-          <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-          <figcaption class="mt-4 fs-5">상추</figcaption>
-        </figure>
-      </div>
-    </div>
-  </c:forEach>
-  <div class="row">
-    <div class="col">
-      <figure class="border border-3 border-success">
-        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-        <figcaption class="mt-4 fs-5">상추</figcaption>
-      </figure>
-    </div>
-    <div class="col">
-      <figure class="border border-3 border-success">
-        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-        <figcaption class="mt-4 fs-5">상추</figcaption>
-      </figure>
-    </div>
-    <div class="col">
-      <figure class="border border-3 border-success">
-        <img src="<c:url value='/img/상추.jpg'/>" alt="상추" width="300" height="200">
-        <figcaption class="mt-4 fs-5">상추</figcaption>
-      </figure>
-    </div>
+    </c:forEach>
   </div>
 </div>
-
-
 </body>
 </html>

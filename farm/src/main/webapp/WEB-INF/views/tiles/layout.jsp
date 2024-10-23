@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
@@ -47,12 +46,17 @@
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
   
-<!--   제이쿼리 선언 -->
-	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- 제이쿼리 선언 -->
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
   <link href="<c:url value='/css/common.css'/>" rel="stylesheet">
+  
+  <!-- 폰트어썸 선언 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
 
   <!-- =======================================================
   * Template Name: AgriCulture
