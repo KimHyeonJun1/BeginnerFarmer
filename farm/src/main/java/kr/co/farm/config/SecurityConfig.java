@@ -9,14 +9,17 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import kr.co.farm.auth.LoginSuccess;
 import kr.co.farm.auth.LogoutSuccess;
+import kr.co.farm.auth.SocialUserService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Configuration //설정파일로 등록(컨테이너에 의해 관리되는 빈을 정의)
 @EnableWebSecurity // 시큐리티 활성화(필터가 적용)
 public class SecurityConfig {
+	
 	private final LoginSuccess loginSuccess;
 	private final LogoutSuccess logoutSuccess;
+	private final SocialUserService socialService;
 	
 	//비밀번호 암호화
 	@Bean // 메서드가 반환하는 객체를 컨테이너에 빈으로 등록
@@ -47,11 +50,15 @@ public class SecurityConfig {
 				.invalidateHttpSession(true) // 로그아웃 시 세션 무효화
 				.logoutSuccessHandler(logoutSuccess) // 로그아웃 성공시 실행될 커스텀 성공 핸들러 설정
 				
-				;
+			//소셜로그인
+			.and()
+			.oauth2Login()
+				.successHandler(loginSuccess)
+				.loginPage("/member/login")
+				.userInfoEndpoint() //로그인성공 후 사용자정보 가져오기위한 설정
+				.userService(socialService)
 				
-			
-		
-		
+			;
 		http.csrf().disable();  //사이트간 요청 위조 방지 처리- 비활성화
 		
 		

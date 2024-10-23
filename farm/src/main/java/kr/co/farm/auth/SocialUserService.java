@@ -46,15 +46,52 @@ public class SocialUserService extends DefaultOAuth2UserService {
 
 		return new LoginUser(vo);
 	}
-
-	private MemberVO setKaKaoUser(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		return null;
+	//카카오 사용자 정보
+	private MemberVO setKaKaoUser(JSONObject json) {
+		String id = json.get("id").toString();
+		//id 를 제외한 사용자 정보가 kakao_acount 에 있다
+		json = json.getJSONObject("kakao_account");
+		String email = common.hasKey(json, "email");
+		String gender =  common.hasKey(json,"gender","female").equals("female") ? "여" : "남" ; //female/male -> 여/남
+		String name =  common.hasKey(json,"name");
+		String phone =  common.hasKey(json,"phone_number");
+		
+		 String profile = common.hasKey(json,"profile_image_url");
+		 if(name.isEmpty() ) name =  common.hasKey(json,"nickname", "무명씨");
+		 
+		 //카카오 프로필 정보를 사용자정보로 관리하도록 MemberVO에 저장하기
+		 MemberVO vo = new MemberVO();
+		 vo.setSocial("K");
+		 vo.setUserid(id);
+		 vo.setEmail(email);
+		 vo.setGender(gender);
+		 vo.setName(name);
+		 vo.setPhone(phone);
+		 vo.setRole("USER");
+		 return vo;
+	
 	}
 
-	private MemberVO setNaverUser(JSONObject jsonObject) {
-		// TODO Auto-generated method stub
-		return null;
+	private MemberVO setNaverUser(JSONObject json) {
+		json = json.getJSONObject("response");
+		String id = json.getString("id"); // 네이버 아이디마다 고유하게 발급되는 값
+		String email =  common.hasKey(json,"email");
+		String name =  common.hasKey(json,"name");
+		// -F : 여성, M: 남성, U: 확인불가 -> F:여 나머지: 남
+		String gender =  common.hasKey(json,"gender").equals("F") ? "여" : "남";
+		String phone =   common.hasKey(json,"mobile");
+		if (name.isEmpty()) name =  common.hasKey(json,"nickname");
+
+		// 네이버 프로필정보를 사용자정보로 관리할수있도록 MembeVO에 담기
+		MemberVO vo = new MemberVO();
+		vo.setSocial("N");
+		vo.setUserid(id);
+		vo.setEmail(email);
+		vo.setName(name);
+		vo.setGender(gender);
+		vo.setPhone(phone);
+		vo.setRole("USER");
+		return vo;
 	}	
 	
 	

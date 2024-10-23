@@ -117,29 +117,29 @@
        	 <ul> 
        	 	<c:if test="${empty auth_user  }"  >
 	             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
-	             <li class="dropdown"><a href="#">회원가입</a></li>
+	             <li class="dropdown"><a href="<c:url value='/member/join' />">회원가입</a></li>
        	 	</c:if>
        	 	
        	 	<c:if test="${not empty auth_user }">
-
-<!-- 			<a><i class="fa-regular fa-bell" style="color: #2bb74c;"></i></a> -->
-
-	             <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
+       	 	
+       	 		 <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
                       	
-                 <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
-                      	data-bs-toggle="dropdown" aria-haspopup="true" 
-                      	aria-expanded="false">${auth_user.name }</a>
-                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-<%--                      	<c:if test="${empty auth_user.social }"> --%>
-<%--                          <a class="dropdown-item" href="#!">아이디: ${auth_user.userid}</a> --%>
-                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
-                         <a class="dropdown-item" href="<c:url value=''/>">비밀번호 변경</a>
-<!--                          <div class="dropdown-divider"></div> -->
-<%--                          </c:if> --%>
-<%--                          <a class="dropdown-item" href="<c:url value='/member/logout'/>">로그아웃</a> --%>
-                     </div>
-                 </li>
+                 <c:if test="${empty auth_user.social }">
+	                 <li class="nav-item dropdown">
+	                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
+	                      	aria-expanded="false">${auth_user.name }</a>
+	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+	                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
+	                     </div>
+	                 </li>
+                 </c:if>
+                 
+                 <c:if test="${not empty auth_user.social }">
+	                         <a href="#!">${auth_user.name}</a>
+
+                 </c:if>
 
        	 	</c:if>
       	 </ul>

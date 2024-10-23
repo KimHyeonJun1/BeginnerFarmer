@@ -13,6 +13,11 @@
 	<c:when test="${category eq 'change'}"> <c:set var="title" value="- 재배 가이드"/>  </c:when>
 	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 게시판"/>  </c:when>
 	<c:when test="${category eq 'my'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
+	
+	<c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
+    <c:when test="${category eq 'find'}"> <c:set var="title" value="- 비밀번호" /> </c:when>
+    <c:when test="${category eq 'join'}"> <c:set var="title" value="- 회원가입" /> </c:when>
+   
 </c:choose>
 
 <!DOCTYPE html>
@@ -39,6 +44,10 @@
 
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
+  
+  <!--   제이쿼리 선언 -->
+<!-- 	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <body class="index-page">

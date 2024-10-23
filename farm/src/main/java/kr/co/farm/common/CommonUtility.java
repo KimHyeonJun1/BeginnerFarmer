@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,20 @@ import kr.co.farm.member.MemberVO;
 
 public class CommonUtility {
 	
+	//임시 비밀번호 이메일 보내기
 	@Value("${spring.mail.host}") private String emailHost;
 	@Value("${spring.mail.username}") private String emailUser;
 	@Value("${spring.mail.password}") private String emailPass;
+	
+		//키의 존재유무에 따라 데이터처리하기
+		public String hasKey(JSONObject json, String key) {
+			return json.has(key) ? json.getString(key) : "";
+		}
+		//기본값을 지정해야하는 경우
+		public String hasKey(JSONObject json, String key, String defaultValue) {
+			return json.has(key) ? json.getString(key) : defaultValue;
+		}
+			
 	
 	
 		private void mailSender(HtmlEmail sender) {

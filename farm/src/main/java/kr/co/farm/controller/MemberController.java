@@ -25,6 +25,29 @@ public class MemberController {
 	private final PasswordEncoder password;
 	
 	
+	//회원가입 화면 요청
+	@RequestMapping("/join")
+	public String join(HttpSession session) {
+		session.setAttribute("category", "join");
+		return "default/member/join";
+	}
+	
+	//현재 입력비번이 정확한지 확인 요청
+		@ResponseBody
+		@RequestMapping("/user/correctPassword")
+		public boolean correctPassword(String userid, String userpw) {
+			//입력한 비번이 DB의 비번과 일치하는지
+			MemberVO vo = mapper.getOneMember(userid);
+			return password.matches(userpw, vo.getUserpw());
+		}
+		
+	// 비밀번호 변경 화면 요청
+		@RequestMapping("/user/changePassword")
+		public String changePassword(HttpSession session) {
+			session.setAttribute("category", "change");
+			return "member/change";
+		}
+	
 	// 임시 비밀번호 발급 처리
 		@ResponseBody
 		@RequestMapping("/tempPassword")
