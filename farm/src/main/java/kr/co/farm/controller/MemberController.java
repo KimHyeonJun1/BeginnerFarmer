@@ -5,11 +5,13 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.farm.auth.LoginUser;
 import kr.co.farm.common.CommonUtility;
 import kr.co.farm.member.MemberMapper;
 import kr.co.farm.member.MemberVO;
@@ -31,6 +33,18 @@ public class MemberController {
 		session.setAttribute("category", "join");
 		return "default/member/join";
 	}
+	
+	// 새 비밀번호로 변경저장 처리 요청
+		@ResponseBody
+		@RequestMapping("/user/resetPassword")
+		public boolean resetPassword(MemberVO vo, String userpw
+									, @AuthenticationPrincipal LoginUser user) {
+			vo.setUserid( user.getUsername() ); //인증된 사용자 아이디를 글쓴이의 아이디로 담기
+			// MemberVo의 id: sinwoo, pw: Abcd1
+			vo.setUserpw(password.encode(userpw)); // 입력비번을 암호화하기
+			return mapper.updatePassword(vo) == 1 ? true : false;
+		}
+		
 	
 	//현재 입력비번이 정확한지 확인 요청
 		@ResponseBody
