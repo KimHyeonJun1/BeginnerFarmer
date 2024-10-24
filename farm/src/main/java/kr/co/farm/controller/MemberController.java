@@ -8,8 +8,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.farm.auth.LoginUser;
 import kr.co.farm.common.CommonUtility;
@@ -26,6 +29,70 @@ public class MemberController {
 	private final CommonUtility common;
 	private final PasswordEncoder password;
 	
+	//내 정보 변경저장 처리 요청
+		@PutMapping("/user/myPage/modify")
+		public String myPage(MemberVO vo,
+							 @AuthenticationPrincipal LoginUser principal
+							, HttpSession session, HttpServletRequest request) {
+			
+			//화면에서 입력한 정보로 DB에 변경 저장
+			//변경된 정보가 화면에 반영되도록 세션정보를 변경하기
+			if( mapper.updateMember(vo) == 1 ) {
+				principal.setUser(vo);
+				
+			}
+			return "redirect:/";
+		}
+	
+	
+	
+	//Principal : 접근주체인 UserDetails(LoginUser)
+	// MyPage 화면 요청
+		@RequestMapping("/user/myPage")
+		public String myPage(HttpSession session, Model model
+							, @AuthenticationPrincipal LoginUser user) {
+			session.setAttribute("category", "my");
+
+			// 로그인한 사용자정보를 조회해오기
+			String userid = user.getUsername();
+			model.addAttribute("vo", mapper.getOneMember(userid) ) ;
+			return "member/myPage";
+		}
+	
+	// 회원가입처리 요청
+	@ResponseBody
+	@RequestMapping("/register")
+	public String join( MemberVO vo, HttpServletRequest request) {
+
+		// 입력비번 암호화하기
+		vo.setUserpw(password.encode(vo.getUserpw()));
+
+		// 화면에서 입력한 정보로 DB에 회원정보저장 처리 -> 로그인/회원가입 화면으로 연결
+		StringBuffer msg = new StringBuffer("<script>");
+
+		if (mapper.registerMember(vo) == 1) {
+			// 회원가입 축하메시지를 이메일로 보내기
+			common.emailForJoin(vo);
+			
+			msg.append("alert('회원가입을 축하합니다'); ");
+			msg.append("location='login'; ");
+			// return "redirect:login";
+		} else {
+			msg.append("alert('회원가입실패'); ");
+			msg.append("location='join'; ");
+			// return "redirect:join";
+		}
+		msg.append("</script>");
+		return msg.toString();
+
+	}
+	
+	// 아이디중복확인 요청
+	@ResponseBody
+	@RequestMapping("/idCheck")
+	public boolean idCheck(String userid) {
+		return mapper.getOneMember(userid) == null ? true : false;
+	}
 	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
@@ -116,7 +183,7 @@ public class MemberController {
 	//로그인 화면 요청
 	@RequestMapping("/login")
 	public String login(HttpSession session) {
-//		session.setAttribute("", "login");
+		session.setAttribute("category", "login");
 		MemberVO vo = null;
 		if(vo == null) {
 		}

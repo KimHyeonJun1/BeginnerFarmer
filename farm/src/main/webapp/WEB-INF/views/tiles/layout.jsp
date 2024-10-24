@@ -24,6 +24,8 @@
 	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도/조도"/>  </c:when>
 	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
 	<c:when test="${category eq 'di'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
+	<c:when test="${category eq 'my' }"><c:set var="title" value="- 내정보"/> </c:when>
+	
 </c:choose>
 
 
@@ -53,9 +55,13 @@
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
   
-<!--   제이쿼리 선언 -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+  <!-- 제이쿼리 선언 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+  
+  <script src="<c:url value='/js/common.js' />"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
   <link href="<c:url value='/css/common.css'/>" rel="stylesheet">
@@ -130,7 +136,7 @@
 	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
 	                      	aria-expanded="false">${auth_user.name }</a>
 	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/myPage'/>">My Page</a>
 	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
 	                     </div>
 	                 </li>
