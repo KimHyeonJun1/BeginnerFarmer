@@ -34,18 +34,35 @@ a:link, a:visited, .pagination a, .nav-pills a, .nav-tabs a { text-decoration: n
     width: 100%;
 }
 
-.dropdown-menu {
-    display: none;
-    position: relative;
-    list-style-type: none;
-    padding-left: 20px; /* 하위 메뉴 들여쓰기 */
-    margin-top: 10px;   /* 하위 메뉴와 상위 메뉴 간 간격 */
+#sidebar-wrapper {
+    min-height: 100vh;
+    /* 전체 높이 */
 }
 
-/* 하위 메뉴 아이템 스타일 */
-.dropdown-menu li {
-    padding: 5px 0;
+.list-group-item {
+    cursor: pointer;
 }
+
+.collapse .list-group-item {
+    padding-left: 30px; /* 하위 카테고리 들여쓰기 */
+}
+
+/* .dropdown-menu { */
+/*     display: none; */
+/*     position: relative; */
+/*     list-style-type: none; */
+/*     padding-left: 20px; 하위 메뉴 들여쓰기 */
+/*     margin-top: 10px;   하위 메뉴와 상위 메뉴 간 간격 */
+/* } */
+
+/* .dropdown-menu.show { */
+/*     display: block !important; 부트스트랩의 메뉴 열림 상태 유지 */
+/* } */
+
+/* /* 하위 메뉴 아이템 스타일 */ */
+/* .dropdown-menu li { */
+/*     padding: 5px 0; */
+/* } */
 
 .notify-comment {
 	font-size: small;
