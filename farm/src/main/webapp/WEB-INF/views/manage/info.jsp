@@ -30,14 +30,12 @@
 <div class="row mb-3 justify-content-center">
    <div class="col-auto d-flex align-items-center flex-column">
       <label class="ml-5 me-2 fs-4 mb-3 ">관리할 작물을 선택하세요</label>
-      <form method="post" action="insert">
       <select class="form-select w-px350 mt-3"  name="plant_id" onchange="submit()">
-         <option value="-1">선택</option>
-         <c:forEach items="${plant_name}" var="p">
-         <option <c:if test="${plant_id eq p.plant_id}">selected</c:if> value="${p.plant_id}">${p.plant_name}</option>
+         <option value="0">선택</option>
+         <c:forEach items="${plant}" var="p">
+         <option  <c:if test="${vo.plant_id eq p.plant_id}">selected</c:if> value="${p.plant_id}">${p.plant_name}</option>
          </c:forEach>
       </select>
-      </form>
    </div>
 </div>
 </div>
