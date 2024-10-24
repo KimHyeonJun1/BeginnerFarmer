@@ -13,7 +13,7 @@
     <div class="row mb-4 ">
         <div class="col-md-4 text-center">
             <h2>${vo.plant_name}</h2>
-            <img src="<c:url value='/img/상추.jpg'/>" alt="${vo.plant_name}" width="250" height="200">
+            <img src="<c:url value='${ vo.image_path }'/>" alt="${vo.plant_name}" width="250" height="200">
         </div>
         <div class="col-md-8 fw-light fs-3 pt-5">
             <p>${vo.feature}</p>
