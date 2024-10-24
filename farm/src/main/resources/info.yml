@@ -1,4 +1,16 @@
 oracle:
   url: jdbc:oracle:thin:@121.179.5.33:1521:xe
   username: farm
-  password: '159357'
+  password: 159357
+
+naver:
+ client-id: pj7eg6YYHdQHaE0W2j1r
+ client-secret: 0EZUA8tNX0
+ email:
+   username: dplhj@naver.com
+   password: lhaej4257!
+
+kakao:
+ client-id: 91bf4ac093e1b519ef6c6633bdd5808d
+   
+baseURL: http://localhost:8080/farm

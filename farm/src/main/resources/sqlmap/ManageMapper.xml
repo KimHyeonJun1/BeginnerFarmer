@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.farm.manage.ManageMapper">
+<select id="getListOfManage" resultType="manage">
+select * from plant
+</select>
+
+<insert id="registerUserPlant"  parameterType="map">
+insert into userplant (userid_log, plantid_log)
+values ( #{userid_log}, #{plantid_log} )
+</insert>
+
+<select id="getUserPlants" parameterType="string" resultType="manage">
+SELECT p.*
+    FROM Plant p
+    INNER JOIN userplant u ON p.plant_id = u.plantid_log
+    WHERE u.userid_log = #{userid_log}
+</select>
+
+
+<!-- <delete id ="deleteuserPlant"> -->
+<!-- DELETE FROM UserPlant WHERE userid = #{userid} AND plant_id = #{plant_id}; -->
+<!-- </delete> -->
+
+
+
+</mapper>

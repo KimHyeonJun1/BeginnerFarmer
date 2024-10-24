@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal.user" var="auth_user"/>
+</sec:authorize>
+
 
 <c:choose>
 	<c:when test="${category eq 'login'}"> <c:set var="title" value="- 로그인" /> </c:when>
@@ -98,13 +104,13 @@
               <li><a href="#">공지사항</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="/farm/manager/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-                <li><a href="<c:url value='/manager/list'/>">작물관리</a></li>
-				<li><a href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
-				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
-				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
-				<li><a href="<c:url value='/observation-diary'/>">관찰일지</a></li>
+                <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
+				<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
+				<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+				<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
+				<li><a href="<c:url value='/observation_diary'/>">관찰일지</a></li>
             </ul>
           </li>
         </ul>
@@ -112,9 +118,34 @@
       </nav>
       
         <nav class="d-flex navmenu">
-       	 <ul>
-             <li class="dropdown"><a href="#">로그인</a></li>
-             <li class="dropdown"><a href="#">회원가입</a></li>
+       	 <ul> 
+       	 	<c:if test="${empty auth_user  }"  >
+	             <li class="dropdown"><a href="<c:url value='/member/login' />">로그인</a></li>
+	             <li class="dropdown"><a href="<c:url value='/member/join' />">회원가입</a></li>
+       	 	</c:if>
+       	 	
+       	 	<c:if test="${not empty auth_user }">
+       	 	
+       	 		 <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
+                      	
+                 <c:if test="${empty auth_user.social }">
+	                 <li class="nav-item dropdown">
+	                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
+	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
+	                      	aria-expanded="false">${auth_user.name }</a>
+	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+	                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
+	                     </div>
+	                 </li>
+                 </c:if>
+                 
+                 <c:if test="${not empty auth_user.social }">
+	                         <a href="#!">${auth_user.name}</a>
+
+                 </c:if>
+
+       	 	</c:if>
       	 </ul>
         </nav>
     </div>
@@ -151,12 +182,20 @@
 
                 <!-- 나의농장 -->
                 <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
-                <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};">
-                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manager/list'/>">작물관리</a></li>
-                    <li><a href="#">실시간모니터링</a></li>
-                    <li><a href="#">온도/습도/조도</a></li>
-                    <li><a href="#">급수관리</a></li>
-                    <li><a href="#">관찰일지</a></li>
+<%--                 <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};"> --%>
+					<ul class="dropdown-menu" style="display: ${category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'block' : 'none'} ;">
+                	<c:choose>
+                	<c:when test="${not empty plant_id }">
+                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/list'/>">작물관리</a></li>
+                	</c:when>
+                	<c:otherwise>
+                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/info'/>">작물관리</a></li>
+                	</c:otherwise>
+                	</c:choose>
+                	<li><a class=" list-group-item-action" href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
+                	<li><a class="${ category eq 'te' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+                	<li><a class="${ category eq 'wa' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/water_management'/>">급수관리</a></li>
+                	<li><a class="${ category eq 'di' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/diary'/>">관찰일지</a></li>
                 </ul>
             </div>
         </div>
