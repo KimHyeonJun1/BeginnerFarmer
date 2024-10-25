@@ -2,6 +2,7 @@ package kr.co.farm.common;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.json.JSONObject;
@@ -29,6 +30,36 @@ public class CommonUtility {
 		}
 			
 	
+		//회원가입축하 메시지 보내기
+		public void emailForJoin(MemberVO vo) {
+			 HtmlEmail sender = new HtmlEmail();
+			 mailSender( sender );
+
+			 try {
+				 sender.setFrom(emailUser, "초보농부 관리자" ); //송신인
+				 sender.addTo(vo.getEmail(), vo.getName() ); //수신인
+
+				 //제목
+				 sender.setSubject("초보농부 회원가입을 축하합니다");
+				 //내용
+				 StringBuffer content = new StringBuffer();
+				 content.append("<h3><a target='_blank' href='http://192.168.0.4:8080/farm/'>초보농부 바로가기</a></h3>")
+				 		.append("<div>[<strong>").append(vo.getName())
+								.append("</strong>]님 회원가입을 축하합니다</div>")
+						.append("<div>초보 농부에 가입해 주셔서 감사합니다</div>")
+				 		;
+				 sender.setHtmlMsg(content.toString() );
+				 
+				 sender.send();
+				 
+				 
+			 }catch(Exception e) {
+				 System.out.println(e.getMessage() );
+			 }
+		}
+		
+		
+		
 	
 		private void mailSender(HtmlEmail sender) {
 			sender.setDebug(true);

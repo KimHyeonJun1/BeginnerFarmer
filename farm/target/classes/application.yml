@@ -26,12 +26,17 @@ spring:
               token-uri: https://kauth.kakao.com/oauth/token
               user-info-uri: https://kapi.kakao.com/v2/user/me
               user-name-attribute: id
+
   application:
     name: farm
   mvc:
     view:
        prefix: /WEB-INF/views/
        suffix: .jsp
+    hiddenmethod:
+      filter:
+        enabled: true
+
   config:
     import: classpath:info.yml
 

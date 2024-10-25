@@ -9,14 +9,13 @@
 </head>
 <body>
 	<div class="row justify-content-center">
-		<div class="col-lg-7">
 			<div class="card shadow-lg border-0 rounded-lg my-5">
 				<div class="card-body p-5">
 					<div class="d-flex justify-content-between">
 						<a href="<c:url value='/' />"> <img
-							src="<c:url value='/img/logogo1.png' />"></a>
-						<h3 class="my-4">회원가입</h3>
+							src="<c:url value='/img/logo.png' />"></a>
 					</div>
+						<h3 class="my-4">회원가입</h3>
 
 					<div class="mb-2 text-danger fw-bold">* 는 필수입력항목입니다</div>
 					<form method="post" action="register" enctype=multipart/form-data>
@@ -147,7 +146,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
 <script src="<c:url value='/js/member.js'/>"></script>
@@ -194,9 +192,9 @@ function idCheck() {
 }
 
 
-$("#btn-post").on("click", function() {
+// $("#btn-post").on("click", function() {
 	
-})
+// })
 $("table th span").addClass("text-danger fw-bold me-2")
 
 $("#btn-cancel").on("click", function() {

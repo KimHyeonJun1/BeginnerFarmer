@@ -41,13 +41,18 @@
   <link href="<c:url value='/vendor/aos/aos.css" rel="stylesheet'/>">
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
+<!--   <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css"> -->
+ 
 
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
   
   <!--   제이쿼리 선언 -->
-<!-- 	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script> -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<script src="<c:url value='/js/common.js' />"></script>
 
 
 <body class="index-page">

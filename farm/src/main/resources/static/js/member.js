@@ -1,7 +1,58 @@
 /**
- *  회원관리 처리
+ * 회원관리처리
  */
 
+
+$(function(){
+	//생년월일자를 13세 이상으로 선택가능하게 제한하기
+	var endDay = new Date()
+	endDay.setFullYear( endDay.getFullYear() - 13 );
+	$(".date").datepicker("option", "maxDate", endDay );	
+})
+
+//각 태그입력유효성 재확인
+function validStatus(){
+	var valid = true;
+	
+	$(".check-item").each(function(){
+		var desc = $(this).closest(".input-check").find(".desc")  
+		
+		if($(this).is("[name=userid]")&& ! desc.text().includes("사용가능") ) {
+		valid = false;
+			
+		}
+		else if( ! desc.hasClass("text-success")  ){
+			valid = false;
+		
+		}
+	
+		if( ! valid){ //회원가입불가 이유 표시하기
+			alert("회원가입 불가 \n" + $(this).attr("title") + " " + desc.text()  )
+			$(this).focus()
+			return valid;
+		}
+	})
+	
+	return valid;
+	
+}
+
+
+
+$("#btn-post").on("click", function() {
+	findPost($("[name=post]"),$("[name=address1]"),$("[name=address2]"))
+})
+
+
+
+//키보드 입력시 바로 입력태크 상태 표시하기
+$(".check-item").on("keyup",function(e) {
+	//아이디에서 엔터하는 경우 중복확인하기
+	if( $(this).is("[name=userid")&&  e.keyCode==13) {
+		idCheck()
+	}else
+	member.showStatus( $(this));
+})
 
 
 var member = {
@@ -51,7 +102,7 @@ var member = {
 		empty: { is:false, desc:"입력하세요"},
 		min:   {is:false, desc: "5자이상 입력하세요"},
 		max:   {is:false, desc: "10자 이내 입력하세요"},
-		space: {is:false, desc: "공백없이 입력하세요"},
+		space: {is:false, desc: "공백없이 입력하세요"}
 		
 	},
 	//비밀번호 상태값

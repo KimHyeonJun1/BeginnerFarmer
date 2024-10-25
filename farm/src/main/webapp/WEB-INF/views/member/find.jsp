@@ -14,7 +14,7 @@
          <div class="card shadow-lg border-0 rounded-lg mt-5">
             <div class="card-header">
                <h3 class="text-center font-weight-light my-4">
-                  <a href="<c:url value='/' />"> <img src="<c:url value='/img/123.png' />" ></a>
+                  <a href="<c:url value='/' />"> <img src="<c:url value='/img/login.png' />" ></a>
                </h3>
             </div>
             <div class="card-body p-5">

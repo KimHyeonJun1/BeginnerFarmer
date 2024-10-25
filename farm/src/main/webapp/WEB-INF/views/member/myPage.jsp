@@ -65,28 +65,6 @@
 					</div></td>
 			</tr>
 			<tr>
-				<th>프로필이미지</th>
-				<td><div class="row">
-						<div class="d-flex align-itmes-center gap-3 file-info">
-							<div class="file-preview profile px80">
-								<c:choose>
-									<c:when test="${empty vo.profile }">
-										<!--기본이미지 지정 -->
-										<i class="font-profile fa-solid fa-circle-user"></i>
-									</c:when>
-									<c:otherwise> <!-- 실제프로필 지정 -->
-										<img src="${vo.profile}">
-									</c:otherwise>
-								</c:choose>
-							</div>
-							<label> <a class="btn btn-outline-primary">프로필선택</a> <input
-								type="file" name="file"
-								class="d-none form-control image-only file-single" accept="image/*"> 
-							</label> <a class="btn btn-outline-danger ${empty vo.profile ? 'd-none' : ''} file-remove">삭제</a>
-						</div>
-					</div></td>
-			</tr>
-			<tr>
 				<th>생년월일</th>
 				<td>
 					<div class="row">
@@ -112,7 +90,7 @@
 				<th>주소</th>
 				<td><div class="row">
 						<div class="col-auto d-flex gap-3">
-							<a class="btn btn-primary" id="btn-post">주소찾기</a> <input
+							<a class="btn btn-success" id="btn-post">주소찾기</a> <input
 								type="text" name="post" value="${vo.post}" class="w-px80 form-control" readonly>
 						</div>
 					</div>
@@ -127,8 +105,8 @@
 	</form>
 	
 <div class="btn-toolbar justify-content-center gap-2">
-    <button class="btn btn-primary px-4" id="btn-save">저장</button>
-    <button class="btn btn-outline-primary px-4" id="btn-cancel">취소</button>
+    <button class="btn btn-success px-4" id="btn-save">저장</button>
+    <button class="btn btn-outline-success px-4" id="btn-cancel">취소</button>
 </div>
 
 <script src="<c:url value='/js/member.js'/>"></script>

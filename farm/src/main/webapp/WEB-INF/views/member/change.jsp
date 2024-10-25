@@ -31,7 +31,7 @@
 	</div>
 	</td>
 </tr>
-<tr><th>새 비밀번호 확인</th>
+<tr><th>세 비밀번호 확인</th>
 	<td><div class="row input-check">
 		<div class="col-auto">
 			<input type="password" name="userpw_ck" class="form-control check-item">
@@ -46,10 +46,7 @@
 	<button class="btn btn-success px-4" id="btn-save">변경</button>
 </div>
 
-
-<!-- 스크립트  -->
 <script src="<c:url value='/js/member.js'/>"></script>
-
 <script>
 
 

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -24,6 +23,8 @@
 	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도/조도"/>  </c:when>
 	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
 	<c:when test="${category eq 'di'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
+	<c:when test="${category eq 'my' }"><c:set var="title" value="- 내정보"/> </c:when>
+	
 </c:choose>
 
 
@@ -53,12 +54,30 @@
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
   
-<!--   제이쿼리 선언 -->
-	<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- 제이쿼리 선언 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+  
+  <script src="<c:url value='/js/common.js' />"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
+  <!-- summer note css -->
+  <link href="<c:url value='/css/summernote/summernote-lite.css'/>" rel="stylesheet">
+  
+  <!-- summer note js -->
+  <script src="<c:url value='/js/summernote/summernote-lite.js' />"></script>
+  <script src="<c:url value='/js/summernote/lang/summernote-ko-KR.js' />"></script>
+  
+
+  
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
   <link href="<c:url value='/css/common.css'/>" rel="stylesheet">
+  
+  <!-- 폰트어썸 선언 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
 
   <!-- =======================================================
   * Template Name: AgriCulture
@@ -102,11 +121,11 @@
           </li>
           <li class="dropdown"><a href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-                <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
-				<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
-				<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
-				<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
-				<li><a href="<c:url value='/observation_diary'/>">관찰일지</a></li>
+                <li><a href="<c:url value='/manager/list'/>">작물관리</a></li>
+				<li><a href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
+				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
+				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
+				<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
             </ul>
           </li>
         </ul>
@@ -130,7 +149,7 @@
 	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
 	                      	aria-expanded="false">${auth_user.name }</a>
 	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                         <a class="dropdown-item" href="<c:url value=''/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/myPage'/>">내 정보</a>
 	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
 	                     </div>
 	                 </li>
