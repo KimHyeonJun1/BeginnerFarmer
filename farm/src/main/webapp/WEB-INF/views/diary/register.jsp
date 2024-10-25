@@ -14,16 +14,14 @@
 <body>
 <h3 class="my-t">관찰일지 등록</h3>
 <form method="post" action="register" enctype="multipart/form-data" >
- <table>
 	 <textarea id="summernote" name="content"></textarea>
 	 
- </table>
 	 
 </form>
 
 <div class="btn-toolbar justify-content-center gap-2">
-	<button class="btn btn-primary px-4" id="btn-save">저장</button>
-	<button class="btn btn-outline-primary px-4" id="btn-cancel">취소</button>
+	<button class="btn btn-success px-4" id="btn-save">저장</button>
+	<button class="btn btn-outline-success px-4" id="btn-cancel">취소</button>
 </div>
 
 
