@@ -7,6 +7,7 @@
 <!-- 	<typeAlias type="kr.co.smart.hr.DepartmentVO" alias="department"/> -->
 <!-- 	<typeAlias type="kr.co.smart.hr.JobVO" alias="job"/> -->
 	<typeAlias type="kr.co.farm.member.MemberVO" alias="member"/>
+	<typeAlias type="kr.co.farm.diary.DiaryVO" alias="diary"/>
 <!-- 	<typeAlias type="kr.co.smart.notice.NoticeVO" alias="notice"/> -->
 <!-- 	<typeAlias type="kr.co.smart.remember.RememberVO" alias="remember"/> -->
 <!-- 	<typeAlias type="kr.co.smart.board.BoardVO" alias="board"/> -->

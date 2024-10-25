@@ -21,29 +21,11 @@ $(function() {
 	})
 	
 	$(".date").attr("readonly", true); //날짜 입력불가(달력선택만가능)
+		$(".date").datepicker();
+		$(".ui-datepicker").css("display", "none"); // ui 스타일
 
 	
-	var endDay = new Date()
-	endDay.setFullYear( endDay.getFullYear() - 13 );
-//	if( $(".date").attr("name") == "birth"){
-//		$("[name=bitrh]").datepicker("option", "maxDate", endDay );	
-//	}else{
-//		$(".date").datepicker();
-//	}
 	
-	$(".date").each(function(){
-		console.log( this )
-		if( $(this).attr("name")=="birth" ){
-			$("[name=bitrh]").datepicker("option", "maxDate", endDay );
-			$(this).datepicker("option", "maxDate", endDay );
-			console.log("birth",  $(this).attr("name"), $("[name=bitrh]").datepicker("option", "maxDate") )	
-		$( "[name=bitrh]" ).datepicker( "refresh" );
-		}else{
-			console.log("!birth",  $(this).attr("name"), $(this).datepicker("option", "maxDate") )	
-			$(this).datepicker("option", "maxDate", today );	
-		$( ".date" ).datepicker( "refresh" );
-		}
-	})
 
 	$(".date").on("change", function(){
 		$(this).next(".date-remove").removeClass("d-none")

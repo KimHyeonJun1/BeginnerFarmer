@@ -55,12 +55,22 @@
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
   
+  
   <!-- 제이쿼리 선언 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
   
   <script src="<c:url value='/js/common.js' />"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  
+  <!-- summer note css -->
+  <link href="<c:url value='/css/summernote/summernote-lite.css'/>" rel="stylesheet">
+  
+  <!-- summer note js -->
+  <script src="<c:url value='/js/summernote/summernote-lite.js' />"></script>
+  <script src="<c:url value='/js/summernote/lang/summernote-ko-KR.js' />"></script>
+  
+
   
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">
@@ -112,7 +122,7 @@
 				<li><a href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
 				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
 				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
-				<li><a href="<c:url value='/observation-diary'/>">관찰일지</a></li>
+				<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
             </ul>
           </li>
         </ul>
@@ -136,7 +146,7 @@
 	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
 	                      	aria-expanded="false">${auth_user.name }</a>
 	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                         <a class="dropdown-item" href="<c:url value='/member/user/myPage'/>">My Page</a>
+	                         <a class="dropdown-item" href="<c:url value='/member/user/myPage'/>">내 정보</a>
 	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
 	                     </div>
 	                 </li>

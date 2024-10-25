@@ -5,10 +5,9 @@
 
 $(function(){
 	//생년월일자를 13세 이상으로 선택가능하게 제한하기
-//	var endDay = new Date()
-//	endDay.setFullYear( endDay.getFullYear() - 13 );
-//	$(".date").datepicker("option", "maxDate", endDay );	
-//	$(".date").datepicker();	
+	var endDay = new Date()
+	endDay.setFullYear( endDay.getFullYear() - 13 );
+	$(".date").datepicker("option", "maxDate", endDay );	
 })
 
 //각 태그입력유효성 재확인
