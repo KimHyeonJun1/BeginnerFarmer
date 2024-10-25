@@ -108,9 +108,13 @@ a:link, a:visited, .pagination a, .nav-pills a, .nav-tabs a { text-decoration: n
 
 textarea.form-control { resize: none; height:250px }
 
+.me-6 {
+	margin-right: 140px; 
+}
+
 .box {
     width: 50%;
-     border: 2px solid green;
+    border: 2px solid green;
     background-color: white;
     margin-left: 20%;
     padding: 20px;

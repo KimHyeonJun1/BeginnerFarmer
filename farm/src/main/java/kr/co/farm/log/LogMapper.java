@@ -9,4 +9,5 @@ public interface LogMapper   {
 	 //CRUD
 	   
 	   List<LogVO> getListOfLog(); //로그 목록조회
+	   
 }

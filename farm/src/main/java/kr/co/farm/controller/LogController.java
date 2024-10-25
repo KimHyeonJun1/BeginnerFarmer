@@ -25,24 +25,21 @@ public class LogController {
 	
 	@RequestMapping("/water_management")
 	public String LogWaterManagement(HttpSession session) {
-		session.setAttribute("category", "ma");
+		session.setAttribute("category", "wa");
 		return "log/water_management";
 	}
 	
 	@RequestMapping("/temperature")
 	public String LogTemperature(HttpSession session) {
-		session.setAttribute("category", "ma");
+		session.setAttribute("category", "te");
 		return "log/temperature";
 	}
 	
 	@RequestMapping("/monitor") //실시간 모니터링 화면 요청
 	public String LogMonitor(HttpSession session, Model model) {
 		  List<ManageVO> plant = manage.getListOfManage();
-//		   if(userid == null ) {
-//			   return "redirect:/member/login";
-//		   }else {
 		 model.addAttribute("plant", plant);
-		session.setAttribute("category", "ma");
-		return "log/monitor";
+		 session.setAttribute("category", "mo");
+		 return "log/monitor";
 	}
 }
