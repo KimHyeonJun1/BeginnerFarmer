@@ -2,7 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 <typeAliases>
-	<typeAlias type="kr.co.farm.manager.ManagerVO" alias="manager"/>
 	<typeAlias type="kr.co.farm.guide.GuideVO" alias="guide"/>
 	<typeAlias type="kr.co.farm.manage.ManageVO" alias="manage"/>
 <!-- 	<typeAlias type="kr.co.smart.hr.EmployeeVO" alias="employee"/> -->

@@ -1,5 +1,5 @@
 /.metadata/
-*/target/*
+/target/
 infot.yml
 
 # Compiled class file
