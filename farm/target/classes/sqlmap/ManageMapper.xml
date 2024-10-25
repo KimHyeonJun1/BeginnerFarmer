@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.manage.ManageMapper">
+
+<select id="getOneManage" resultType="manage">
+select * from userplant
+</select>
+
+
+<!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->
+<select id="countOfUserPlant" resultType="Integer">
+select count(*) from userplant 
+where userid_log = #{userid_log}
+</select>
+
+
+<select id="getListOfUserPlant" resultType="manage">
+select * from plant where plant_id not in( select plant_id from userplant where userid = #{userid})
+</select>
+
 <select id="getListOfManage" resultType="manage">
 select * from plant
 </select>
 
-<insert id="registerUserPlant"  parameterType="map">
+<insert id="registerUserPlant" >
 insert into userplant (userid_log, plantid_log)
 values ( #{userid_log}, #{plantid_log} )
 </insert>
@@ -18,10 +35,12 @@ SELECT p.*
 </select>
 
 
-<!-- <delete id ="deleteuserPlant"> -->
-<!-- DELETE FROM UserPlant WHERE userid = #{userid} AND plant_id = #{plant_id}; -->
-<!-- </delete> -->
+<delete id ="deleteuserPlant">
+DELETE FROM userplant WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log};
+</delete>
 
-
+<delete id="deleteManage">
+delete from userplant where userid_log = #{userid_log} and plantid_log = #{plantid_log}
+</delete>
 
 </mapper>

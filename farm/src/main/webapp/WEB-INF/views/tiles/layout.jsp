@@ -255,7 +255,6 @@
                     <a class="${ category eq 'no' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/notice/list'/>">공지사항</a>
                 </div>
             </div>
-
             <!-- 메인 카테고리 3 -->
             <a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}
             			list-group-item list-group-item-action list-group-item-light dropdown-toggle" data-bs-toggle="collapse" href="#category3" role="button"
