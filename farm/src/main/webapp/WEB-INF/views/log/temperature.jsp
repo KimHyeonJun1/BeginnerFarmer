@@ -5,11 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모니터링</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<h3>aasdfadf</h3>
-
+<h3>온도/습도/조도</h3>
 </body>
 </html>
