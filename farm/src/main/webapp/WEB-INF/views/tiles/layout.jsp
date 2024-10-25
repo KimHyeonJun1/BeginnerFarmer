@@ -107,8 +107,8 @@
               <li><a href="<c:url value='/guide/list'/>">작물가이드</a></li>
               <li class="dropdown"><a href="#"><span>농사Tip</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">주간농사정보</a></li>
-                  <li><a href="#">농업기술동영상</a></li>
+                  <li><a href="<c:url value='/weekInfo/list'/>">주간농사정보</a></li>
+                  <li><a href="<c:url value='/video/list'/>">농업기술동영상</a></li>
                 </ul>
               </li>
             </ul>
@@ -121,10 +121,10 @@
           </li>
           <li class="dropdown"><a href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-                <li><a href="<c:url value='/manager/list'/>">작물관리</a></li>
-				<li><a href="<c:url value='/monitor/list'/>">실시간모니터링</a></li>
-				<li><a href="<c:url value='/environment/temperature'/>">온도/습도/조도</a></li>
-				<li><a href="<c:url value='/water-management'/>">급수관리</a></li>
+                <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
+				<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
+				<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+				<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
 				<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
             </ul>
           </li>
@@ -178,42 +178,102 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <c:if test="${ category != 'home' }">
-        <div class="border-end bg-white" id="sidebar-wrapper" style="width: 200px;">
-            <div class="sidebar-heading border-bottom bg-light"></div>
-            <div class="list-group list-group-flush">
-                <!-- 농사정보 -->
-                <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a>
-                <ul class="dropdown-menu" style="display: ${category eq 'gu' ? 'block' : 'none'};">
-                    <li><a class="${ category eq 'gu' ? 'active' : ''} list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a></li>
-                    <li><a href="#">농사Tip</a></li>
-                </ul>
+<!--         <div class="border-end bg-light" id="sidebar-wrapper" style="width: 200px;"> -->
+<!--             <div class="sidebar-heading border-bottom bg-light"></div> -->
+<!--             <div class="list-group list-group-flush"> -->
+<!--                 농사정보 -->
+<%--                 <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">농사정보</a> --%>
+<%--                 <ul class="dropdown-menu" style="display: ${category eq 'gu' ? 'block' : 'none'};"> --%>
+<%--                     <li><a class="${ category eq 'gu' ? 'active' : ''} list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a></li> --%>
+<!--                     <li><a href="#">농사Tip</a></li> -->
+<!--                 </ul> -->
 
-                <!-- 소통공간 -->
-                <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a>
-                <ul class="dropdown-menu" style="display: ${category eq 'bo' ? 'block' : 'none'};">
-                    <li><a class="${ category eq 'bo' ? 'active' : ''} list-group-item-action" href="/board/list">게시판</a></li>
-                    <li><a href="#">공지사항</a></li>
-                </ul>
+<!--                 소통공간 -->
+<%--                 <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">소통공간</a> --%>
+<%--                 <ul class="dropdown-menu" style="display: ${category eq 'bo' ? 'block' : 'none'};"> --%>
+<%--                     <li><a class="${ category eq 'bo' ? 'active' : ''} list-group-item-action" href="/board/list">게시판</a></li> --%>
+<!--                     <li><a href="#">공지사항</a></li> -->
+<!--                 </ul> -->
 
-                <!-- 나의농장 -->
-                <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a>
+<!--                 나의농장 -->
+<%--                 <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light p-3 ps-4 dropdown-toggle" href="#">나의농장</a> --%>
+
 <%--                 <ul class="dropdown-menu" style="display: ${category eq 'ma' ? 'block' : 'none'};"> --%>
-					<ul class="dropdown-menu" style="display: ${category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'block' : 'none'} ;">
-                	<c:choose>
-                	<c:when test="${not empty plant_id }">
-                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/list'/>">작물관리</a></li>
-                	</c:when>
-                	<c:otherwise>
-                    <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/info'/>">작물관리</a></li>
-                	</c:otherwise>
-                	</c:choose>
-                	<li><a class=" list-group-item-action" href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
-                	<li><a class="${ category eq 'te' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
-                	<li><a class="${ category eq 'wa' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/water_management'/>">급수관리</a></li>
-                	<li><a class="${ category eq 'di' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/diary'/>">관찰일지</a></li>
-                </ul>
+
+<%-- 					<ul class="dropdown-menu" style="display: ${category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'block' : 'none'} ;"> --%>
+<%--                 	<c:choose> --%>
+<%--                 	<c:when test="${not empty plant_id }"> --%>
+<%--                     <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/list'/>">작물관리</a></li> --%>
+<%--                 	</c:when> --%>
+<%--                 	<c:otherwise> --%>
+<%--                     <li><a class="${ category eq 'ma' ? 'active' : ''} list-group-item-action" href="<c:url value='/manage/info'/>">작물관리</a></li> --%>
+<%--                 	</c:otherwise> --%>
+<%--                 	</c:choose> --%>
+<%--                 	<li><a class=" list-group-item-action" href="<c:url value='/log/monitor'/>">실시간모니터링</a></li> --%>
+<%--                 	<li><a class="${ category eq 'te' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li> --%>
+<%--                 	<li><a class="${ category eq 'wa' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/water_management'/>">급수관리</a></li> --%>
+<%--                 	<li><a class="${ category eq 'di' ? 'active' : ''} list-group-item-action" href="<c:url value='/log/diary'/>">관찰일지</a></li> --%>
+<!--                 </ul> -->
+<!--             </div> -->
+<!--         </div> -->
+
+	<div class="bg-light border-end" id="sidebar-wrapper" style="width: 200px;">
+        <div class="list-group list-group-flush">
+<!--             메인 카테고리 1 -->
+            <a class="${ category eq 'gu' || category eq 'in' || category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light dropdown-toggle"
+            			data-bs-toggle="collapse" href="#category1" role="button" aria-expanded="${category eq 'gu' || category eq 'in' || category eq 'vi' ? 'true' : 'false'}"
+            			aria-controls="category1">
+                농사정보
+            </a>
+            <div class="collapse ${category eq 'gu' ? 'show' : ''}" id="category1">
+                <div class="list-group list-group-flush ms-3">
+<!--                     하위 카테고리 1-1 -->
+                    <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a>
+                    
+<!--                     하위 카테고리 1-2 -->
+                    <a class="${ category eq 'in' || category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action dropdown-toggle" data-bs-toggle="collapse" href="#subcategory1-1" role="button"
+                    			 aria-expanded="${category eq 'in' || category eq 'vi' ? 'true' : 'false'}" aria-controls="subcategory1-1">
+                        농사Tip
+                    </a>
+                    <div class="collapse ${category eq 'in' || category eq 'vi' ? 'show' : ''}" id="subcategory1-1">
+                        <div class="list-group list-group-flush ms-3">
+                            <a class="${ category eq 'in' ? 'active' : ''}list-group-item list-group-item-action" href="<c:url value='/weekinfo/list'/>">주간농사정보</a>
+                            <a class="${ category eq 'vi' ? 'active' : ''}list-group-item list-group-item-action" href="<c:url value='/video/list'/>">농업기술동영상</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- 메인 카테고리 2 -->
+            <a class="${ category eq 'bo' || category eq 'no' ? 'active' : ''} list-group-item list-group-item-action dropdown-toggle" data-bs-toggle="collapse" href="#category2" role="button"
+            			aria-expanded="${ category eq 'bo' || category eq 'no' ? 'true' : 'false' }" aria-controls="category2">
+                소통공간
+            </a>
+            <div class="collapse ${category eq 'bo' || category eq 'no' ? 'show' : ''}" id="category2">
+                <div class="list-group list-group-flush ms-3">
+                    <a class="${ category eq 'bo' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/board/list'/>">게시판</a>
+                    <a class="${ category eq 'no' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/notice/list'/>">공지사항</a>
+                </div>
+            </div>
+
+            <!-- 메인 카테고리 3 -->
+            <a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}
+            			list-group-item list-group-item-action list-group-item-light dropdown-toggle" data-bs-toggle="collapse" href="#category3" role="button"
+            			aria-expanded="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'true' : 'false'}"
+            			aria-controls="category3">
+                나의농장
+            </a>
+            <div class="collapse ${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'show' : ''}" id="category3">
+                <div class="list-group list-group-flush ms-3">
+                    <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/manage/list'/>">작물관리</a>
+                    <a class="${ category eq 'mo' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/monitor'/>">실시간모니터링</a>
+                    <a class="${ category eq 'te' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도/조도</a>
+                    <a class="${ category eq 'wa' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/water_management'/>">급수관리</a>
+                    <a class="${ category eq 'di' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/diary/list'/>">관찰일지</a>
+                </div>
             </div>
         </div>
+    </div>
     </c:if>
 
     <!-- Main Content -->

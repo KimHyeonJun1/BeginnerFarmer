@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.farm.guide.GuideMapper">
+
+<!-- 작물가이드 정보화면 -->
+<select id="getOneGuide" resultType="guide">
+select * from plant where plant_id = #{plant_id}
+</select>
+
+<!-- 작물가이드 목록조회 -->
+<select id="getListOfGuide" resultType="guide">
+select * from plant order by 1
+</select>
+</mapper>
