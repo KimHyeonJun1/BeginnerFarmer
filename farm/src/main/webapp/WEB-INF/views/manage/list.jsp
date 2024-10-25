@@ -18,14 +18,14 @@
 <h3 class="m-2 pb-5">작물관리</h3>
 <div class="box">
       
-       <a class="link" href='<c:url value="${empty auth_user ? '/member/login' : '/manage/register'}"/>'>
+
+			<div class="text-box">
+			<a class="link" href='<c:url value="${empty auth_user ? '/member/login' : '/manage/register'}"/>'>
        <div class="plant-mg my-2">
        		 <img src="<c:url value='/img/clover.png'/>" alt="식물">
         <div class="speech-bubble"> 여기를 클릭!</div>
        </div>
        </a>
-			<div class="text-box">
-			
 			  <h3>작물을 등록하세요</h3>
 			</div>        	
     </div>

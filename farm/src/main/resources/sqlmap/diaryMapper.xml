@@ -10,7 +10,7 @@
 select * 
 from (select row_number() over(order by root, step desc) no, name, n.*
 	 from diary n left outer join member m on m.userid = n.writer
-	 <include refid="whereSearch"/>) n
+	 <!-- <include refid="whereSearch"/>) --> n
 where no between #{beginList} and #{endList}
 order by no desc
 </select>
