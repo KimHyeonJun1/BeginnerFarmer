@@ -219,30 +219,38 @@
 
 	<div class="bg-light border-end" id="sidebar-wrapper" style="width: 200px;">
         <div class="list-group list-group-flush">
-<!--             메인 카테고리 1 -->
-            <a class="${ category eq 'gu' || category eq 'in' || category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light dropdown-toggle"
-            			data-bs-toggle="collapse" href="#category1" role="button" aria-expanded="${category eq 'gu' || category eq 'in' || category eq 'vi' ? 'true' : 'false'}"
-            			aria-controls="category1">
-                농사정보
-            </a>
-            <div class="collapse ${category eq 'gu' ? 'show' : ''}" id="category1">
-                <div class="list-group list-group-flush ms-3">
-<!--                     하위 카테고리 1-1 -->
-                    <a class="${ category eq 'gu' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/guide/list'/>">작물가이드</a>
-                    
-<!--                     하위 카테고리 1-2 -->
-                    <a class="${ category eq 'in' || category eq 'vi' ? 'active' : ''} list-group-item list-group-item-action dropdown-toggle" data-bs-toggle="collapse" href="#subcategory1-1" role="button"
-                    			 aria-expanded="${category eq 'in' || category eq 'vi' ? 'true' : 'false'}" aria-controls="subcategory1-1">
-                        농사Tip
-                    </a>
-                    <div class="collapse ${category eq 'in' || category eq 'vi' ? 'show' : ''}" id="subcategory1-1">
-                        <div class="list-group list-group-flush ms-3">
-                            <a class="${ category eq 'in' ? 'active' : ''}list-group-item list-group-item-action" href="<c:url value='/weekinfo/list'/>">주간농사정보</a>
-                            <a class="${ category eq 'vi' ? 'active' : ''}list-group-item list-group-item-action" href="<c:url value='/video/list'/>">농업기술동영상</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<!-- 메인 카테고리 1 -->
+			<a class="${category == 'gu' || category == 'in' || category == 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light dropdown-toggle"
+			   data-bs-toggle="collapse" href="#category1" role="button" 
+			   aria-expanded="${category == 'gu' || category == 'in' || category == 'vi' ? 'true' : 'false'}" 
+			   aria-controls="category1">
+			    농사정보
+			</a>
+			
+			<div class="collapse ${category == 'gu' || category == 'in' || category == 'vi' ? 'show' : ''}" id="category1">
+			    <div class="list-group list-group-flush ms-3">
+			        <!-- 하위 카테고리 1-1 -->
+			        <a class="${category == 'gu' ? 'active' : ''} list-group-item list-group-item-action" 
+			           href="<c:url value='/guide/list'/>">작물가이드</a>
+			
+			        <!-- 하위 카테고리 1-2 -->
+			        <a class="${category == 'in' || category == 'vi' ? 'active' : ''} list-group-item list-group-item-action list-group-item-light dropdown-toggle"
+			           data-bs-toggle="collapse" href="#subcategory1-1" role="button" 
+			           aria-expanded="${category == 'in' || category == 'vi' ? 'true' : 'false'}" 
+			           aria-controls="subcategory1-1">
+			            농사Tip
+			        </a>
+			
+			        <div class="collapse ${category == 'in' || category == 'vi' ? 'show' : ''}" id="subcategory1-1">
+			            <div class="list-group list-group-flush ms-3">
+			                <a class="${category == 'in' ? 'active' : ''} list-group-item list-group-item-action" 
+			                   href="<c:url value='/weekInfo/list'/>">주간농사정보</a>
+			                <a class="${category == 'vi' ? 'active' : ''} list-group-item list-group-item-action" 
+			                   href="<c:url value='/video/list'/>">농업기술동영상</a>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 
 			<!-- 메인 카테고리 2 -->
             <a class="${ category eq 'bo' || category eq 'no' ? 'active' : ''} list-group-item list-group-item-action dropdown-toggle" data-bs-toggle="collapse" href="#category2" role="button"
