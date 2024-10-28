@@ -9,14 +9,15 @@ import org.apache.ibatis.annotations.Param;
 public interface ManageMapper {
 //작물관리
 	
-	int countOfUserPlant(String userid_log); //userplant의 userid_log 조회
+	//userplant의 userid_log 조회
+	int countOfUserPlant(String userid_log); 
 	
-	int deleteManage(String userid_log, int plantid_log);
-		
-	
-	 // 작물 목록 조회
+	//자신이 등록한 작물 빼고 작물 목록 조회
+    List<ManageVO> getListOfManage(String userid_log);
+    
+    //전체 작물 조회
     List<ManageVO> getListOfManage();
-    List<ManageVO> getListOfUserPlant();
+    
     
     // 사용자별 작물 조회
     List<ManageVO> getUserPlants(@Param("userid_log") String userid_log);
@@ -27,7 +28,7 @@ public interface ManageMapper {
     // 작물 삭제
     void deleteUserPlant(@Param("userid_log") String userid_log, @Param("plantid_log") int plantid_log);
 	
-	// 선택한 유저의 정보 조회
-    ManageVO getOneManage(String userid_log, int plantid_log);
+//	// 선택한 유저의 정보 조회
+//    ManageVO getOneManage(String userid_log, int plantid_log);
 	
 }
