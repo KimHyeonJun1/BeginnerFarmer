@@ -277,7 +277,7 @@
     </c:if>
 
     <!-- Main Content -->
-    <main id="content" class="main ${ category == 'home' ? 'full-width' : ''}" style="flex-grow: 1;">
+    <main id="content" class="mx-5 main ${ category == 'home' ? 'full-width' : ''}" style="flex-grow: 1;">
         <tiles:insertAttribute name="container"/>
     </main>
 </div>
