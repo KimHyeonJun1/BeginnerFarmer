@@ -64,7 +64,32 @@
 	</tbody>
 	
 </table>
+<script>
+// $(function(){
+// 	$.ajax({
+// 		url: "weekInfo"
+// 	}).done(function(rs){
+// 		console.log(rs)
+		
+// 		console.log($(rs).find("item").find("childNodes"))
 
+// 	$(rs).find("item").each(function(){
+// 		console.log($(this).find("childNodes"))
+// 		var v = this
+// 		console.log('item> ',$(this).find("cntntsNo").text())
+// 		console.log($(this).find("subject"))
+// 	})
+// 		subject
+// 		writerNm
+// 		regDt
+// 		hitCt
+// 		downUrl
+// 		downUrlList
+// 		fileName
+
+// 	})
+// })
+</script>
 
 </body>
 </html>
