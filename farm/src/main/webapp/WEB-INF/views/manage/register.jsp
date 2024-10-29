@@ -15,7 +15,7 @@
       <label class="ml-5 fs-4 ">나의 작물을 선택하세요</label>
       <form method="post" action="register">
       <select class="form-select w-px350 mt-3"  name="plant_id">
-         <option value="1">선택</option>
+         <option value="0">선택</option>
          <c:forEach items="${plant}" var="p">
          <option <c:if test="${vo.plant_id eq p.plant_id}">selected</c:if> value="${p.plant_id}">${p.plant_name}</option>
          </c:forEach>

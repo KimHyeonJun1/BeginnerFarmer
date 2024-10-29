@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.farm.manage.ManageMapper;
 import kr.co.farm.manage.ManageVO;
@@ -18,8 +21,16 @@ import lombok.RequiredArgsConstructor;
 
 @Controller	@RequestMapping("/manage") @RequiredArgsConstructor
 public class ManageController {
+
 	private final ManageMapper mapper;
 		
+	
+//	@PostMapping("/savePlantId")
+//	@ResponseBody
+//	public String savePlantId(@RequestParam("plant_id") String plantId, HttpSession session) {
+//		session.setAttribute("plantid_log", plantId);
+//		return "success";
+//	}
 	
 	
 	//작물 정보 삭제 요청
@@ -31,6 +42,9 @@ public class ManageController {
     }
 	
 
+	
+	
+	
 	
 	
 	//작물 정보 화면 요청

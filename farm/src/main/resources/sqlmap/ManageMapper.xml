@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.manage.ManageMapper">
 
- <!-- 선택한 유저의 작물정보 조회 --> 
+<!--  선택한 유저의 작물정보 조회  -->
 <!-- <select id="getOneManage" resultType="manage"> -->
-<!-- select * from userplant -->
+<!-- select * from userplant   -->
+<!-- WHERE userid_log = #{userid_log}  -->
+<!-- AND plant_id = #{plantid_log} -->
 <!-- </select> -->
 
 

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +33,7 @@ justfiy-content: center;
 		<div class="p-2 fs-5" >키운지 ${vo.register_date} 일 차에요!</div>
 	</div>
 	
+
 	
 	
 	
