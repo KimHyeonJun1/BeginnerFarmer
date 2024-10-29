@@ -1,5 +1,7 @@
 package kr.co.farm.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.XML;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.farm.common.CommonUtility;
+import kr.co.farm.common.PageVO;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -28,33 +31,33 @@ public class WeekInfoController {
 		url.append("?apiKey=").append(Key)
 		   .append("&_type=json");
 		
-//		model.addAttribute( "list", common.responseBody( url.toString() ).toMap() );
-//		JSONObject json = common.responseBody(url.toString());
-		
 		return XML.toJSONObject(common.requestAPI(url.toString())).getJSONObject("response").getJSONObject("body").toMap();
 	}
 	
 	// 주간농사정보 화면 요청
 	@RequestMapping("/list")
-	public String weekInfoList(HttpSession session, Model model) {
-//	public String weekInfoList(@RequestBody HashMap<String, Object> map, HttpSession session, Model model) {
+	public String weekInfoList(HttpSession session, Model model, PageVO page) {
 		session.setAttribute("category", "in");
 		// 농사로에서 주간농사정보 조회해오기
 		StringBuffer url = new StringBuffer(weekInfoURL);
 		url.append("?apiKey=").append(Key)
-		   .append("&_type=json");
+		   .append("&_type=json")
+		   .append("&pageNo=").append(page.getPageNo())
+		   .append("&numOfRows=").append(page.getListSize())
+		   ;
 		
-//		return common.requestAPI(url.toString());
+		Map<String, Object> weekInfo = XML.toJSONObject(common.requestAPI(url.toString()))
+										  .getJSONObject("response")
+										  .getJSONObject("body")
+										  .toMap();
+		model.addAttribute("weekInfo", weekInfo);
 		
+		Map<String, Object> items = (Map<String, Object>) weekInfo.get("items");
+		Integer totalCount = (Integer) items.get("totalCount");
 		
-//		JSONObject json = common.response(url.toString());
-//		model.addAttribute("weekInfo", json.toMap());
-//		
-		// 오류가 있다면 오류내용을 출력할 수 있게하기
-//		model.addAttribute("response", json.getJSONObject("header").toMap());
-//		
-//		json = json.getJSONObject("body");
-//		
+		page.setTotalList(totalCount);
+	    model.addAttribute("page", page);
+	    
 		return "weekInfo/list";
 	}
 }

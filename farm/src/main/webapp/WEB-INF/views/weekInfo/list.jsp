@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<h3>주간농사정보</h3>
+<h3 class="my-5">주간농사정보</h3>
 
-<div class="d-flex mb-2 justify-content-between">
+<div class="d-flex my-2 justify-content-between">
 	<div class="col">
 		<form method="post" action="list" class="d-flex justify-content-between">
 			<div class="input-group w-px500">
@@ -53,42 +53,37 @@
 		<c:if test="${ weekInfo.totalCount==0 }">
 			<tr><td colspan="6" class="text-center">주간농사정보가 없습니다.</td></tr>
 		</c:if>
+		<c:set var="No" value="${ page.endList }"/> 
+		<c:forEach items="${ weekInfo.items.item }" var="item">
+		
 		<tr>
-			<td></td>
-			<td>${ item.subject }</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>${ No }</td>
+			<td><a href="${item.downUrl}">${ item.subject }</a></td>
+			<td>${ item.writerNm }</td>
+			<td>${ item.regDt }</td>
+			<td>${ item.hitCt }</td>
+			<td><a href="${item.downUrl}"><i class="fa-regular fa-file"></i></a></td>
 		</tr>
+		<c:set var="No" value="${ No-1 }"/>
+		</c:forEach>
 	</tbody>
-	
 </table>
+
+<jsp:include page="/WEB-INF/views/include/subPage.jsp"/>
+
 <script>
-// $(function(){
+$(function(){
+	$("a.page-link").on("click", function(){
+		location = "<c:url value='list?pageNo='/>"+$(this).data("page")
+	})
 // 	$.ajax({
 // 		url: "weekInfo"
 // 	}).done(function(rs){
 // 		console.log(rs)
 		
-// 		console.log($(rs).find("item").find("childNodes"))
-
-// 	$(rs).find("item").each(function(){
-// 		console.log($(this).find("childNodes"))
-// 		var v = this
-// 		console.log('item> ',$(this).find("cntntsNo").text())
-// 		console.log($(this).find("subject"))
-// 	})
-// 		subject
-// 		writerNm
-// 		regDt
-// 		hitCt
-// 		downUrl
-// 		downUrlList
-// 		fileName
 
 // 	})
-// })
+})
 </script>
 
 </body>

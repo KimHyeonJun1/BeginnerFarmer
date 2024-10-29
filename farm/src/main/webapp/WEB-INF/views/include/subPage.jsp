@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:set var="page" value="${ subPage }"/>
-
 <nav>
   <ul class="pagination justify-content-center mt-4">
   	<c:if test="${ page.prev }">
