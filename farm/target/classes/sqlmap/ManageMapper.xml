@@ -2,12 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.manage.ManageMapper">
 
-<!--  선택한 유저의 작물정보 조회  -->
-<!-- <select id="getOneManage" resultType="manage"> -->
-<!-- select * from userplant   -->
-<!-- WHERE userid_log = #{userid_log}  -->
-<!-- AND plant_id = #{plantid_log} -->
-<!-- </select> -->
+
+
+
+
+<select id="getUserPlant" resultType="manage">
+    SELECT p.plant_id AS plantid_log, p.plant_name
+    FROM userplant up
+    JOIN plant p ON up.plantid_log = p.plant_id
+    WHERE up.userid_log = #{userid_log}
+</select>
+
+<select id="getPlantInfo" resultType="manage">
+    SELECT p.plant_id AS plantid_log, p.plant_name, TRUNC(SYSDATE) - TRUNC(up.register_date)+1 AS today
+    FROM userplant up
+    JOIN plant p ON up.plantid_log = p.plant_id
+    WHERE up.userid_log = #{userid_log} AND up.plantid_log = #{plantid_log}
+</select>
+
 
 
 <!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->

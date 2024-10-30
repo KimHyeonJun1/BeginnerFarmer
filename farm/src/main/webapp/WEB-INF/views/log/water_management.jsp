@@ -32,7 +32,7 @@
     align-items: center; /* 수평 중앙 정렬 */
 </style>
 <body>
-<h3 class="my-3">급수관리</h3>
+<h3 class="my-2">급수관리</h3>
 
 <div class="mt-4">
 	<div class="box1">

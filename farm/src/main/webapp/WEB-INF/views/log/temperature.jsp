@@ -7,25 +7,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.w10 { width : 100%; }
+.w30 { width : 70%  }
+.h40 { height : 100%; }
+</style>
 <body>
-<h3>온도/습도/조도</h3>
-<div class="container text-center">
-  <div class="row g-2">
-    <div class="col-6">
-    <span class="border border-success">
-    </span>
-      <div class="p-3">Custom column padding</div>
-    </div>	
-    <div class="col-6">
-      <div class="p-3">Custom column padding</div>
-    </div>
-    <div class="col-6">
-      <div class="p-3">Custom column padding</div>
-    </div>
-    <div class="col-6">
-      <div class="p-3">Custom column padding</div>
-    </div>
-  </div>
+<h3 class="my-2">온도/습도/조도</h3>
+<div class="container d-flex">
+	<div class="col w10">
+		<div class="row h40" >영역1</div>
+		
+	</div>
+	<div class="col w20">
+		<div class="row">영역2</div>
+	
+	</div>
+	<div class="col w30">
+	영역3
+	</div>
+	<div class="col"></div>
+	<div class="col"></div>
+	<div class="col"></div>
 </div>
+ 
 </body>
 </html>

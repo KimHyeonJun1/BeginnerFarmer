@@ -9,12 +9,16 @@ import org.apache.ibatis.annotations.Param;
 public interface ManageMapper {
 //작물관리
 	
+	 // 현재 사용자가 소유한 모든 작물 리스트 조회
+    List<ManageVO> getUserPlant(String userid_log);
+
+    // 특정 plantid_log에 대한 작물 정보 조회
+    ManageVO getPlantInfo(@Param("userid_log") String userid_log, @Param("plantid_log") int plantid_log);
+	
 	
 	ManageVO getOneManage(int plantid_log);
 	
-	// 특정 작물 정보 조회 (새로운 메서드 추가)
-//    ManageVO selectPlantInfo(@Param("userid_log") String userid_log, @Param("plantid_log") int plantid_log);
-	
+
 	//userplant의 userid_log 조회
 	int countOfUserPlant(String userid_log); 
 	

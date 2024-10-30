@@ -25,14 +25,6 @@ public class ManageController {
 	private final ManageMapper mapper;
 		
 	
-//	@PostMapping("/savePlantId")
-//	@ResponseBody
-//	public String savePlantId(@RequestParam("plant_id") String plantId, HttpSession session) {
-//		session.setAttribute("plantid_log", plantId);
-//		return "success";
-//	}
-	
-	
 	//작물 정보 삭제 요청
 	@DeleteMapping("/delete")
 	public String delete(Authentication user, int plantid_log, Model model) {
@@ -42,9 +34,6 @@ public class ManageController {
     }
 	
 
-	
-	
-	
 	
 	
 	//작물 정보 화면 요청

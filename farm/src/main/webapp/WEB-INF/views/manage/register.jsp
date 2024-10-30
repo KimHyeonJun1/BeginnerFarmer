@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3 class="my-4">등록화면</h3>
+<h3 class="my-2">등록화면</h3>
 <div class="box">
 <div class="row mb-3 justify-content-center">
    <div class="col-auto d-flex align-items-center flex-column">

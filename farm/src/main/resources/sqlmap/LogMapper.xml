@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.log.LogMapper">
-<!-- 실시간 모니터링 화면요청 -->
-<select id="getListOfLog">
-select day(${register_dtae} = #{register_date}) from userplant
+
+<select id="getOneLog" resultType="log">
+select * from userplant where plantid_log = #{plantid_log}
 </select>
 
-<!-- 유저의 작물이 등록된지 며칠됐는지 알려주는 쿼리 -->
-<select id="getCountDate">
-SELECT 
-    TRUNC(SYSDATE) - TRUNC(register_date)+1 AS day
-FROM 
-    userplant
-WHERE 
-    userid_log = #{userid_log}
-    AND plantid_log = #{plantid_log}
-</select>
+
 </mapper>
