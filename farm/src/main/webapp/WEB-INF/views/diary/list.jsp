@@ -45,7 +45,7 @@
 
         <c:forEach items="${diaryList}" var="vo">
             <tr>
-                <td>${vo.diary_id}</td>
+                <td>${vo.no}</td>
                 <td><a class="text-link" href="info?id=${vo.diary_id}">${vo.diary_title}</a></td>
                 <td>${vo.diary_writedate}</td>
             </tr>

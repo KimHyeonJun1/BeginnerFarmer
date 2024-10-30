@@ -137,9 +137,10 @@ public class MemberController {
 	//현재 입력비번이 정확한지 확인 요청
 		@ResponseBody
 		@RequestMapping("/user/correctPassword")
-		public boolean correctPassword(String userid, String userpw) {
+		public boolean correctPassword(String userid, String userpw
+									, @AuthenticationPrincipal LoginUser user) {
 			//입력한 비번이 DB의 비번과 일치하는지
-			MemberVO vo = mapper.getOneMember(userid);
+			MemberVO vo = mapper.getOneMember(user.getUsername());
 			return password.matches(userpw, vo.getUserpw());
 		}
 		

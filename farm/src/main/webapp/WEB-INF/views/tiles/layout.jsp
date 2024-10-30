@@ -144,19 +144,17 @@
        	 		 <li class="dropdown"><a href="<c:url value='/member/logout' />">로그아웃</a></li>
                       	
                  <c:if test="${empty auth_user.social }">
-	                 <li class="nav-item dropdown">
-	                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" 
-	                      	data-bs-toggle="dropdown" aria-haspopup="true" 
-	                      	aria-expanded="false">${auth_user.name }</a>
-	                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                         <a class="dropdown-item" href="<c:url value='/member/user/myPage'/>">내 정보</a>
-	                         <a class="dropdown-item" href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a>
-	                     </div>
-	                 </li>
+                 	<li class="dropdown"><span>${auth_user.name }님</span><i class="bi bi-chevron-down toggle-dropdown"></i>
+						<ul>
+					        <li><a href="<c:url value='/member/user/myPage'/>">내 정보</a></li>
+							<li><a href="<c:url value='/member/user/changePassword'/>">비밀번호 변경</a></li>
+					     </ul>
+
+					</li>
                  </c:if>
                  
                  <c:if test="${not empty auth_user.social }">
-	                         <a href="#!">${auth_user.name}</a>
+	                         <a href="#!">${auth_user.name}님</a>
 
                  </c:if>
 

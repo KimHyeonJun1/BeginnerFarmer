@@ -10,13 +10,15 @@ values ( #{diary_title, jdbcType=VARCHAR}, #{diary_content, jdbcType=VARCHAR}, #
 
 <!-- 특정 writer에 대한 관찰일지 목록 조회 -->
 <select id="getListOfDiaryByWriter" parameterType="String" resultType="diary">
-SELECT 
+select *
+from (SELECT row_number() over(order by diary_id) no, 
     diary_id,
     diary_title,
     writer,
     diary_writedate
 FROM diary
-WHERE writer = #{writer}
+WHERE writer = #{writer} )
+order by no desc
 </select>
 
 </mapper>

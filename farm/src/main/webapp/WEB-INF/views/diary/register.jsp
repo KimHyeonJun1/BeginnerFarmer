@@ -19,14 +19,13 @@
 	<tr>
 		<th>제목</th>
 		<td>
-			<input type="text" name="title" title="제목" class="check-empty form-control">
+			<input type="text" name="diary_title" title="제목" class="check-empty form-control">
 		</td>		
 	</tr>
-	
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea id="summernote" name="content" title="내용" class="check-empty form-control"></textarea>
+			<textarea id="summernote" name="diary_content" title="내용" class="check-empty form-control"></textarea>
 		</td>		
 	</tr>
 	</table>
@@ -45,10 +44,29 @@
 
 
 <script>
-
 $("#btn-save").on("click", function() {
-	if( isNotEmpty() ) 
-		$("form").submit()
+	if( isNotEmpty() ) {
+// 		$("form").submit()
+//    		var data = new FormData();
+		let summernote = new Object();
+		summernote.diary_title = $("[name=diary_title]").val();
+		summernote.diary_content = $("[name=diary_content]").val();
+// 		console.log( 'save> ',summernote)
+		$.ajax({
+			url : "<c:url value='register'/>",
+	       	type : "POST",
+//        		dataType : "text",
+	        contentType : "application/json; charset=utf-8",
+	        data: JSON.stringify(summernote),
+	        success : function (data){
+	           	if(data){
+	               	location.href="<c:url value='list'/>";
+	           	}else{
+	               	alert("저장 오류 발생");
+	           	}
+			}
+   	    });
+	}
 })
 
 // 저장 버튼 클릭 시 AJAX로 서버에 데이터 전송
@@ -113,15 +131,43 @@ $('#summernote').summernote({
 
 	                // 파일 업로드(다중업로드를 위해 반복문 사용)
 	                for (var i = files.length - 1; i >= 0; i--) {
-	                    uploadSummernoteImageFile(files[i],
-	                this);
-	                    }
+	                    uploadSummernoteImageFile(files[i], this);
 	                }
-	            } 
-	});
+              } 
+       } 
+});
 	
 $('#summernote').summernote('fontSize', '24');
+
+function uploadSummernoteImageFile(file, el) {
+    var data = new FormData();
+    data.append('file', file);
+    
+    $.ajax({
+      url: "<c:url value='summernote_image/upload'/>",
+      type: "POST",
+      enctype: 'multipart/form-data',
+      data: data,
+      cache: false,
+      contentType : false,
+      processData : false,
+      success : function( url ) {
+      	  console.log( url )
+          summerImage.push( url );
+          $(el).summernote('editor.insertImage', url);
+//                     var json = JSON.parse(data);
+//                     $(el).summernote('editor.insertImage',json["url"]);
+//                         jsonArray.push(json["url"]);
+//                         jsonFn(jsonArray);
+console.log( summerImage )
+        },
+        error : function(e) {
+            console.log(e);
+        }
+   });
+}
 	
+var summerImage = [];
 
 
 
