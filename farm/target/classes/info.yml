@@ -12,5 +12,12 @@ naver:
 
 kakao:
  client-id: 91bf4ac093e1b519ef6c6633bdd5808d
+
+rememberKey: farm
+
+farm:
+  upload: d://farm/app/upload/
+  #파일 업로드 위치
+  files: d://farm/app/files/
    
 baseURL: http://localhost:8080/farm
