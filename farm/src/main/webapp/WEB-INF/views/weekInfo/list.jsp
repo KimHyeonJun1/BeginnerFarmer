@@ -8,34 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <h3 class="my-5">주간농사정보</h3>
 
-<div class="d-flex my-2 justify-content-between">
-	<div class="col">
-		<form method="post" action="list" class="d-flex justify-content-between">
-			<div class="input-group w-px500">
-				<select name="search" class="form-select w-px100">
-					<option value="all">전체</option>
-					<option value="title" ${page.search == "title" ? "selected" : "" }>제목</option>
-					<option value="content" <c:if test="${page.search eq 'content'}">selected</c:if> >내용</option>
-				</select>
-				<input type="text" name="keyword" value="${page.keyword }" class="form-control w-px300">
-				<button class="btn btn-success" ><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
-			</div>
-			
-			<div class="col-auto">
-				<select name="listSize" class="form-select">
-					<c:forEach var="i" begin="1" end="5">
-					<option value="${ 10*i }">${ 10*i }개씩</option>
-					</c:forEach>
-				</select>
-			</div>
-		</form>
+<div class="d-flex mb-2 justify-content-between">
+	<div class="col-auto d-flex gap-2"></div>
+	<div class="col-auto">
+		<select id="listSize" class="form-select">
+			<c:forEach var="i" begin="1" end="5">
+				<option value="${ 10*i }">${ 10*i }개씩</option>
+			</c:forEach>
+		</select>
 	</div>
 </div>
 
-<table class="table tb-list text-center">
+<table class="table tb-list text-center" id="weekInfo">
 	<colgroup>
 		<col width="100px">
 		<col width="">
@@ -73,17 +59,26 @@
 
 <script>
 $(function(){
+	$("#listSize").val( ${page.listSize} ).prop("selected", true)
+	
 	$("a.page-link").on("click", function(){
-		location = "<c:url value='list?pageNo='/>"+$(this).data("page")
+		location = "<c:url value='list?pageNo='/>"+$(this).data("page")+"&listSize="
+				+$("#listSize option:selected").val()
 	})
+
+    // listSize 값 변경 시 실행되는 함수
+    $("#listSize").on("change", function() {
+        if ($("table#weekInfo").length > 0) {
+        	location = "<c:url value='list?pageNo=1&listSize='/>"+$(this).val()
+        }
+    });
+})
+
 // 	$.ajax({
 // 		url: "weekInfo"
 // 	}).done(function(rs){
 // 		console.log(rs)
-		
-
 // 	})
-})
 </script>
 
 </body>

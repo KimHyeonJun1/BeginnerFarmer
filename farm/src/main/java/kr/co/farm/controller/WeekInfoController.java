@@ -46,12 +46,14 @@ public class WeekInfoController {
 		   .append("&numOfRows=").append(page.getListSize())
 		   ;
 		
+		// API 요청 후 데이터 매핑
 		Map<String, Object> weekInfo = XML.toJSONObject(common.requestAPI(url.toString()))
 										  .getJSONObject("response")
 										  .getJSONObject("body")
 										  .toMap();
 		model.addAttribute("weekInfo", weekInfo);
 		
+		// 페이지 총 수 설정
 		Map<String, Object> items = (Map<String, Object>) weekInfo.get("items");
 		Integer totalCount = (Integer) items.get("totalCount");
 		
