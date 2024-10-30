@@ -53,7 +53,7 @@
   <link href="<c:url value='/vendor/aos/aos.css" rel="stylesheet'/>">
   <link href="<c:url value='/vendor/swiper/swiper-bundle.min.css'/>" rel="stylesheet">
   <link href="<c:url value='/vendor/glightbox/css/glightbox.min.css'/>" rel="stylesheet">
-  
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
   
   <!-- 제이쿼리 선언 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

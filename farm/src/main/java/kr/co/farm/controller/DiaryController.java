@@ -28,12 +28,14 @@ public class DiaryController {
     private final DiaryMapper diaryMapper;
     private final CommonUtility common;
     
+    
+    
     //관찰일지 정보화면 요청
     @RequestMapping("/info")
-    public String info() {
-    	
-    	
-    	
+    public String info(int id ,Model model, HttpSession session) {
+    	//선택한 글 DB 조회해 정보화면에 출력하기 위해 Model객체 담기
+    	model.addAttribute("diary", diaryMapper.getOneDiary(id));    	
+    	session.setAttribute("category", "di");
     	return "diary/info";
     }
     

@@ -22,7 +22,7 @@ $(function() {
 	
 	$(".date").attr("readonly", true); //날짜 입력불가(달력선택만가능)
 		$(".date").datepicker();
-		$(".ui-datepicker").css("display", "none"); // ui 스타일
+//		$(".ui-datepicker").css("display", "none"); // ui 스타일
 
 	
 	
@@ -68,4 +68,8 @@ function isNotEmpty(){
 	
 	return ok;
 }
+
+//--------------------------------------------------------------
+
+
 

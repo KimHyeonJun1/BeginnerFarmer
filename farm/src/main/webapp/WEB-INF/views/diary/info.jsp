@@ -1,113 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관찰일지 정보</title>
 </head>
-<body>
-<h3 class="my-4"> 정보</h3>
 
+<body>
+<h3 class="my-t">관찰일지 상세 정보</h3>
 <table class="table tb-row">
 <colgroup>
+	<col width ="50x">
 	<col width ="200px">
-	<col width ="140px">
-	<col width ="200px">
-	<col width ="100px">
-	<col>
 </colgroup>
-<tr><th>제목</th>
-	<td colspan="5">${vo.title }</td>
-</tr>
-<tr><th>작성자</th>
-	<td>${vo.name }</td>
-	<th>작성일자</th>
-	<td>${vo.writedate }</td>
-	<th>조회수</th>
-	<td>${vo.readcnt }</td>
-</tr>
-<tr><th>내용</th>
-	<td colspan="5">${fn: replace(vo.content, crlf, "<br>") }</td>
-</tr>
-<tr><th>첨부파일</th>
-	<td colspan="5">
-		<c:forEach items="${vo.fileList}" var="f">
-		<div class="row py-1">
-			<c:if test="${files[f.id]}">
-			<label role="button" data-file="${f.id }" class="d-flex col-auto text-link gap-3 file-download ">
-			<span>${f.filename }</span>
-			<i class="fs-3 fa-regular fa-circle-down"></i>
-			</label>
-			</c:if>
-			
-			<c:if test="${! files[f.id]}">
-			<del class="text-danger">${f.filename}</del>
-			</c:if>
-		</div>
-		</c:forEach>
-	</td>
-</tr>
-
+    <tr>
+        <th>제목</th>
+        <td>${diary.diary_title}</td> <!-- DB에서 가져온 제목 -->
+    </tr>
+    <tr>
+        <th>내용</th>
+        <td>
+            <div id="summernote" class="form-control" >${diary.diary_content}</div> <!-- DB에서 가져온 내용 -->
+        </td>
+    </tr>
 </table>
 
+
+
 <div class="btn btn-toolbar justify-content-center gap-2">
-	<button class="btn btn-primary" id="btn-list">목록으로</button>
-	
-	<sec:authorize access="isAuthenticated()"> <!-- 인증(로그인)된 경우 -->
-		<sec:authentication property="principal.user" var="auth"/>
-<!-- 	로그인한 사용자가 쓴 글에 대해서만 수정/삭제 가능  -->
-	<c:if test="${auth.userid == vo.writer }">
-	<button class="btn btn-primary" id="btn-modify">정보수정</button> 
-	<button class="btn btn-primary" id="btn-delete">정보삭제</button>
-	</c:if> 
-	
-	</sec:authorize>
-	
+	<button class="btn btn-outline-success" id="btn-list">목록으로</button>
+	<button class="btn btn-outline-primary px-4" id="btn-modify">수정</button> 
+	<button class="btn btn-outline-danger px-4" id="btn-delete">삭제</button>
 </div>
 
-<jsp:include page="comment/register.jsp"></jsp:include>
-
-
-<script >
-$(".file-download").on("click",function() {
-	var id = $(this).data("file");
-	location = `<c:url value ='/board/download?id=\${id}'/>`
-})
+<script>
 
 
 
-var info = {  id: "${vo.id}"
-			, pageNo: "${page.pageNo}"
-			, search: "${page.search}"
-			, keyword: "${page.keyword}"
-			, listSize: "${page.listSize}"
-			}
 
-$("#btn-list , #btn-modify, #btn-delete").on("click",function() {
-	var id = $(this).attr("id"); //btn-list, btn-modify
-	id = id.substr( id.indexOf("-")+1 ) //list, modify
-	
-	$(`<form method="post" action="\${id}"></form>`)
-	.appendTo("body")
-	.append( addToForm(info) );
-	
-	if( id == "delete"){
-		if( confirm("정말 삭제하시겠습니까?") ) {
- 			$("form")//.append(`<input type="hidden" name="_method" value="delete">`)
-					 .submit();
-		}
-	}else{
-		$("form").submit()
-	}
-	
-})
-
-
-
+// // Summernote 읽기 전용 설정
+// $('#summernote').summernote({
+//     height: 300,
+//     lang: "ko-KR",
+//     toolbar: false, // 툴바 비활성화
+//     disableDragAndDrop: true // 드래그 앤 드롭 비활성화
+// });
+// $('#summernote').summernote('disable'); // 읽기 전용 모드로 설정
 
 </script>
+
 </body>
 </html>
