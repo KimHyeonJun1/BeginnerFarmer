@@ -22,7 +22,7 @@ $(function() {
 	
 	$(".date").attr("readonly", true); //날짜 입력불가(달력선택만가능)
 		$(".date").datepicker();
-		$(".ui-datepicker").css("display", "none"); // ui 스타일
+//		$(".ui-datepicker").css("display", "none"); // ui 스타일
 
 	
 	
@@ -30,10 +30,9 @@ $(function() {
 	$(".date").on("change", function(){
 		$(this).next(".date-remove").removeClass("d-none")
 	})
+});
 //--------------------------------------------------------------
 	
-});
-
 $(document)
 .on("click", ".date + .date-remove", function(){
 	//폰트이미지가 동적으로 만들어지므로 문서에 이벤트 등록
@@ -52,3 +51,25 @@ function findPost( post, address1, address2 ){
 	    }
 	}).open();		
 }
+//--------------------------------------------------------------
+
+//필수입력항목 입력여부 확인
+function isNotEmpty(){
+	var ok = true;
+	
+	$(".check-empty").each(function() {
+		if( $(this).val()==""){
+			alert( $(this).attr("title") + "입력하세요!" )
+			$(this).focus()
+			ok = false;
+			return ok;
+		}
+	})
+	
+	return ok;
+}
+
+//--------------------------------------------------------------
+
+
+

@@ -20,5 +20,7 @@ public class LoginUserService implements UserDetailsService {
 		if( user==null ) throw new UsernameNotFoundException(username);
 		return new LoginUser(user);
 	}
+	
+
 
 }

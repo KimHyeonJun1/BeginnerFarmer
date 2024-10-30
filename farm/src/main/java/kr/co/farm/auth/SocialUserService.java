@@ -56,8 +56,9 @@ public class SocialUserService extends DefaultOAuth2UserService {
 		String name =  common.hasKey(json,"name");
 		String phone =  common.hasKey(json,"phone_number");
 		
-		 String profile = common.hasKey(json,"profile_image_url");
-		 if(name.isEmpty() ) name =  common.hasKey(json,"nickname", "무명씨");
+		json = json.getJSONObject("profile");
+		String profile = common.hasKey(json,"profile_image_url");
+		if(name.isEmpty() ) name =  common.hasKey(json,"nickname", "무명씨");
 		 
 		 //카카오 프로필 정보를 사용자정보로 관리하도록 MemberVO에 저장하기
 		 MemberVO vo = new MemberVO();

@@ -39,12 +39,12 @@
                      <input class="form-control" name="userpw" type="password"
                         placeholder="비밀번호"> <label>비밀번호</label>
                   </div>
-<!--                   <div class="form-check mb-3"> -->
-<!-- 					 <label> -->
-<!-- 					 	<input class="form-check-input" name="remember-me" -->
-<!-- 							type="checkbox" checked>로그인 상태 유지 -->
-<!-- 					 </label> -->
-<!-- 				  </div> -->
+                  <div class="form-check mb-3 d-flex">
+					 <label>
+					 	<input class="form-check-input " name="remember-me"
+							type="checkbox" checked>로그인 상태 유지
+					 </label>
+				  </div>
                      <button class="btn btn-success form-control py-3">로그인</button>
                </form>
                
