@@ -48,13 +48,15 @@ public class LogController {
 	@GetMapping("/monitor") //실시간 모니터링 화면 요청
 	public String LogMonitor(Authentication user,  HttpSession session, Model model) {
 		String userid_log = user.getName();	
+		Integer plantid_log = (Integer) session.getAttribute("plantid_log");  // 세션에서 선택된 plantid_log 가져오기
+		if (plantid_log  == null) {
+			return "redirect:/manage/list"; // 선택된 plantid_log가 없으면 info 페이지로 리다이렉트
+		}else {
 		
-		 int plantid_log = (Integer) session.getAttribute("plantid_log");  // 세션에서 선택된 plantid_log 가져오기
-		    
 		ManageVO selectedPlant = manageMapper.getPlantInfo(userid_log, plantid_log); 
 	    model.addAttribute("vo", selectedPlant);
 		session.setAttribute("category", "mo");		
 		return "log/monitor";
 				}	
-	
+	}
 }

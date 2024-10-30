@@ -25,7 +25,7 @@ justfiy-content: center;
 <body>
 
 <h3 class="my-2">실시간모니터링</h3>
-<h3 class="d-flex justify-content-center mb-3 fs-10 me-6">${vo.plant_name}가 자라고 있어요 !</h3>
+<h3 class="d-flex justify-content-center mb-3 fs-10 me-6">"${vo.plant_name}"ㅤ자라고 있어요 !</h3>
 <div class ="box d-flex">
 		<div class="cctv justify-content-center ">
 <!-- 			카메라부분 -->
