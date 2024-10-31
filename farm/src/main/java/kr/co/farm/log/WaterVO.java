@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class WaterVO {
-	private int water_id, soilmoisture, plants_id;
+	private int water_id, soilmoisture;
 	private Date waterdate;
 	
 }

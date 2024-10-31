@@ -2,9 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.manage.ManageMapper">
 
-<select id="getOneManage" resultType="manage">
-select * from userplant
+
+
+
+
+<select id="getUserPlant" resultType="manage">
+    SELECT p.plant_id AS plantid_log, p.plant_name
+    FROM userplant up
+    JOIN plant p ON up.plantid_log = p.plant_id
+    WHERE up.userid_log = #{userid_log}
 </select>
+
+<select id="getPlantInfo" resultType="manage">
+    SELECT p.plant_id AS plantid_log, p.plant_name, TRUNC(SYSDATE) - TRUNC(up.register_date)+1 AS today
+    FROM userplant up
+    JOIN plant p ON up.plantid_log = p.plant_id
+    WHERE up.userid_log = #{userid_log} AND up.plantid_log = #{plantid_log}
+</select>
+
 
 
 <!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->
@@ -14,33 +29,30 @@ where userid_log = #{userid_log}
 </select>
 
 
-<select id="getListOfUserPlant" resultType="manage">
-select * from plant where plant_id not in( select plant_id from userplant where userid = #{userid})
-</select>
 
+<!-- 전체작물목록조회 -->
 <select id="getListOfManage" resultType="manage">
-select * from plant
+select * from plant <if test="userid_log != null">where plant_id not in( select plantid_log from userplant where userid_log = #{userid_log})</if>
 </select>
 
+<!-- 작물 등록 -->
 <insert id="registerUserPlant" >
 insert into userplant (userid_log, plantid_log)
 values ( #{userid_log}, #{plantid_log} )
 </insert>
 
-<select id="getUserPlants" parameterType="string" resultType="manage">
+<!-- 자신이 등록한 작물 정보 조회 -->
+<select id="getUserPlants" resultType="manage">
 SELECT p.*
     FROM Plant p
     INNER JOIN userplant u ON p.plant_id = u.plantid_log
     WHERE u.userid_log = #{userid_log}
 </select>
 
-
-<delete id ="deleteuserPlant">
-DELETE FROM userplant WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log};
+<!-- 등록된 작물정보삭제 -->
+<delete id ="deleteUserPlant">
+DELETE FROM userplant WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log}
 </delete>
 
-<delete id="deleteManage">
-delete from userplant where userid_log = #{userid_log} and plantid_log = #{plantid_log}
-</delete>
 
 </mapper>
