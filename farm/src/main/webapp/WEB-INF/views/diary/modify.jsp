@@ -69,37 +69,10 @@ $("#btn-save").on("click", function() {
 	}
 })
 
-// 저장 버튼 클릭 시 AJAX로 서버에 데이터 전송
-// $("#btn-save").on("click", function(event) {
-//     event.preventDefault();  // 기본 폼 전송 방지
-
-//     // 데이터 확인용 로그 출력
-//     console.log("저장 버튼 클릭!");
-
-//     // 폼 데이터 수집
-//     var formData = new FormData($("form")[0]);
-
-//     $.ajax({
-//         type: "POST",
-//         url: "/farm/diary/register",
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         success: function(response) {
-//             console.log("성공:", response);  // 응답 데이터 출력
-//             location.href = "/farm/diary/list";  // 성공 시 목록 페이지로 이동
-//         },
-//         error: function(xhr, status, error) {
-//             console.log("에러 상태:", status);  // 에러 상태 코드
-//             console.log("에러 메시지:", error);  // 에러 메시지
-//             console.log("응답 본문:", xhr.responseText);  // 에러 내용 출력
-//         }
-//     });
-// });
 
 
 $("#btn-cancel").on("click",function(){
-	location = "list"
+	location = "diary/modify?id=${diary.diary_id}"
 })
 
 //summernote 

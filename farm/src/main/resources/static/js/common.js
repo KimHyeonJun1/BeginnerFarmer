@@ -71,5 +71,14 @@ function isNotEmpty(){
 
 //--------------------------------------------------------------
 
+//function addToForm(info) {
+//    return `
+//        <input type="hidden" name="id" value="${info.id}">
+//        <input type="hidden" name="pageNo" value="${info.pageNo}">
+//        <input type="hidden" name="search" value="${info.search}">
+//        <input type="hidden" name="keyword" value="${info.keyword}">
+//        <input type="hidden" name="listSize" value="${info.listSize}">
+//    `;
+//}
 
 

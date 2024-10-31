@@ -22,7 +22,7 @@
     <tr>
         <th>내용</th>
         <td>
-            <div id="summernote" class="form-control" >${diary.diary_content}</div> <!-- DB에서 가져온 내용 -->
+            <div id="summernote" class="form-control " >${diary.diary_content}</div> <!-- DB에서 가져온 내용 -->
         </td>
     </tr>
 </table>
@@ -37,17 +37,28 @@
 
 <script>
 
+$("#btn-list").on("click",function(){
+	location = "list"
+})
 
 
+$("#btn-modify").on("click", function() {
+	location = "diary/modify?id=${diary.diary_id}";
+});
 
-// // Summernote 읽기 전용 설정
-// $('#summernote').summernote({
-//     height: 300,
-//     lang: "ko-KR",
-//     toolbar: false, // 툴바 비활성화
-//     disableDragAndDrop: true // 드래그 앤 드롭 비활성화
-// });
-// $('#summernote').summernote('disable'); // 읽기 전용 모드로 설정
+
+$("#btn-delete").on("click", function() {
+	if( confirm("정말 삭제하시겠습니까?")) {
+		$("<form method='post' action='delete'></form>")
+		.appendTo("body")
+		.append(`<input type="hidden" name="id" value="${diary.diary_id}">`)
+		.append(`<input type="hidden" name="_method" value="delete">`)
+		.submit()
+		
+	}
+})
+
+
 
 </script>
 

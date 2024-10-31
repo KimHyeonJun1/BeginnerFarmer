@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.diary.DiaryMapper">
 
+<!-- 공지글 삭제 -->
+<delete id="deleteDiary">
+delete from diary where diary_id = #{diary_id}
+</delete>
+
 <!-- 특정 diary_id에 해당하는 관찰일지 정보 조회 -->
 <select id="getOneDiary" resultType="diary">
 select *
