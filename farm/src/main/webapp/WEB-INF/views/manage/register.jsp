@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.box{
+ border: 2px solid rgb(13, 202, 240);
+}
+</style>
 <body>
 <h3 class="my-2">등록화면</h3>
 <div class="box">
@@ -24,8 +29,8 @@
    </div>
 </div>
 <div class="btn-toolbar gap-2 justify-content-center mt-5">
-   <button class="btn btn-success px-4" id="btn-save">저장</button>
-   <button class="btn btn-outline-success px-4" id="btn-cancel">취소</button>
+   <button class="btn btn-info px-4" id="btn-save">저장</button>
+   <button class="btn btn-outline-info px-4" id="btn-cancel">취소</button>
 </div>
 </div>
 <script>

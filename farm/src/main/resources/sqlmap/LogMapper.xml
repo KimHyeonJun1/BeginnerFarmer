@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.log.LogMapper">
 
+
+<select id="getOneWaterInfo" resultType="water">
+	select * from water_manage
+</select>
+
+
+<!-- 플랜테이블 목록 조회 -->
+<select id="getPlantStandardInfo" resultType="guide" parameterType="int">
+    SELECT standard_temp, standard_hum, image_path, plant_name
+    FROM plant
+    WHERE plant_id = #{plantid_log}
+</select>
+
+
+
 <select id="getOneLog" resultType="log">
 select * from userplant where plantid_log = #{plantid_log}
 </select>
