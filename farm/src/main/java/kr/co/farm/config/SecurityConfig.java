@@ -1,5 +1,6 @@
 package kr.co.farm.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,8 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import kr.co.farm.auth.LoginSuccess;
+import kr.co.farm.auth.LoginUserService;
 import kr.co.farm.auth.LogoutSuccess;
+import kr.co.farm.auth.RememberService;
 import kr.co.farm.auth.SocialUserService;
+import kr.co.farm.remember.RememberMapper;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -20,6 +24,15 @@ public class SecurityConfig {
 	private final LoginSuccess loginSuccess;
 	private final LogoutSuccess logoutSuccess;
 	private final SocialUserService socialService;
+	private final RememberMapper mapper;
+	private final LoginUserService userService;
+	
+	@Bean
+	RememberService rememberMe() {
+		return new RememberService( rememberKey, userService, mapper);
+	}
+	
+	@Value("${rememberKey}") private String rememberKey;
 	
 	//비밀번호 암호화
 	@Bean // 메서드가 반환하는 객체를 컨테이너에 빈으로 등록
@@ -50,6 +63,13 @@ public class SecurityConfig {
 				.invalidateHttpSession(true) // 로그아웃 시 세션 무효화
 				.logoutSuccessHandler(logoutSuccess) // 로그아웃 성공시 실행될 커스텀 성공 핸들러 설정
 				
+			//로그인 상태 유지
+			.and()
+			.rememberMe()
+				.key(rememberKey) // 토큰 암호화 고유 키
+				.tokenValiditySeconds(60*60*24*30) // 유효기간 (쿠키 저장 한 달)
+				.rememberMeServices(rememberMe() ) // 쿠키 생성 및 검증과정 제어
+				
 			//소셜로그인
 			.and()
 			.oauth2Login()
@@ -57,13 +77,12 @@ public class SecurityConfig {
 				.loginPage("/member/login")
 				.userInfoEndpoint() //로그인성공 후 사용자정보 가져오기위한 설정
 				.userService(socialService)
-				
+			
 			;
 		http.csrf().disable();  //사이트간 요청 위조 방지 처리- 비활성화
-		
-		
 		return http.build();
 	}
+	
 	
 	
 

@@ -129,7 +129,7 @@ $("#btn-save").on("click", function() {
 	}
 })
 
-$("#btn-cancel").on("Click", function() {
+$("#btn-cancel").on("click", function() {
 	location = "<c:url value='/'/>"
 })
 	
