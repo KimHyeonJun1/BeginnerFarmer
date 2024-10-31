@@ -24,9 +24,8 @@
 	<div class="item">B</div>
 	<div class="item">C
 		<div class="row">
-		<img src="<c:url value='/img/clover.png'/>" alt="식물">
+			</div>
 		</div>
-	</div>
 	<div class="item">D</div>
 	<div class="item">E</div>
 	<div class="item">F</div>

@@ -10,6 +10,13 @@ import kr.co.farm.manage.ManageVO;
 public interface LogMapper   {
 	 //CRUD
 	   
+	//temperature
+	//모니터화면 목록조회
+	List<TemperatureVO> getListOfTemperature();
+	
+	
+	
+	
 //		사용자가 선택한 작물정보조회
 	  LogVO getOneLog (int plnatid_log);
 	   

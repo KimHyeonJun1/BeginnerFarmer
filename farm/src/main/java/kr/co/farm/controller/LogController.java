@@ -40,7 +40,7 @@ public class LogController {
 	@RequestMapping("/temperature")
 	public String LogTemperature(Authentication user, HttpSession session) {
 		String userid_log = user.getName();	
-		int plantid_log = (Integer) session.getAttribute("plantid_log");  // 세션에서 선택된 plantid_log 가져오기
+//		int plantid_log = (Integer) session.getAttribute("plantid_log");  // 세션에서 선택된 plantid_log 가져오기
 		session.setAttribute("category", "te");
 		return "log/temperature";
 	}
