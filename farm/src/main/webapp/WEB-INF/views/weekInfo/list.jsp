@@ -8,11 +8,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h3 class="my-5">주간농사정보</h3>
 
-<table>
+<div class="d-flex mb-2 justify-content-between">
+	<div class="col-auto d-flex gap-2"></div>
+	<div class="col-auto">
+		<select id="listSize" class="form-select">
+			<c:forEach var="i" begin="1" end="5">
+				<option value="${ 10*i }">${ 10*i }개씩</option>
+			</c:forEach>
+		</select>
+	</div>
+</div>
+
+<table class="table tb-list text-center" id="weekInfo">
 	<colgroup>
 		<col width="100px">
-		<col width="600px">
+		<col width="">
 		<col width="150px">
 		<col width="200px">
 		<col width="150px">
@@ -25,12 +37,49 @@
 	</thead>
 	<tbody>
 		<c:if test="${ weekInfo.totalCount==0 }">
-			<tr><td colspan="6" class="text-center">주간농사정보가 없습니다.</td><tr>
+			<tr><td colspan="6" class="text-center">주간농사정보가 없습니다.</td></tr>
 		</c:if>
+		<c:set var="No" value="${ page.endList }"/> 
+		<c:forEach items="${ weekInfo.items.item }" var="item">
+		
+		<tr>
+			<td>${ No }</td>
+			<td><a href="${item.downUrl}">${ item.subject }</a></td>
+			<td>${ item.writerNm }</td>
+			<td>${ item.regDt }</td>
+			<td>${ item.hitCt }</td>
+			<td><a href="${item.downUrl}"><i class="fa-regular fa-file"></i></a></td>
+		</tr>
+		<c:set var="No" value="${ No-1 }"/>
+		</c:forEach>
 	</tbody>
-	
 </table>
 
+<jsp:include page="/WEB-INF/views/include/subPage.jsp"/>
+
+<script>
+$(function(){
+	$("#listSize").val( ${page.listSize} ).prop("selected", true)
+	
+	$("a.page-link").on("click", function(){
+		location = "<c:url value='list?pageNo='/>"+$(this).data("page")+"&listSize="
+				+$("#listSize option:selected").val()
+	})
+
+    // listSize 값 변경 시 실행되는 함수
+    $("#listSize").on("change", function() {
+        if ($("table#weekInfo").length > 0) {
+        	location = "<c:url value='list?pageNo=1&listSize='/>"+$(this).val()
+        }
+    });
+})
+
+// 	$.ajax({
+// 		url: "weekInfo"
+// 	}).done(function(rs){
+// 		console.log(rs)
+// 	})
+</script>
 
 </body>
 </html>

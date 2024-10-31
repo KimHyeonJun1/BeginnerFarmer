@@ -20,6 +20,7 @@ insert into diary ( diary_title, diary_content, writer )
 values ( #{diary_title, jdbcType=VARCHAR}, #{diary_content, jdbcType=VARCHAR}, #{writer})
 </insert>
 
+
 <!-- 특정 writer에 대한 관찰일지 목록 조회 -->
 <select id="getListOfDiaryByWriter" parameterType="String" resultType="diary">
 select *

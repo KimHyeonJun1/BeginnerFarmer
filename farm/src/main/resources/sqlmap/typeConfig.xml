@@ -8,7 +8,7 @@
 <!-- 	<typeAlias type="kr.co.smart.hr.DepartmentVO" alias="department"/> -->
 <!-- 	<typeAlias type="kr.co.smart.hr.JobVO" alias="job"/> -->
 	<typeAlias type="kr.co.farm.log.LogVO" alias="log"/>
-	<typeAlias type="kr.co.farm.log.MonitorVO" alias="monitor"/>
+	<typeAlias type="kr.co.farm.log.TemperatureVO" alias="temperature"/>
 	<typeAlias type="kr.co.farm.log.WaterVO" alias="water"/>
 	<typeAlias type="kr.co.farm.member.MemberVO" alias="member"/>
 	<typeAlias type="kr.co.farm.diary.DiaryVO" alias="diary"/>

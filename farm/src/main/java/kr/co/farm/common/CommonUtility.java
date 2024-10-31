@@ -1,5 +1,9 @@
 package kr.co.farm.common;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -117,8 +121,6 @@ public class CommonUtility {
 		}
 		
 		
-		
-	
 		private void mailSender(HtmlEmail sender) {
 			sender.setDebug(true);
 			sender.setCharset("utf-8");
@@ -175,6 +177,66 @@ public class CommonUtility {
 		// http://127.0.0.1/farm + "/member/login"
 		return new StringBuffer(appURL(request)).append(path).toString();
 
+	}
+	
+	
+	// Http통신API요청
+	public String requestAPI(HttpURLConnection con) throws Exception {
+		int responseCode = con.getResponseCode();
+		BufferedReader br;
+		// System.out.print("responseCode="+responseCode);
+		if (responseCode == 200) { // 정상 호출
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		} else { // 에러 발생
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		}
+		String inputLine;
+		StringBuffer res = new StringBuffer();
+		while ((inputLine = br.readLine()) != null) {
+			res.append(inputLine);
+		}
+		br.close();
+
+		if (responseCode == 200) {
+			System.out.println(res.toString()); // "{ 'a': 10, 'b': 20 }"
+		}
+
+		return res.toString();
+	}
+
+	public String requestAPI(String apiURL, String property) {
+		try {
+			HttpURLConnection con = (HttpURLConnection) (new URL(apiURL)).openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", property);
+			apiURL = requestAPI(con);
+		} catch (Exception e) {
+		}
+		return apiURL;
+	}
+
+	public String requestAPI(String apiURL) {
+		try {
+			HttpURLConnection con = (HttpURLConnection) (new URL(apiURL)).openConnection();
+			con.setRequestMethod("GET");
+			apiURL = requestAPI(con);
+		} catch (Exception e) {
+		}
+		return apiURL;
+	}
+	
+	// 공공데이터 응답결과
+	public JSONObject responseBody(String url) {
+		JSONObject json = new JSONObject( requestAPI(url) );
+		return json.getJSONObject( "response" ).getJSONObject( "body" );
+	}
+	
+	public JSONObject response( String url ) {
+		JSONObject json = new JSONObject( requestAPI(url) ).getJSONObject( "response" );
+		//body가 없으면 만들어 넣기
+		json.put("body", json.has("body") ?  json.getJSONObject("body") 
+										  :  new JSONObject("{ totalCount: 0 }") );
+		return json;
 	}
 	
 
