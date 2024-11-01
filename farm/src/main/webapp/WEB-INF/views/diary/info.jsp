@@ -15,6 +15,10 @@
 	<col width ="50x">
 	<col width ="200px">
 </colgroup>
+	<tr>
+		<th>작물</th>
+		<td>${diary.plant_name}</td>
+	</tr>
     <tr>
         <th>제목</th>
         <td>${diary.diary_title}</td> <!-- DB에서 가져온 제목 -->
@@ -43,7 +47,7 @@ $("#btn-list").on("click",function(){
 
 
 $("#btn-modify").on("click", function() {
-	location = "diary/modify?id=${diary.diary_id}";
+	location = "modify?id=${diary.diary_id}";
 });
 
 
