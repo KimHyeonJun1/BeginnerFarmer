@@ -13,17 +13,15 @@
 
 
 <body>
-<h3 class="my-t">관찰일지 등록</h3>
-
-
-<form method="post" action="register" enctype="multipart/form-data" >
-	<table class="table tb-row mt-5">
+<h3 class="my-t">관찰일지 수정</h3>
+<form method="post" action="modify" enctype="multipart/form-data" >
+	<table class="table tb-row">
 	<tr>
 		<th>작물</th>
 		<td>
           <select class="form-select  " name="plant_id" title="작물이름" >
               <c:forEach items="${plant}" var="p">
-                  <option value="${p.plant_id}" >${p.plant_name}</option>
+				<option  <c:if test="${vo.plant_id eq p.plant_id}">selected</c:if> value="${p.plant_id}"> ${p.plant_name} </option>
               </c:forEach>
              </select>
         </td>
@@ -31,13 +29,13 @@
 	<tr>
 		<th>제목</th>
 		<td>
-			<input type="text" name="diary_title" title="제목" class="check-empty form-control">
+			<input type="text" name="diary_title" value="${diary.diary_title}" title="제목" class="check-empty form-control">
 		</td>		
 	</tr>
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea id="summernote" name="diary_content" title="내용" class="check-empty form-control"></textarea>
+			<textarea id="summernote" name="diary_content" title="내용" class="check-empty form-control">${diary.diary_content}</textarea>
 		</td>		
 	</tr>
 	</table>
@@ -58,24 +56,23 @@
 <script>
 
 $("#btn-save").on("click", function() {
+
 	if( isNotEmpty() ) {
-		//썸머노트 내용 가져오기
 		let summernote = new Object();
 		summernote.diary_title = $("[name=diary_title]").val();
 		summernote.diary_content = $("[name=diary_content]").val();
 		summernote.plant_id = $("[name=plant_id]").val();
-// 		summernote.diary_content = $('#summernote').summernote('code'); // 썸머노트 내용을 가져옴
-// 		console.log( 'save> ',summernote)
-	
+		summernote.diary_id = ${diary.diary_id} ;
+
 		$.ajax({
-			url : "<c:url value='register'/>",
-	       	type : "POST",
-//        		dataType : "text",
+			url : "<c:url value='modify'/>",
+	       	type : "PUT",
 	        contentType : "application/json; charset=utf-8",
 	        data: JSON.stringify(summernote),
 	        success : function (data){
+	        	console.log(data)
 	           	if(data){
-	               	location.href="<c:url value='list'/>";
+	               	location.href="<c:url value='info?id=${diary.diary_id}'/>";
 	           	}else{
 	               	alert("저장 오류 발생");
 	           	}
@@ -86,8 +83,9 @@ $("#btn-save").on("click", function() {
 
 
 
+
 $("#btn-cancel").on("click",function(){
-	location = "list"
+	location = "info?id=${diary.diary_id}"
 })
 
 //summernote 
@@ -122,7 +120,11 @@ $('#summernote').summernote({
 	                for (var i = files.length - 1; i >= 0; i--) {
 	                    uploadSummernoteImageFile(files[i], this);
 	                }
-              } 
+              } ,
+          	    onBlur: function() {
+//             	      alert('Editable area loses focus[' +  $(this).val() +'] \n\n'
+//             	    		  + $(".note-editable").html() );
+           	    },
        } 
 });
 	

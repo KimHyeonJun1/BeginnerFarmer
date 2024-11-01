@@ -938,15 +938,21 @@ function deepestChildIsEmpty(node) {
  */
 function dom_isEmpty(node) {
   var len = nodeLength(node);
+//console.log(  node )	
+
   if (len === 0) {
+//console.log( "0" , " len>>", len)	
     return true;
   } else if (!isText(node) && len === 1 && node.innerHTML === blankHTML) {
     // ex) <p><br></p>, <span><br></span>
-    return true;
+//console.log( "1" , " len>>", len)	
   } else if (lists.all(node.childNodes, isText) && node.innerHTML === '') {
     // ex) <p></p>, <span></span>
+//console.log( "2" , " len>>", len)	
     return true;
   }
+  
+//console.log( "3 len>>", len)
   return false;
 }
 

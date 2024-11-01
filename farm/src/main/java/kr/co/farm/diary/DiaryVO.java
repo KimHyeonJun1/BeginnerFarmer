@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Setter @Getter
 public class DiaryVO {
-	private int diary_id, no;
-	private String diary_title, diary_content, writer  ;
+	private int diary_id, no, plant_id;
+	private String diary_title, diary_content, writer, plant_name  ;
 	private Date diary_writedate ; 
 }
 
