@@ -21,15 +21,19 @@
 	<div class="col">
 		<form method="post" action="list" class="d-flex justify-content-between me-2">
 		
-<%-- 			<c:forEach items="${boardTypes}" var="type"> --%>
-<%-- 			    <option class="boardType" value="${type.board_type_id}">${type.board_type_name}</option> --%>
-<%-- 			</c:forEach> --%>
-			<select name="board_type_id" onchange="submit()" class="form-select w-px300">
-			    <option value="-1">전체</option> <!-- 전체를 선택하는 옵션 추가 -->
+			<div class="boardTypeButtons">
 			    <c:forEach items="${boardTypes}" var="type">
-			        <option <c:if test="${ board_type_id eq type.board_type_id }">selected</c:if> value="${type.board_type_id}">${type.board_type_name}</option>
+			        <button class="boardTypeBtn" data-type-id="${type.board_type_id}">
+			            ${type.board_type_name}
+			        </button>
 			    </c:forEach>
-			</select>
+			</div>
+<!-- 			<select name="board_type_id" onchange="submit()" class="form-select w-px300"> -->
+<!-- 			    <option value="-1">전체</option> 전체를 선택하는 옵션 추가 -->
+<%-- 			    <c:forEach items="${boardTypes}" var="type"> --%>
+<%-- 			        <option <c:if test="${ board_type_id eq type.board_type_id }">selected</c:if> value="${type.board_type_id}">${type.board_type_name}</option> --%>
+<%-- 			    </c:forEach> --%>
+<!-- 			</select> -->
 			
 			<div class="col-auto">
 				<select name="listSize" class="form-select">
@@ -107,12 +111,8 @@ $("[name=listSize]").on("change", function(){
 	$("form").submit()
 })
 $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
-// $('#summernote').summernote({
-//   height: 300, // set editor height
-//   minHeight: null, // set minimum height of editor
-//   maxHeight: null, // set maximum height of editor
-//   focus: true // set focus to editable area after initializing summernote
-// });
+
+
 </script>
 
 </html>
