@@ -50,6 +50,7 @@ public class ManageController {
 	   @PostMapping("/register")
 	   public String register(Authentication user, ManageVO vo, HttpSession session) {
 	        String userid_log = user.getName();
+	        
 	        int plantid_log = vo.getPlant_id();
 	        mapper.registerUserPlant(userid_log, plantid_log);
 	        return "redirect:info";

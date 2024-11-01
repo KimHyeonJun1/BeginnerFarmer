@@ -11,6 +11,7 @@
 	<typeAlias type="kr.co.farm.diary.DiaryVO" alias="diary"/>
 	<typeAlias type="kr.co.farm.board.BoardVO" alias="board"/>
 	<typeAlias type="kr.co.farm.board.BoardTypeVO" alias="boardType"/>
+	<typeAlias type="kr.co.farm.common.LowerKeyMap" alias="LowerMap"/>
 <!-- 	<typeAlias type="kr.co.smart.notice.NoticeVO" alias="notice"/> -->
 <!-- 	<typeAlias type="kr.co.smart.remember.RememberVO" alias="remember"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.FileVO" alias="file"/> -->

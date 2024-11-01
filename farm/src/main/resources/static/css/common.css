@@ -190,3 +190,8 @@ textarea.form-control { resize: none; height:250px }
     margin: 0;
     font-size: 30px;
 }
+
+.box1.btn:hover{
+	 border: 2px solid var(--contrrast-color);
+	outline: solid;
+}
