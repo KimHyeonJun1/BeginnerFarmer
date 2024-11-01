@@ -55,13 +55,28 @@ display: grid;
     justify-content: center; /* 수직 중앙 정렬 */
     align-items: center; /* 수평 중앙 정렬 */
  }
- 
+ [id^="myChart"] {
+ 	width: 630px;
+ 	height: 320px;
+ }
  
 </style>
 <body>
 <h3 class="my-2 mb-4">온도/습도/조도</h3>
 <div class="container">
-		<div class="item"><img src="<c:url value='${vo.image_path}'/>" alt="식물" width="340px" height="240px"></div>
+		<div class="item z-3">
+		<form method="post" action="temperature">
+		<select class="form-select w-px200 gap-4 mb-2" name="plant_id" id="select-plant" onchange="submit()">
+         <option value="${plantid_log}">${vo.plant_name}</option>
+         <c:forEach items="${plant}" var="p">
+            <c:if test="${p.plant_id != plantid_log}">
+                <option value="${p.plant_id}">${p.plant_name}</option>
+            </c:if>
+        </c:forEach>
+      </select>
+</form>
+		<img src="<c:url value='${vo.image_path}'/>" alt="식물" width="340px" height="240px">
+		</div>
 		<div class="item">작물 정보</div>
 		<div class="item">
 			<div class="d-flex">
@@ -98,12 +113,16 @@ display: grid;
 			<div class="d-flex">
 				<div class="box3">
 				
-				dddd
+					<div>
+  						<canvas id="myChart_temp"></canvas>
+					</div>
 				
 				</div>
 				<div class="box3">
 				
-				dddddddddd
+					<div>
+  						<canvas id="myChart_hum"></canvas>
+					</div>
 				
 				</div>
 			</div>
@@ -112,20 +131,24 @@ display: grid;
 			<div class="d-flex">
 				<div class="box3">
 				
-				
+					<div>
+  						<canvas id="myChart_moisture"></canvas>
+					</div>
 				
 				
 				
 				</div>
 				<div class="box3">
 				
-				
+					<div>
+  						<canvas id="myChart_bright"></canvas>
+					</div>
 				
 				
 				</div>
 			</div>
-				<canvas id="chart" class="m-auto h-100"></canvas>
 		</div>
+		
 
 			
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -135,7 +158,77 @@ display: grid;
 			
 			
 <script>
+  var ctx = document.getElementById('myChart_temp');
+  var labels = getRecentTimeLabels().reverse();
+  // Chart.js에 사용될 데이터 예시
+  var data = {
+      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
+      datasets: [{
+          label: '온도',
+          data: [/* 데이터 배열 */],
+          borderColor: '#FF6384',
+          backgroundColor: '#FFB1C1',
+          borderWidth: 1
+      }]
+  };
+//Chart.js 생성
+  var ctx = document.getElementById('myChart_temp');
+  var myChart = new Chart(ctx, {
+      type: 'line', // 또는 다른 차트 유형
+      data: data,
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  var ctx = document.getElementById('myChart_hum');
+  var labels = getRecentTimeLabels().reverse();
+  // Chart.js에 사용될 데이터 예시
+  var data = {
+      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
+      datasets: [{
+          label: '습도',
+          data: [/* 데이터 배열 */],
+          borderColor: '#36A2EB',
+          backgroundColor: '#9BD0F5',
+          borderWidth: 1
+      }]
+  };
+//Chart.js 생성
+  var ctx = document.getElementById('myChart_hum');
+  var myChart = new Chart(ctx, {
+      type: 'line', // 또는 다른 차트 유형
+      data: data,
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  
+  $("#select-plant").change(function() {
+	    var selectedPlantId = $(this).val();
+	    sessionStorage.setItem("plant_id", $(this).val() )
 
+	        $.ajax({
+	            type: "POST",
+	            url: "/farm/log/saveSelectedPlant",
+	            data: { plantid_log: selectedPlantId },
+	            success: function(response) {
+	                console.log("서버 저장완료");
+	            },
+	            error: function() {
+	                console.error("서버 저장실패");
+	            }
+	        });
+	}); 
 </script>
 
 </body>

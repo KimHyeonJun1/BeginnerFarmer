@@ -2,9 +2,9 @@
  * 시각화 차트
  */
 
-Chart.defaults.font.size = 16; //폰트 사이즈
+Chart.defaults.font.size = 12; //폰트 사이즈
 Chart.defaults.plugins.legend.position = 'bottom'; //범례위치 
-Chart.defaults.layout.padding.top =  50; //위쪽 여백
+Chart.defaults.layout.padding.top =  30; //위쪽 여백
 Chart.register(ChartDataLabels); // Register the plugin to all charts:
 Chart.defaults.set('plugins.datalabels', { // Change default options for ALL charts
   color: '#000',
@@ -24,6 +24,33 @@ const colors = ["#e31717","#f5e105","#1df505","#0585f5","#ad05f5","#f50595"];
 41~50: 4   49: *0.1=4.9 -> 5 
 51~  : 5
 */
+
+/**
+ * 현재 시간 기준으로 30분 단위로 최근 10개 시간을 계산합니다.
+ * @returns {Array} 계산된 시간 배열 (형식: ["HH:MM", ...])
+ */
+function getRecentTimeLabels() {
+    var now = new Date();
+    var labels = [];
+
+    // 현재 시간을 기준으로 30분 단위로 10개의 시간 계산
+    for (let i = 0; i < 10; i++) {
+        var pastDate = new Date(now.getTime() - ((9 - i) * 30) * 60000); // 30분 단위로 감소
+        var hours = pastDate.getHours().toString().padStart(2, '0'); // 시간 포맷
+        var minutes = Math.floor(pastDate.getMinutes() / 30) * 30; // 30분 단위로 계산
+        var formattedMinutes = minutes.toString().padStart(2, '0'); // 분 포맷
+        labels.push(`${hours}:${formattedMinutes}`); // "HH:MM" 형식으로 추가
+    }
+
+    return labels; // 배열의 순서를 변경하지 않음 (최신 데이터가 오른쪽에 위치)
+}
+
+
+
+
+
+
+
 function makeLegend(max){
 	//54 *0.1=5.4 -> 6
 	max = Math.ceil(max *0.1)-1;
@@ -73,7 +100,7 @@ function setOptions(title){
 		        title: {
 		          color: '#000',
 		          display: true,
-		          text: title
+		          text: title,
 		        }
 		      }
 		    },
