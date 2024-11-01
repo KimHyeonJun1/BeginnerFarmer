@@ -53,11 +53,19 @@ public class LogController {
 		ManageVO selectedPlant = manageMapper.getPlantInfo(userid_log, plantid_log); 
 	    model.addAttribute("vo", selectedPlant);
 	    
-		List<WaterVO> waterList = mapper.getListOfWater(userid_log, plantid_log);
-		model.addAttribute("waterList", waterList);
+//		List<WaterVO> waterList = mapper.getListOfWater(userid_log, plantid_log);
+//		model.addAttribute("waterList", waterList);
 		
-		page.setTotalList(mapper.countOfWater(page) );
-		page.setList(mapper.getListOfWater(page) );
+		
+		//페이지 처리
+		List<Object> waterList = mapper.getListOfWaterByUser( userid_log, page, plantid_log);
+		page.setList(waterList);
+		
+		// 총 목록 수를 카운트하여 PageVO에 설정
+		int totalWaterCount = mapper.countOfWater( userid_log, page, plantid_log);
+		page.setTotalList(totalWaterCount);
+		
+		model.addAttribute("waterList", waterList);
 		model.addAttribute("page", page);
 		
 		session.setAttribute("category", "wa");

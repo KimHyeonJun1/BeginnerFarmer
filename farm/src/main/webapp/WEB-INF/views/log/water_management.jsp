@@ -67,30 +67,30 @@
 
 
 
-<%-- <c:if test="${empty waterList}"> --%>
-<!-- <tr><td class="text-center" colspan="3">데이터가 없습니다</td></tr> -->
-<%-- </c:if> --%>
+<c:if test="${empty waterList}">
+<tr><td class="text-center" colspan="3">데이터가 없습니다</td></tr>
+</c:if>
 
-<%-- <c:forEach items="${waterList}" var="item"> --%>
-<!-- <tr> -->
-<%-- 	<td>${item.no}</td> --%>
-<%-- 	<td>${item.waterdate}</td> --%>
-<%-- 	<td>${item.soilmoisture} %</td> --%>
-<!-- </tr> -->
-<%-- </c:forEach> --%>
-
-<!-- </table> -->
-
-<c:forEach items="${page.list}" var="vo">
+<c:forEach items="${waterList}" var="vo">
 <tr>
 	<td>${vo.no}</td>
-	<td>${vo.waterdate }</td>
-	<td>${vo.soilmoisture }</td>
-
+	<td>${vo.waterdate}</td>
+	<td>${vo.soilmoisture} %</td>
 </tr>
 </c:forEach>
 
 </table>
+
+<%-- <c:forEach items="${page.list}" var="vo"> --%>
+<!-- <tr> -->
+<%-- 	<td>${vo.no}</td> --%>
+<%-- 	<td>${vo.waterdate }</td> --%>
+<%-- 	<td>${vo.soilmoisture }</td> --%>
+
+<!-- </tr> -->
+<%-- </c:forEach> --%>
+
+<!-- </table> -->
 
 
 <jsp:include page="/WEB-INF/views/include/page.jsp"></jsp:include>
