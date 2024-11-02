@@ -7,6 +7,11 @@
 select * from board where board_id = #{board_id}
 </select>
 
+<!-- 게시판 신규 등록 -->
+<insert id="registerBoard">
+insert into board (board_title, board_content, board_writer, board_type_id)
+values ( #{board_title, jdbcType=VARCHAR}, #{board_content, jdbcType=VARCHAR}, #{board_writer}, #{board_type_id})
+</insert>
 
 <!-- 게시판 전체 목록수 조회 -->
 <select id="getCountOfBoard" resultType="integer">
@@ -14,8 +19,25 @@ select count(*) from board <include refid="whereSearch"/>
 </select>
 
 <!-- 게시판 종류 선택 조회 -->
-<select id="getListOfBoardType">
-select * from board where board_type_id = #{boardTypeId} order by id DESC
+<select id="getListOfBoardType" resultType="board">
+SELECT 
+        row_number() over(order by b.board_id) AS no,
+        b.board_title,
+        b.board_content,
+        m.name AS board_writer,    <!-- 유저 테이블에서 작성자 이름을 가져옴 -->
+        bt.board_type_name AS type_name,   <!-- 게시판 종류 테이블에서 게시판 종류 이름을 가져옴 -->
+        b.board_writedate,
+        b.board_readcnt
+    FROM 
+        board b 
+    JOIN 
+        member m ON b.board_writer = m.userid
+    JOIN 
+        board_type bt ON b.board_type_id = bt.board_type_id
+    WHERE 
+        b.board_type_id = #{board_type_id}   <!-- 특정 게시판 유형에 해당하는 게시물만 조회 -->
+    ORDER BY 
+        b.board_id DESC   <!-- 최신 작성 순으로 정렬 -->
 </select>
 
 <!-- 게시판 종류 조회 -->
@@ -26,7 +48,7 @@ select * from board_type order by board_type_id
 <!-- 게시판 페이지 목록조회 -->
 <select id="getListOfBoard" resultType="board">
 SELECT 
-    b.board_id AS no,
+    row_number() over(order by b.board_id) AS no,
     b.board_title,
     b.board_content,
     m.name AS board_writer,    <!-- 유저 테이블에서 작성자 이름을 가져옴 -->
@@ -39,50 +61,51 @@ JOIN
     member m ON b.board_writer = m.userid
 JOIN 
     board_type bt ON b.board_type_id = bt.board_type_id
+<include refid="whereSearch"/> <!-- 검색 조건 추가 -->
 ORDER BY 
     b.board_id DESC  <!-- 최신 작성 순으로 정렬 -->
-
+    
 <!-- SELECT * -->
 <!-- FROM ( -->
 <!--     SELECT  -->
-<!--         ROW_NUMBER() OVER (ORDER BY b.board_id DESC) no,  페이징을 위한 no 생성 -->
-<!--         b.board_id,  -->
+<!--         ROW_NUMBER() OVER (ORDER BY b.board_id) AS no,  페이징을 위한 no 생성 -->
 <!--         b.board_title, -->
 <!--         b.board_content, -->
+<!--         m.name AS board_writer, -->
+<!--         t.board_type_name AS type_name, -->
 <!--         b.board_writedate, -->
-<!--         b.board_readcnt, -->
-<!--         t.board_type_name, -->
-<!--         m.name AS writer_name -->
+<!--         b.board_readcnt -->
 <!--     FROM  -->
 <!--         board b -->
 <!--     JOIN  -->
-<!--         board_type t ON b.board_type_id = t.board_type_id 게시판 종류 조인 -->
+<!--         board_type t ON b.board_type_id = t.board_type_id  게시판 종류 조인 -->
 <!--     JOIN  -->
 <!--         member m ON b.board_writer = m.userid             작성자(유저) 조인 -->
 <!--     WHERE  -->
-<!--         t.board_type_id = #{boardTypeId}  특정 게시판 종류 필터링 (필요 시) -->
+<!--         t.board_type_id = #{board_type_id}  특정 게시판 종류 필터링 (필요 시) -->
 <!--         <include refid="whereSearch"/>    검색 조건 필터링 (필요 시) -->
 <!-- )  -->
 <!-- WHERE  -->
 <!--     no BETWEEN #{beginList} AND #{endList}   페이징 범위 설정 -->
 </select>
 
+<!-- 검색조건절 -->
 <sql id="whereSearch">
 <if test="keyword != null">
 	<choose>
 		<when test="search == 'all'"> <!-- 전체 -->
-			where board_title like '%' || {keyword} || '%'
-			or board_content like '%' || {keyword} || '%'
-			or board_writer in (select userid from member where name like '%' || {keyword} || '%')
+			where board_title like '%' || #{keyword} || '%'
+			or board_content like '%' || #{keyword} || '%'
+			or board_writer in (select userid from member where name like '%' || #{keyword} || '%')
 		</when>
 		<when test="search == 'title'"> <!-- 제목 -->
-			where board_title like '%' || {keyword} || '%'
+			where board_title like '%' || #{keyword} || '%'
 		</when>
 		<when test="search == 'content'"> <!-- 내용-->
-			where board_content like '%' || {keyword} || '%'
+			where board_content like '%' || #{keyword} || '%'
 		</when>
 		<when test="search == 'writer'"> <!-- 작성자 -->
-			where board_writer in (select userid from member where name like '%' || {keyword} || '%')
+			where board_writer in (select userid from member where name like '%' || #{keyword} || '%')
 		</when>
 	</choose>
 </if>

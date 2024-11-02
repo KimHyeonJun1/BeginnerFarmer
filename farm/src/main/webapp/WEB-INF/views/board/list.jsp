@@ -21,19 +21,14 @@
 	<div class="col">
 		<form method="post" action="list" class="d-flex justify-content-between me-2">
 		
-			<div class="boardTypeButtons">
-			    <c:forEach items="${boardTypes}" var="type">
-			        <button class="boardTypeBtn" data-type-id="${type.board_type_id}">
-			            ${type.board_type_name}
-			        </button>
+			<div class="boardTypeButtons d-flex gap-2">
+			    <c:forEach items="${boardTypes}" var="t">
+			        <a href="<c:url value='/board/listType?board_type_id=${t.board_type_id}' />" 
+			           class="btn btn-success"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
+			            ${t.board_type_name}
+			        </a>
 			    </c:forEach>
 			</div>
-<!-- 			<select name="board_type_id" onchange="submit()" class="form-select w-px300"> -->
-<!-- 			    <option value="-1">전체</option> 전체를 선택하는 옵션 추가 -->
-<%-- 			    <c:forEach items="${boardTypes}" var="type"> --%>
-<%-- 			        <option <c:if test="${ board_type_id eq type.board_type_id }">selected</c:if> value="${type.board_type_id}">${type.board_type_name}</option> --%>
-<%-- 			    </c:forEach> --%>
-<!-- 			</select> -->
 			
 			<div class="col-auto">
 				<select name="listSize" class="form-select">
@@ -46,9 +41,9 @@
 		</form>
 	</div>
 	<!-- 로그인되어 있는 경우만 글쓰기 가능 -->
-<%-- 	<sec:authorize access = "isAuthenticated()"> --%>
-		<button class="btn btn-primary" onclick="location='register'">글쓰기</button>
-<%-- 	</sec:authorize> --%>
+	<sec:authorize access = "isAuthenticated()">
+		<button class="btn btn-success" onclick="location='register'">글쓰기</button>
+	</sec:authorize>
 </div>
 
 <table class="table tb-list">
@@ -66,17 +61,21 @@
 	<tr><td colspan="6" class="text-center">게시판 글이 없습니다.</td></tr>
 </c:if>
 
+<!-- <div class="boardList"> -->
+<%--     <c:forEach items="${boardType}" var="board"> --%>
+<!--         <div class="boardItem"> -->
+<%--             <h4>${board.title}</h4> --%>
+<%--             <p>${board.content}</p> --%>
+<!--             게시글 내용 표시 -->
+<!--         </div> -->
+<%--     </c:forEach> --%>
+<!-- </div> -->
+
 <c:forEach items="${ page.list }" var="vo">
 <tr>
 	<td>${ vo.no }</td>
 	<td>${ vo.type_name }</td>
-	<td><a class="text-link" href="">${ vo.board_title }</a>
-	</td>
-	
-<%-- 	<td data-id="${ vo.board_id }"> --%>
-<%-- 		<a class="text-link" href="javascript:info(${ vo.board_id })"> ${ vo.board_title }</a> --%>
-<!-- 	</td>	 -->
-
+	<td><a class="text-link" href="">${ vo.board_title }</a></td>
 	<td>${ vo.board_writer }</td>
 	<td>${ vo.board_writedate }</td>
 	<td>${ vo.board_readcnt }</td>
@@ -111,7 +110,6 @@ $("[name=listSize]").on("change", function(){
 	$("form").submit()
 })
 $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
-
 
 </script>
 
