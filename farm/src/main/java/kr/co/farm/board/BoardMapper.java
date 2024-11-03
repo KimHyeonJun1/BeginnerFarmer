@@ -16,6 +16,6 @@ public interface BoardMapper {
 	int updateReadCount(int board_id);								 // 게시판 조회수 변경저장
 	int deleteBoard(int board_id);					 				 // 게시판 삭제
 	
-	List<BoardTypeVO> getBoardTypes();		 		 			 	 // 게시판이 속해있는 게시판종류목록
+	List<BoardTypeVO> getBoardTypes();		 		 			 	 // 게시판 종류 목록
 	List<Object> getListOfBoardType(PageVO page, int board_type_id); // 특정 게시판에 속한 게시판 목록조회
 }

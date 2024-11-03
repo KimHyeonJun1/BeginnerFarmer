@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.farm.board.BoardMapper;
 import kr.co.farm.board.BoardTypeVO;
@@ -28,27 +31,50 @@ public class BoardController {
 	private final BoardMapper mapper;
 	private final CommonUtility common;
 	
+	// 게시판 수정 저장처리 요청
+	@ResponseBody @PutMapping("/modify")
+    public boolean modify(@RequestBody BoardVO vo){
+    	 
+    	return mapper.updateBoard(vo)==1 ? true:false;
+    	//응답화면연결 : 정보화면
+    }
+	
+	// 게시판 수정화면 요청
+	@RequestMapping("/modify")
+	public String modify(int board_id, Model model) {
+		// 해당 게시판 정보를 DB에서 조회하고 수정화면 요청을 위해 Model 객체에 담기
+		model.addAttribute("vo", mapper.getOneBoard(board_id));
+		// 게시판 종류 정보를 DB에서 조회하여 Model 객체에 담기 
+		model.addAttribute("boardTypes", mapper.getBoardTypes());
+		return "board/modify";
+	}
+	
 	// 게시판 정보화면 요청
 	@RequestMapping("/info")
-	public String info(int id, Model model) {
-		
-		// 선택한 방명록 글을 DB에서 조회해와서 정보화면에 출력할 수 있게 Model 객체에 담기
-		BoardVO vo = mapper.getOneBoard(id);
+	public String info(int board_id, Model model) {
+		// 선택한 게시판 글을 DB에서 조회해와서 정보화면에 출력할 수 있게 Model 객체에 담기
+		BoardVO vo = mapper.getOneBoard(board_id);
 		model.addAttribute("vo", vo);
 		
 		return "board/info";
-		
 	}
 	
-	// 게시판 등록화면 저장요청
+	// 서머노트 파일 업로드
+	@ResponseBody @PostMapping("/summernote_image/upload")
+    public Object summernoteImageUpload(MultipartFile file, HttpServletRequest request) {
+    	String url = common.fileUpload("board/summernote", file, request);
+    	return url;
+    }
+	
+	// 게시판 등록화면 저장처리
 	@PostMapping("/register")
-	public String register(@RequestBody BoardVO vo, HttpServletRequest request, Authentication auth) {
+	public String register(@RequestBody BoardVO vo, Authentication auth) {
 		vo.setBoard_writer(auth.getName()); // 현재 로그인한 사용자 ID를 작성자로 설정
 		mapper.registerBoard(vo);
 		
 		return "redirect:list";
 	}
-	
+		
 	// 게시판 등록화면 요청
 	@GetMapping("/register")
 	public String register(Model model) {

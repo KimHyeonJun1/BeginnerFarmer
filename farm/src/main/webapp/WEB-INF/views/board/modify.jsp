@@ -14,23 +14,25 @@
 	<tr>
 		<th>게시판</th>
 		<td>
-          <select class="form-select" name="board_type_id" title="게시판종류" >
-              <c:forEach items="${boardTypes}" var="bt">
-                  <option value="${bt.board_type_id}" >${bt.board_type_name}</option>
-              </c:forEach>
-             </select>
+       		<select class="form-select" name="board_type_id" title="게시판종류" >
+	            <c:forEach items="${boardTypes}" var="bt">
+	            	<option <c:if test= "${ vo.board_type_id eq bt.board_type_id }">selected</c:if>
+	            	 		value="${bt.board_type_id}" >${bt.board_type_name}</option>
+	            </c:forEach>
+            </select>
         </td>
 	</tr>
 	<tr>
 		<th>제목</th>
 		<td>
-			<input type="text" name="board_title" title="제목" class="check-empty form-control">
+			<input type="text" name="board_title" value="${ vo.board_title }" title="제목" class="check-empty form-control">
 		</td>		
 	</tr>
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea id="summernote" name="board_content" title="내용" class="check-empty form-control"></textarea>
+			<textarea id="summernote" name="board_content" title="내용" class="check-empty form-control">
+			${ vo.board_content }</textarea>
 		</td>		
 	</tr>
 	</table>
