@@ -52,15 +52,16 @@ $("#btn-save").on("click", function() {
 		summernote.board_title = $("[name=board_title]").val();
 		summernote.board_content = $("[name=board_content]").val();
 		summernote.board_type_id = $("[name=board_type_id]").val();
+		summernote.board_id = ${vo.board_id} ;
 	
 		$.ajax({
-			url : "<c:url value='register'/>",
-	       	type : "POST",
+			url : "<c:url value='modify'/>",
+	       	type : "PUT",
 	        contentType : "application/json; charset=utf-8",
 	        data: JSON.stringify(summernote),
 	        success : function (data){
 	           	if(data){
-	               	location.href="<c:url value='list'/>";
+	               	location.href="<c:url value='info?board_id=${vo.board_id}&board_type_id=${ vo.board_type_id}'/>";
 	           	}else{
 	               	alert("저장 오류 발생");
 	           	}
@@ -72,7 +73,7 @@ $("#btn-save").on("click", function() {
 
 
 $("#btn-cancel").on("click",function(){
-	location = "list"
+	location = "info?board_id=${vo.board_id}"
 })
 
 //summernote 

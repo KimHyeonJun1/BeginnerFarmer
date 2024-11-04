@@ -16,17 +16,18 @@
 <h3 class="my-5">게시판 목록</h3>
 
 
-
+<form action="list" method="post">
 <div class="d-flex mb-2 justify-content-between">
-	<div class="col">
-		<form method="post" action="list" class="d-flex justify-content-between me-2">
-		
-			<div class="boardTypeButtons d-flex gap-2">
+	<div class="col d-flex justify-content-between me-2">
+<!-- 		<form method="post" action="list" class="d-flex justify-content-between me-2" id="frmType"> -->
+			<input type="hidden" name="board_type_id" value="${board_type_id}">
+			<div class="boardTypeButtons d-flex gap-3">
 			    <c:forEach items="${boardTypes}" var="bt">
-			        <a href="<c:url value='/board/listType?board_type_id=${bt.board_type_id}' />" 
-			           class="btn btn-success"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
+			        <a onclick="boardType(${bt.board_type_id})"
+			           class="btn btn-success text-white"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
 			            ${bt.board_type_name}
 			        </a>
+<%-- 			        href="<c:url value='/board/list?board_type_id=${bt.board_type_id}' />"  --%>
 			    </c:forEach>
 			</div>
 			
@@ -38,7 +39,7 @@
 				</select>
 			</div>
 			
-		</form>
+<!-- 		</form> -->
 	</div>
 	<!-- 로그인되어 있는 경우만 글쓰기 가능 -->
 	<sec:authorize access = "isAuthenticated()">
@@ -75,7 +76,8 @@
 <tr>
 	<td>${ vo.no }</td>
 	<td>${ vo.type_name }</td>
-	<td><a class="text-link" href="info?board_id=${ vo.board_id }">${ vo.board_title }</a></td>
+	<td><a class="text-link" href="info?board_id=${ vo.board_id }&board_type_id=${ board_type_id}">${ vo.board_title }</a></td>
+<%-- 	<td><a class="text-link" href="info?board_id=${ vo.board_id }">${ vo.board_title }</a></td> --%>
 	<td>${ vo.board_writer }</td>
 	<td>${ vo.board_writedate }</td>
 	<td>${ vo.board_readcnt }</td>
@@ -86,7 +88,7 @@
 
 <div class="d-flex mb-2 justify-content-between">
 	<div class="col">
-		<form method="post" action="list" class="d-flex justify-content-between me-2">
+<!-- 		<form method="post" action="list" class="d-flex justify-content-between me-2" id="frmSearch"> -->
 			<div class="input-group w-px500">
 				<select name="search" class="form-select">
 					<option value="all">전체</option>
@@ -97,19 +99,24 @@
 				<input type="text" name="keyword" value="${ page.keyword }" class="form-control w-px300">
 				<button class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
 			</div>
-		</form>
+<!-- 		</form> -->
 	</div>
 </div>
-
+</form>
 <jsp:include page="/WEB-INF/views/include/page.jsp"/>
 
 </body>
 
 <script>
-$("[name=listSize]").on("change", function(){
+function boardType(board_type_id){
+	$("[name=board_type_id]").val(board_type_id)
 	$("form").submit()
-})
-$("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
+}
+
+// $("[name=listSize]").on("change", function(){
+// 	$("form").submit()
+// })
+// $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
 
 </script>
 

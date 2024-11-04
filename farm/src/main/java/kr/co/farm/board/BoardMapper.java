@@ -18,4 +18,5 @@ public interface BoardMapper {
 	
 	List<BoardTypeVO> getBoardTypes();		 		 			 	 // 게시판 종류 목록
 	List<Object> getListOfBoardType(PageVO page, int board_type_id); // 특정 게시판에 속한 게시판 목록조회
+	int getCountOfBoardType(PageVO page, int board_type_id);		 // 특정 게시판 전체 목록수 조회
 }

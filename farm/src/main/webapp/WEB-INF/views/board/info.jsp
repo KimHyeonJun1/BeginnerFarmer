@@ -44,7 +44,7 @@
 
 <script>
 $("#btn-list").on("click",function(){
-	location = "list"
+	location = "list?board_type_id=${board_type_id}"
 })
 
 
@@ -57,7 +57,7 @@ $("#btn-delete").on("click", function() {
 	if( confirm("정말 삭제하시겠습니까?")) {
 		$("<form method='post' action='delete'></form>")
 		.appendTo("body")
-		.append(`<input type="hidden" name="id" value="${vo.board_id}">`)
+		.append(`<input type="hidden" name="board_id" value="${vo.board_id}">`)
 		.append(`<input type="hidden" name="_method" value="delete">`)
 		.submit()
 		

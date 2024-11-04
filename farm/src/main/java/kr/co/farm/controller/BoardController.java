@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,6 +32,15 @@ public class BoardController {
 	private final BoardMapper mapper;
 	private final CommonUtility common;
 	
+	// 게시판 삭제처리
+	@DeleteMapping("/delete")
+	public String delete(int board_id) {
+		mapper.deleteBoard(board_id);
+		StringBuffer redirect = new StringBuffer("redirect:list");
+		
+		return redirect.toString();
+	}
+	
 	// 게시판 수정 저장처리 요청
 	@ResponseBody @PutMapping("/modify")
     public boolean modify(@RequestBody BoardVO vo){
@@ -51,7 +61,10 @@ public class BoardController {
 	
 	// 게시판 정보화면 요청
 	@RequestMapping("/info")
-	public String info(int board_id, Model model) {
+	public String info(int board_id, Model model, int board_type_id) {
+		// 조회수 증가
+		mapper.updateReadCount(board_id);
+		model.addAttribute("board_type_id", board_type_id);
 		// 선택한 게시판 글을 DB에서 조회해와서 정보화면에 출력할 수 있게 Model 객체에 담기
 		BoardVO vo = mapper.getOneBoard(board_id);
 		model.addAttribute("vo", vo);
@@ -67,12 +80,11 @@ public class BoardController {
     }
 	
 	// 게시판 등록화면 저장처리
-	@PostMapping("/register")
-	public String register(@RequestBody BoardVO vo, Authentication auth) {
+	@ResponseBody @PostMapping("/register")
+	public boolean register(@RequestBody BoardVO vo, Authentication auth) {
 		vo.setBoard_writer(auth.getName()); // 현재 로그인한 사용자 ID를 작성자로 설정
-		mapper.registerBoard(vo);
 		
-		return "redirect:list";
+		return mapper.registerBoard(vo) == 1? true : false;
 	}
 		
 	// 게시판 등록화면 요청
@@ -88,9 +100,6 @@ public class BoardController {
 	@RequestMapping("/listType")
 	public String listType(Model model, PageVO page, @RequestParam int board_type_id) {
 		
-		// 선택된 board_type_id에 해당하는 게시글만 불러오기
-	    page.setList(mapper.getListOfBoardType(page, board_type_id));
-		
 		List<BoardTypeVO> boardTypes = mapper.getBoardTypes();
 		model.addAttribute("boardTypes", boardTypes);
 		model.addAttribute("page", page);
@@ -100,16 +109,22 @@ public class BoardController {
 	
 	// 전체 게시판 목록 화면
 	@RequestMapping("/list")
-	public String list(HttpSession session, Model model, PageVO page) {
+	public String list(HttpSession session, Model model, PageVO page, @RequestParam (defaultValue = "0") int board_type_id) {
 		session.setAttribute("category", "bo");
+		
+		model.addAttribute("board_type_id", board_type_id);
+		// 선택한 게시판 종류 총 목록수 조회
+		page.setTotalList( mapper.getCountOfBoardType(page, board_type_id) );
+		// 선택된 board_type_id에 해당하는 게시글만 불러오기
+		page.setList(mapper.getListOfBoardType(page, board_type_id));
 		
 		// 게시판 종류를 DB에서 조회해오기
 		List<BoardTypeVO> boardTypes = mapper.getBoardTypes();
 		model.addAttribute("boardTypes", boardTypes);
 		
 		// DB에서 게시판 목록을 조회해와서 화면에 출력할 수 있도록 Model 객체에 담기
-		page.setTotalList( mapper.getCountOfBoard(page) );
-		page.setList( mapper.getListOfBoard(page) );
+//		page.setTotalList( mapper.getCountOfBoard(page) );
+//		page.setList( mapper.getListOfBoard(page) );
 		model.addAttribute("page", page);
 		
 		return "board/list";
