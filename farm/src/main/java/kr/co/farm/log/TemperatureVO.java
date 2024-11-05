@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class TemperatureVO {
- private int log_id, plant_id, temperature, humid, bright, moisture, water_id, soilmoisture;
- private Date time_log, cctv, planting_date, waterdate;
+ private int log_numb, plant_id, temperature, humid, bright, moisture;
+ private String mac_address, userid;
+ private Date time_log, cctv;
 }

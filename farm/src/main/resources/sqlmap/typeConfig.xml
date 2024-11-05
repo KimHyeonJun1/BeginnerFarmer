@@ -4,17 +4,16 @@
 <typeAliases>
 	<typeAlias type="kr.co.farm.guide.GuideVO" alias="guide"/>
 	<typeAlias type="kr.co.farm.manage.ManageVO" alias="manage"/>
-<!-- 	<typeAlias type="kr.co.smart.hr.EmployeeVO" alias="employee"/> -->
-<!-- 	<typeAlias type="kr.co.smart.hr.DepartmentVO" alias="department"/> -->
-<!-- 	<typeAlias type="kr.co.smart.hr.JobVO" alias="job"/> -->
 	<typeAlias type="kr.co.farm.log.LogVO" alias="log"/>
 	<typeAlias type="kr.co.farm.log.TemperatureVO" alias="temperature"/>
 	<typeAlias type="kr.co.farm.log.WaterVO" alias="water"/>
 	<typeAlias type="kr.co.farm.member.MemberVO" alias="member"/>
 	<typeAlias type="kr.co.farm.diary.DiaryVO" alias="diary"/>
+	<typeAlias type="kr.co.farm.board.BoardVO" alias="board"/>
+	<typeAlias type="kr.co.farm.board.BoardTypeVO" alias="boardType"/>
+	<typeAlias type="kr.co.farm.common.LowerKeyMap" alias="LowerMap"/>
 <!-- 	<typeAlias type="kr.co.smart.notice.NoticeVO" alias="notice"/> -->
 <!-- 	<typeAlias type="kr.co.smart.remember.RememberVO" alias="remember"/> -->
-<!-- 	<typeAlias type="kr.co.smart.board.BoardVO" alias="board"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.FileVO" alias="file"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.CommentVO" alias="comment"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.LowerKeyMap" alias="LowerMap"/> -->

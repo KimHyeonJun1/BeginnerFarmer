@@ -162,38 +162,46 @@ display: grid;
 
 // 		온도차트
 
-  var ctx = document.getElementById('myChart_temp');
-  var labels = getRecentTimeLabels().reverse();
-  // Chart.js에 사용될 데이터 예시
-  var data = {
-      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-      datasets: [{
-          label: ' 온도',
-          data: [/* 데이터 배열 */],
-          borderColor: '#FF6384',
-          backgroundColor: '#FFB1C1',
-          borderWidth: 1
-      }]
-  };
-//Chart.js 생성
-  var ctx = document.getElementById('myChart_temp');
-  var myChart = new Chart(ctx, {
-      type: 'line', // 또는 다른 차트 유형
-      data: data,
-      options: {
-          responsive: true,
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  min: 0,
-                  max: 100,
-                  ticks: {
-                      stepSize: 10 // 10 단위로 눈금 설정
-              }
-          }
-          }
-      }
-  });
+// 온도 차트 생성
+function drawTemperatureChart(data) {
+    var ctx = document.getElementById('myChart_temp').getContext('2d');
+    var labels = data.map(item => item.time); // 데이터에 시간 정보가 있어야 함
+    var temperatures = data.map(item => item.temperature); // 온도 데이터
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '온도',
+                data: temperature,
+                borderColor: '#FF6384',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+// AJAX 요청으로 데이터 가져오기
+$.ajax({
+    url: '/temp',
+    method: 'GET',
+    success: function(data) {
+        drawTemperatureChart(data); // 데이터를 가져온 후 차트를 그림
+    },
+    error: function(err) {
+        console.error('온도 데이터 조회 실패:', err);
+    }
+});
 //   대기습도차트
 
   var ctx = document.getElementById('myChart_hum');
