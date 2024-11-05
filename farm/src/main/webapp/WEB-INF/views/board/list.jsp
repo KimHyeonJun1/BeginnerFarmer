@@ -16,20 +16,20 @@
 <h3 class="my-5">게시판 목록</h3>
 
 
-
+<form action="list" method="post">
 <div class="d-flex mb-2 justify-content-between">
-	<div class="col">
-		<form method="post" action="list" class="d-flex justify-content-between me-2">
-		
-<%-- 			<c:forEach items="${boardTypes}" var="type"> --%>
-<%-- 			    <option class="boardType" value="${type.board_type_id}">${type.board_type_name}</option> --%>
-<%-- 			</c:forEach> --%>
-			<select name="board_type_id" onchange="submit()" class="form-select w-px300">
-			    <option value="-1">전체</option> <!-- 전체를 선택하는 옵션 추가 -->
-			    <c:forEach items="${boardTypes}" var="type">
-			        <option <c:if test="${ board_type_id eq type.board_type_id }">selected</c:if> value="${type.board_type_id}">${type.board_type_name}</option>
+	<div class="col d-flex justify-content-between me-2">
+<!-- 		<form method="post" action="list" class="d-flex justify-content-between me-2" id="frmType"> -->
+			<input type="hidden" name="board_type_id" value="${board_type_id}">
+			<div class="boardTypeButtons d-flex gap-3">
+			    <c:forEach items="${boardTypes}" var="bt">
+			        <a onclick="boardType(${bt.board_type_id})"
+			           class="btn btn-success text-white"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
+			            ${bt.board_type_name}
+			        </a>
+<%-- 			        href="<c:url value='/board/list?board_type_id=${bt.board_type_id}' />"  --%>
 			    </c:forEach>
-			</select>
+			</div>
 			
 			<div class="col-auto">
 				<select name="listSize" class="form-select">
@@ -39,12 +39,12 @@
 				</select>
 			</div>
 			
-		</form>
+<!-- 		</form> -->
 	</div>
 	<!-- 로그인되어 있는 경우만 글쓰기 가능 -->
-<%-- 	<sec:authorize access = "isAuthenticated()"> --%>
-		<button class="btn btn-primary" onclick="location='register'">글쓰기</button>
-<%-- 	</sec:authorize> --%>
+	<sec:authorize access = "isAuthenticated()">
+		<button class="btn btn-success" onclick="location='register'">글쓰기</button>
+	</sec:authorize>
 </div>
 
 <table class="table tb-list">
@@ -62,17 +62,22 @@
 	<tr><td colspan="6" class="text-center">게시판 글이 없습니다.</td></tr>
 </c:if>
 
+<!-- <div class="boardList"> -->
+<%--     <c:forEach items="${boardType}" var="board"> --%>
+<!--         <div class="boardItem"> -->
+<%--             <h4>${board.title}</h4> --%>
+<%--             <p>${board.content}</p> --%>
+<!--             게시글 내용 표시 -->
+<!--         </div> -->
+<%--     </c:forEach> --%>
+<!-- </div> -->
+
 <c:forEach items="${ page.list }" var="vo">
 <tr>
 	<td>${ vo.no }</td>
 	<td>${ vo.type_name }</td>
-	<td><a class="text-link" href="">${ vo.board_title }</a>
-	</td>
-	
-<%-- 	<td data-id="${ vo.board_id }"> --%>
-<%-- 		<a class="text-link" href="javascript:info(${ vo.board_id })"> ${ vo.board_title }</a> --%>
-<!-- 	</td>	 -->
-
+	<td><a class="text-link" href="info?board_id=${ vo.board_id }&board_type_id=${ board_type_id}">${ vo.board_title }</a></td>
+<%-- 	<td><a class="text-link" href="info?board_id=${ vo.board_id }">${ vo.board_title }</a></td> --%>
 	<td>${ vo.board_writer }</td>
 	<td>${ vo.board_writedate }</td>
 	<td>${ vo.board_readcnt }</td>
@@ -83,7 +88,7 @@
 
 <div class="d-flex mb-2 justify-content-between">
 	<div class="col">
-		<form method="post" action="list" class="d-flex justify-content-between me-2">
+<!-- 		<form method="post" action="list" class="d-flex justify-content-between me-2" id="frmSearch"> -->
 			<div class="input-group w-px500">
 				<select name="search" class="form-select">
 					<option value="all">전체</option>
@@ -94,25 +99,25 @@
 				<input type="text" name="keyword" value="${ page.keyword }" class="form-control w-px300">
 				<button class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
 			</div>
-		</form>
+<!-- 		</form> -->
 	</div>
 </div>
-
+</form>
 <jsp:include page="/WEB-INF/views/include/page.jsp"/>
 
 </body>
 
 <script>
-$("[name=listSize]").on("change", function(){
+function boardType(board_type_id){
+	$("[name=board_type_id]").val(board_type_id)
 	$("form").submit()
-})
-$("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
-// $('#summernote').summernote({
-//   height: 300, // set editor height
-//   minHeight: null, // set minimum height of editor
-//   maxHeight: null, // set maximum height of editor
-//   focus: true // set focus to editable area after initializing summernote
-// });
+}
+
+// $("[name=listSize]").on("change", function(){
+// 	$("form").submit()
+// })
+// $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
+
 </script>
 
 </html>
