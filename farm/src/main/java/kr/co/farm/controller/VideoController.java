@@ -1,5 +1,6 @@
 package kr.co.farm.controller;
 
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -57,6 +58,8 @@ public class VideoController {
 		url.append("?apiKey=").append(Key)
 		   .append("&_type=json");
 		
+
+		
 		return XML.toJSONObject(common.requestAPI(url.toString())).getJSONObject("response").getJSONObject("body").toMap();
 	}
 	
@@ -69,12 +72,13 @@ public class VideoController {
 		url.append("?apiKey=").append(Key)
 		.append("&_type=json")
 		;
+		
 		return XML.toJSONObject(common.requestAPI(url.toString())).getJSONObject("response").getJSONObject("body").toMap();
 	}
 	
 	//농업기술동영상 리스트 화면 요청
 	@RequestMapping("/list")
-	public String list ( HttpSession session, Model model, PageVO page, String mainCategory, String subCategory) {
+	public String list ( HttpSession session, Model model, PageVO page, String mainCategory, String subCategory) throws Exception{
 		session.setAttribute("category", "vi");
 		page.setListSize(12);
 		//농사로에서 농업기술동영상 리스트 조회
@@ -88,6 +92,9 @@ public class VideoController {
 		   .append("&numOfRows=").append(page.getListSize())
 		   .append("&categoryCode=").append(sub.isEmpty() ? main:sub)
 		   ;
+		if(	  page.getKeyword() != null && ! page.getKeyword().isEmpty() ) {
+			url.append("&videoTitle=").append( URLEncoder.encode(page.getKeyword(), "utf-8" ) );
+		}
 		model.addAttribute("mainCategory", mainCategory);
 		model.addAttribute("subCategory", subCategory);
 		
@@ -97,8 +104,12 @@ public class VideoController {
 				.getJSONObject("body");
 		
 		JSONObject json = body.getJSONObject("items");
-		if(  json.get("item")  instanceof JSONObject ) {
-			json.put("item", new JSONArray().put(0, json.get("item")));
+		if( json.has("item") ) {
+			if( json.get("item")  instanceof JSONObject ) {
+				json.put("item", new JSONArray().put(0, json.get("item")));
+			}
+		}else {
+			json.put("item", new JSONArray());
 		}
 		
 		Map<String, Object> videoList = body.toMap();
@@ -129,11 +140,22 @@ public class VideoController {
 				   ;
 				
 				// API 요청 후 데이터 매핑
-				Map<String, Object> subCategoryList = XML.toJSONObject(common.requestAPI(url.toString()))
-												  .getJSONObject("response")
-												  .getJSONObject("body")
-												  .toMap();
-				model.addAttribute("subCategoryList", subCategoryList);
+//				Map<String, Object> subCategoryList = XML.toJSONObject(common.requestAPI(url.toString()))
+//												  .getJSONObject("response")
+//												  .getJSONObject("body")
+//												  .toMap();
+//				model.addAttribute("subCategoryList", subCategoryList);
+				
+				 body = XML.toJSONObject(common.requestAPI(url.toString()))
+						.getJSONObject("response")
+						.getJSONObject("body");
+				
+				 json = body.getJSONObject("items");
+				if(  json.get("item")  instanceof JSONObject ) {
+					json.put("item", new JSONArray().put(0, json.get("item")));
+				}
+				
+				model.addAttribute("subCategoryList", body.toMap());
 			
 		}
 		

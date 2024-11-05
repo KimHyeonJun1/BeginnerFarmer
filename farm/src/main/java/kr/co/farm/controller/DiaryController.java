@@ -123,10 +123,10 @@ public class DiaryController {
     //관찰일지 목록 화면 
     @RequestMapping("/list")
     public String list(@RequestParam(defaultValue = "-1") int plant_id, PageVO page, Authentication user, Model model, HttpSession session) {
+    	session.setAttribute("category", "di");
         if (user == null) {
             return "diary/diary"; // 로그인하지 않은 경우
         } else {
-            session.setAttribute("category", "di");
 
             // 로그인한 사용자의 writer와 일치하는 관찰일지 목록 조회
             String writer = user.getName();

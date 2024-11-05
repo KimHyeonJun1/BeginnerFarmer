@@ -11,7 +11,7 @@
         .video-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 가로로 4개 */
-            gap: 20px; /* 각 동영상 간 간격 */
+            gap: 25px; /* 각 동영상 간 간격 */
             max-width: 1200px;
             margin: auto;
         }
@@ -53,8 +53,16 @@
 </head>
 <body>
 	<h3 class="my-5 mb-5" >농업기술동영상</h3>
+	
+	<c:if test="${videoList.totalCount == 0 }"> 
+		<table class="table tb-list">
+		    <tr><th></th></tr>
+		    <tr><th class="text-center">농업기술동영상</th></tr> 
+		</table>
+	</c:if>
+	
 		
-	<div class="d-flex mb-2 justify-content-center">
+	<div class="d-flex video-grid">
 		<form method="post" action="list">
 				<div class=" mb-2 justify-content-between">
 					<div class="col-auto video-top  gap-2"></div>
@@ -78,11 +86,7 @@
 				</div>
 		
 	            <div class="d-flex input-group mb-3">
-	            	<select name="search" class="form-select w-px100">
-	                    <option value="">전체</option>
-	                    <option value="diary_title" <c:if test="${page.search eq 'diary_title'}">selected</c:if>>제목</option>
-	                </select>
-	                <input type="text" name="keyword" value="${page.keyword}" class="form-control w-px400" placeholder="검색어를 입력하세요">
+	                <input type="text" name="keyword" value="${page.keyword}" class="form-control w-px600" placeholder="검색어를 입력하세요">
 	                <button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
 	            </div>
         	
@@ -91,6 +95,11 @@
 
 
     <div class="video-grid mt-5">
+    
+    
+    
+    
+    
 	<c:forEach items="${ videoList.items.item }" var="item">
         <!-- 동영상 아이템  -->
         <div class="video-item">
@@ -104,14 +113,6 @@
 
 
 <script>
-// function mainCategory(){
-// 	$.ajax({
-// 		url: "mainCg"
-// 	})
-// 		.done(function(main){
-// 			$("#mainCategory").html(main)
-// 		})
-// }
 
 $("#mainCategory").on("change",function(){
 	$("form").submit()
@@ -123,23 +124,23 @@ $("#subCategory").on("change",function(){
 
 $(function(){
 	
-    var listSize = ${page.listSize != null ? page.listSize : 12};
-    var pageNo = ${page.pageNo != null ? page.pageNo : 1};
+//     var listSize = ${page.listSize != null ? page.listSize : 12};
+//     var pageNo = ${page.pageNo != null ? page.pageNo : 1};
 
-    // 페이지 로드 시 select 옵션에서 선택된 값으로 설정
-    $("#listSize").val(listSize).prop("selected", true);
+//     // 페이지 로드 시 select 옵션에서 선택된 값으로 설정
+//     $("#listSize").val(listSize).prop("selected", true);
 
     // 페이지 링크 클릭 시 listSize와 pageNo 값을 반영하여 이동
     $("a.page-link").on("click", function(){
         // 클릭한 페이지 번호 가져오기
         var selectedPageNo = $(this).data("page");
-        location.href = "<c:url value='/video/list?pageNo='/>" + selectedPageNo + "&listSize=" + $("#listSize option:selected").val();
+        location.href = "<c:url value='/video/list?pageNo='/>" + selectedPageNo ;
     });
 
     // listSize 값이 변경될 때 페이지 새로고침
-    $("#listSize").on("change", function() {
-        location.href = "<c:url value='/video/list?pageNo=1&listSize='/>" + $(this).val();
-    });
+//     $("#listSize").on("change", function() {
+//         location.href = "<c:url value='/video/list?pageNo=1&listSize='/>" + $(this).val();
+//     });
 });
 </script>
 
