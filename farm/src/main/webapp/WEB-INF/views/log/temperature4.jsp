@@ -159,41 +159,47 @@ display: grid;
 			
 <script>
 
+// 온도 조회
+function temp(){
+	$.ajax({
+		url: "/farm/log/temp"
+	}).done(function(response){
+// 		console.log(response)
+		var info = {};
+		info.labels = [], info.data = []
+		
+		for(var item of response){
+			info.labels.push(item.time_log)//['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Black']
+			info.data.push( item.temp) // [1, 2, 3, 4, 5, 6, 7]
+		}
+		lineChart(info); //선차트 그리기
+		
+	})
+}
+function lineChart(info){
+	new Chart( $("#myChart_temp"), {
+		type: 'line',
+		data: {
+			labels: info.labels,
+			datasets: [{
+				label: '온도',
+				data : info.data,
+				borderColor: "#FF6384",
+				pointBackgroundColor: "#ff0000",
+				pointRadius: 5,
+				tension: 0, //꺾은선 형태
+			}]
+		},
+		options: setOptions('온도')
+	})
+}
 
-// 		온도차트
 
-  var ctx = document.getElementById('myChart_temp');
-  var labels = getRecentTimeLabels().reverse();
-  // Chart.js에 사용될 데이터 예시
-  var data = {
-      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-      datasets: [{
-          label: ' 온도',
-          data: [/* 데이터 배열 */],
-          borderColor: '#FF6384',
-          backgroundColor: '#FFB1C1',
-          borderWidth: 1
-      }]
-  };
-//Chart.js 생성
-  var ctx = document.getElementById('myChart_temp');
-  var myChart = new Chart(ctx, {
-      type: 'line', // 또는 다른 차트 유형
-      data: data,
-      options: {
-          responsive: true,
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  min: 0,
-                  max: 100,
-                  ticks: {
-                      stepSize: 10 // 10 단위로 눈금 설정
-              }
-          }
-          }
-      }
-  });
+
+
+
+
+
 //   대기습도차트
 
   var ctx = document.getElementById('myChart_hum');

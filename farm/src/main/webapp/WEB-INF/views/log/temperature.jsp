@@ -80,12 +80,12 @@ display: grid;
 		<div class="item">작물 정보</div>
 		<div class="item">
 			<div class="d-flex">
-				<div class="box1">현재온도 </div>
+				<div class="box1 gap-2">현재온도 ${temp.temperature}°C<i class="fa-solid fa-temperature-half fs-4" style="color:#de1717;"></i></div>
 				<div class="box1 gap-2">적정온도 ${vo.standard_temp}°C<i class="fa-solid fa-temperature-half fs-4" style="color:#de1717;"></i></div>
 				<button class="btn box1 gap-2">온습도 낮추기  <img src="<c:url value='/img/switch-on.png'/>" alt="on" ></button>
 			</div>
 			<div class="d-flex">
-				<div class="box1">현재습도 </div>
+				<div class="box1 gap-2">현재습도 ${temp.humid}%<i class="fa-solid fa-droplet fs-4" style="color:#74C0FC;"></i> </div>
 				<div class="box1 gap-2">적정습도 ${vo.standard_hum}%<i class="fa-solid fa-droplet fs-4" style="color:#74C0FC;"></i></div>
 				<button class="btn box1 gap-2">온습도 낮추기  <img src="<c:url value='/img/switch-off.png'/>" alt="off" ></button>
 			</div>		
@@ -114,7 +114,7 @@ display: grid;
 				<div class="box3">
 				
 					<div>
-  						<canvas id="myChart_temp"></canvas>
+  						<canvas id="myChart_temp" ></canvas>
 					</div>
 				
 				</div>
@@ -157,62 +157,209 @@ display: grid;
 <script src="<c:url value='/js/chart.js'/>"></script>
 			
 			
+
 <script>
-  var ctx = document.getElementById('myChart_temp');
-  var labels = getRecentTimeLabels().reverse();
-  // Chart.js에 사용될 데이터 예시
-  var data = {
-      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-      datasets: [{
-          label: '온도',
-          data: [/* 데이터 배열 */],
-          borderColor: '#FF6384',
-          backgroundColor: '#FFB1C1',
-          borderWidth: 1
-      }]
-  };
-//Chart.js 생성
-  var ctx = document.getElementById('myChart_temp');
-  var myChart = new Chart(ctx, {
-      type: 'line', // 또는 다른 차트 유형
-      data: data,
-      options: {
-          responsive: true,
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
-  var ctx = document.getElementById('myChart_hum');
-  var labels = getRecentTimeLabels().reverse();
-  // Chart.js에 사용될 데이터 예시
-  var data = {
-      labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-      datasets: [{
-          label: '습도',
-          data: [/* 데이터 배열 */],
-          borderColor: '#36A2EB',
-          backgroundColor: '#9BD0F5',
-          borderWidth: 1
-      }]
-  };
-//Chart.js 생성
-  var ctx = document.getElementById('myChart_hum');
-  var myChart = new Chart(ctx, {
-      type: 'line', // 또는 다른 차트 유형
-      data: data,
-      options: {
-          responsive: true,
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
+
+ 
+//온도 조회
+$(document).ready(function(){
+	$.ajax({
+		url: "temp"
+	}).done(function(response){
+		console.log(response)
+		var info = {};
+		info.labels = [], info.data = {}
+		info.data.temperature = []
+		info.data.humid = []
+		info.data.bright = []
+		info.data.moisture = []
+		
+		
+		for(var item of response){
+			info.labels.push(item.time_log)//['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Black']
+			info.data.temperature.push( item.temperature) // [1, 2, 3, 4, 5, 6, 7]
+			info.data.humid.push( item.humid) // [1, 2, 3, 4, 5, 6, 7]
+			info.data.bright.push( item.bright) // [1, 2, 3, 4, 5, 6, 7]
+			info.data.moisture.push( item.moisture) // [1, 2, 3, 4, 5, 6, 7]
+		}
+		info.labels.reverse()
+		info.data.temperature.reverse()
+		info.data.humid.reverse()
+		info.data.bright.reverse()
+		info.data.moisture.reverse()
+		console.log(info)
+		lineChart(info); //선차트 그리기
+		
+	})
+})
+function lineChart(info){
+	new Chart( $("#myChart_temp"), {
+		type: 'line',
+		data: {
+			labels: info.labels,
+			datasets: [{
+				label: '온도',
+				data : info.data.temperature,
+				borderColor: '#FF6384',
+				BackgroundColor: '#ff0000',
+// 				pointBackgroundColor: '#ff0000',
+				pointRadius: 5,
+				tension: 0.1, //꺾은선 형태
+			}]
+		},
+		options:  setOptions()
+	})
+	new Chart( $("#myChart_hum"), {
+		type: 'line',
+		data: {
+			labels: info.labels,
+			datasets: [{
+				label: '대기습도',
+				data : info.data.humid,
+				borderColor: "#36A2EB",
+				backgroundColor: "#9BD0F5",
+// 				pointBackgroundColor: "#9BD0F5",
+				pointRadius: 5,
+				tension: 0.1, //꺾은선 형태
+			}]
+		},
+		options:  setOptions()
+	})
+	new Chart( $("#myChart_moisture"), {
+		type: 'line',
+		data: {
+			labels: info.labels,
+			datasets: [{
+				label: '토양습도',
+				data : info.data.moisture,
+				borderColor: 'rgb(75, 192, 192)',
+				backgroundColor: 'rgb(75, 192, 192)',
+// 				pointBackgroundColor: 'rgb(75, 192, 192)',
+				pointRadius: 5,
+				tension: 0.1, //꺾은선 형태
+			}]
+		},
+		options:  setOptions()
+	})
+	new Chart( $("#myChart_bright"), {
+		type: 'line',
+		data: {
+			labels: info.labels,
+			datasets: [{
+				label: '조도',
+				data : info.data.bright,
+				borderColor: "rgb(255, 159, 64)",
+				BackgroundColor: "rgb(255, 159, 64)",
+// 				pointBackgroundColor: "rgb(255, 159, 64)",
+				pointRadius: 5,
+				tension: 0.1, //꺾은선 형태
+			}]
+		},
+		options: {
+			scales: {
+				  y: {
+				       beginAtZero: true, 
+						  min: Math.min(...info.data.bright)-50,
+							 grace:'20%',
+							  ticks: {
+							   stepSize: 10 // 10 단위로 눈금 설정
+								   }
+		
+								 
+							 },
+					}
+		}
+		
+	})
+	console.log(Math.min(...info.data.bright))
+}
+
+//   대기습도차트
+// $(document).ready(function(){
+	
+//   var ctx = document.getElementById('myChart_hum');
+// //   var labels = getRecentTimeLabels().reverse();
+//   var data = {
+//       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
+//       datasets: [{
+//           label: ' 대기습도',
+//           data: [],
+//           borderColor: '#36A2EB',
+//           backgroundColor: '#9BD0F5',
+//           borderWidth: 1
+//       }]
+//   };
+// })
+// //Chart.js 생성
+//   var ctx = document.getElementById('myChart_hum');
+//   var myChart = new Chart(ctx, {
+//       type: 'line', // 또는 다른 차트 유형
+//       data: data,
+//       options: {
+//           responsive: true,
+//           scales: {
+//               y: {
+//                   beginAtZero: true,
+//               }
+//           }
+//       }
+//   });
   
+  
+// //   토양습도차트
+  
+//   var ctx = document.getElementById('myChart_moisture');
+// //   var labels = getRecentTimeLabels().reverse();
+//   var data = {
+// //       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
+//       datasets: [{
+//           label: ' 토양습도',
+//           data: [/* 데이터 배열 */],
+//           borderColor: 'rgb(75, 192, 192)',
+//           backgroundColor: 'rgb(75, 192, 192)',
+//           borderWidth: 1
+//       }]
+//   };
+// //Chart.js 생성
+//   var ctx = document.getElementById('myChart_moisture');
+//   var myChart = new Chart(ctx, {
+//       type: 'line', 
+//       data: data,
+//       options: setOptions()
+//   });
+// //   조도차트
+//   var ctx = document.getElementById('myChart_bright');
+// //   var labels = getRecentTimeLabels().reverse();
+//   var data = {
+// //       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
+//       datasets: [{
+//           label: ' 조도',
+//           data: [/* 데이터 배열 */],
+//           borderColor: 'rgb(255, 159, 64)',
+//           backgroundColor: 'rgb(255, 159, 64)',
+//           borderWidth: 1
+//       }]
+//   };
+// //Chart.js 생성
+//   var ctx = document.getElementById('myChart_bright');
+//   var myChart = new Chart(ctx, {
+//       type: 'line', 
+//       data: data,
+//       options: setOptions()
+      
+//   });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //서버에 plant정보 저장하기
   $("#select-plant").change(function() {
 	    var selectedPlantId = $(this).val();
 	    sessionStorage.setItem("plant_id", $(this).val() )
