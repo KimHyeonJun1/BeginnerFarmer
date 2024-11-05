@@ -40,7 +40,7 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="<c:url value='/img/2222.png'/>" rel="icon">
+  <link href="<c:url value='/img/favicon.png'/>" rel="icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -96,13 +96,13 @@
       <a href="/farm" class="logo d-flex align-items-center">
      
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="<c:url value='/img/logogo1.png'/>" alt="AgriCulture">
+        <img src="<c:url value='/img/logo.png'/>" alt="AgriCulture">
         <!-- <h1 class="sitename">AgriCulture</h1>  -->
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="/farm" class="active">홈</a></li>
-          <li class="dropdown"><a href="/farm/guide/list"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="/farm" class="${category == 'home' ? 'active' : ''}">홈</a></li>
+          <li class="dropdown"><a class="${category == 'gu' || category == 'in' || category == 'vi' ? 'active' : ''}" href="/farm/guide/list"><span>농사정보</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="<c:url value='/guide/list'/>">작물가이드</a></li>
               <li class="dropdown"><a href="/farm/weekInfo/list"><span>농사Tip</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -113,13 +113,13 @@
               </li>
             </ul>
           </li>
-          <li class="dropdown"><a href="/farm/board/list"><span>소통공간</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a class="${ category eq 'bo' || category eq 'no' ? 'active' : ''}" href="/farm/board/list"><span>소통공간</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="<c:url value='/board/list'/>">게시판</a></li>
               <li><a href="<c:url value='/notice/list'/>">공지사항</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}" href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
                 <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
 				<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
@@ -313,15 +313,15 @@
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by BootstrapMade
           </div>
         </div>
 
         <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-          <a href=""><i class="bi bi-twitter-x"></i></a>
-          <a href=""><i class="bi bi-facebook"></i></a>
-          <a href=""><i class="bi bi-instagram"></i></a>
-          <a href=""><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.twitter.com"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.naver.com"><i class="bi bi-linkedin"></i></a>
         </div>
 
       </div>

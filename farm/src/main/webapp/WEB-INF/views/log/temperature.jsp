@@ -18,7 +18,8 @@
 display: grid;
 	gap: 20px;
 	max-width: 1520px;
-	grid-template-columns: 4fr 2fr 7fr;
+	grid-template-columns: 3fr 3fr 7fr;
+/* 	grid-template-columns: 4fr 2fr 7fr; */
 	grid-template-rows: 280px;
 }
 .box1{
@@ -60,6 +61,21 @@ display: grid;
  	height: 320px;
  }
  
+ .result-message {
+/*         font-size: 16px; /* 원하는 폰트 크기로 조정 */ */
+        color: #333; /* 원하는 글자 색상으로 조정 */
+    }
+.box4{
+	border-radius: 6px;
+	display: flex;
+	width: 310px;
+	height: 100px;	
+	border: 2px solid black;
+	flex-direction: row; /* 세로 방향 정렬 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+ } 
+ 
 </style>
 <body>
 <h3 class="my-2 mb-4">온도/습도/조도</h3>
@@ -77,7 +93,17 @@ display: grid;
 </form>
 		<img src="<c:url value='${vo.image_path}'/>" alt="식물" width="340px" height="240px">
 		</div>
-		<div class="item">작물 정보</div>
+		
+		<div class="item text-center"><h4 class="mb-3">현재 상태</h4>
+			<div class="d-flex">
+			<div class="box4">
+   				 <c:if test="${not empty conditionMessage}">
+      				  <h3 class="mt-2 result-message">${conditionMessage}</h3>
+   				 </c:if>
+			</div>
+			</div>
+			
+		</div>
 		<div class="item">
 			<div class="d-flex">
 				<div class="box1 gap-2">현재온도 ${temp.temperature}°C<i class="fa-solid fa-temperature-half fs-4" style="color:#de1717;"></i></div>

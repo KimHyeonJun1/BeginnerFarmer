@@ -35,7 +35,9 @@ public class DiaryController {
     private final CommonUtility common;
     private final ManageMapper manageMapper;
     
-
+    
+    
+    
     //관찰일지 수정저장처리 요청
     @ResponseBody @PutMapping("/modify")
     public boolean modify(@RequestBody DiaryVO vo){
@@ -127,7 +129,6 @@ public class DiaryController {
             return "diary/diary"; // 로그인하지 않은 경우
         } else {
             session.setAttribute("category", "di");
-
             // 로그인한 사용자의 writer와 일치하는 관찰일지 목록 조회
             String writer = user.getName();
 

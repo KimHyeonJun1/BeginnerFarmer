@@ -1,6 +1,5 @@
 package kr.co.farm.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -62,6 +61,10 @@ public class LogController {
 		List<ManageVO> plant = manageMapper.getUserPlants(userid_log); 
 		model.addAttribute("plant", plant); 
 		
+		//온/습/조도 정보 조회
+		TemperatureVO temp = mapper.getOneTemperature(userid_log, plantid_log);
+		model.addAttribute("temp", temp);
+		
 		ManageVO selectedPlant = manageMapper.getPlantInfo(userid_log, plantid_log); 
 		model.addAttribute("vo", selectedPlant);
 		
@@ -95,6 +98,34 @@ public class LogController {
 		//플랜테이블 정보 조회
 		GuideVO standardInfo = mapper.getPlantStandardInfo(plantid_log);
 		model.addAttribute("vo", standardInfo);
+		
+		//
+
+		  // 온도와 습도 상태 메시지 생성
+	    String message = "";
+
+	    // 온도 상태 메시지 생성
+	    if (temp.getTemperature() > standardInfo.getStandard_temp()) {
+	        message += "적정온도 보다 높습니다." + "<br>";
+	    } else if (temp.getTemperature() < standardInfo.getStandard_temp()) {
+	        message += "적정온도 보다 낮습니다."  + "<br>";
+	    } else {
+	        message += "적정온도입니다."  + "<br>";
+	    }
+
+	    // 습도 상태 메시지 생성
+	    if (temp.getHumid() > standardInfo.getStandard_hum()) {
+	        message += "적정습도 보다 높습니다.";
+	    } else if (temp.getHumid() < standardInfo.getStandard_hum()) {
+	        message += "적정습도 보다 낮습니다.";
+	    } else {
+	        message += "적정습도입니다.";
+	    }
+
+	    // 결과 메시지를 모델에 추가
+	    model.addAttribute("conditionMessage", message.trim());
+	
+		//
 		
 		
 		

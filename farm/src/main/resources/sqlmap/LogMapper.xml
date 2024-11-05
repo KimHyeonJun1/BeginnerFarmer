@@ -40,23 +40,12 @@ select * from plants_logs_select
 </select>
 
 
-<!-- 월별 채용인원수 조회 -->
-<select id="getCountByHumid" resultType="LowerMap">
-</select>
-
-<!-- 부서별 사원수 조회 -->
-<select id="getCountByMoisture" resultType="LowerMap">
-</select>
-
-<!-- 부서별 사원수 조회 -->
-<select id="getCountByBright" resultType="LowerMap">
-
-</select>
-
 <!-- 급수관리 유저별 총건수 조회 -->
 <select id="countOfWater" resultType="integer">
 select count(*) from water_manage where userid = #{userid} and plant_id = #{plant_id}
 </select>
+
+
 
 <!-- 급수관리 목록 조회 -->
 <select id="getListOfWaterByUser" resultType="water">
