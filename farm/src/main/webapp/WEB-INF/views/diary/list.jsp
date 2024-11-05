@@ -11,7 +11,7 @@
     <h3 class="my-4">관찰일지</h3>
 
     <div class="d-flex mb-2 justify-content-between">
-	        <form method="post" action="list">
+		<form method="post" action="list">
 	        <div class="d-flex ">
 	            <div class="input-group">
 	                <select name="search" class="form-select w-px100">
@@ -30,8 +30,9 @@
 	              		 </c:forEach>
 				      </select>
 	        	</div>
-        </div>
-	        </form>
+        	</div>
+        	
+	    </form>
         
         <button class="btn btn-success" onclick="location='register'">글쓰기</button>
         
