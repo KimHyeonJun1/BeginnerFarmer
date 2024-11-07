@@ -40,6 +40,8 @@
 		</c:if>	
 	</sec:authorize>
 </div>
+
+<jsp:include page="comment/register.jsp"/>
 </body>
 
 <script>
