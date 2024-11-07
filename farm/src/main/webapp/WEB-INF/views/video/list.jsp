@@ -95,11 +95,6 @@
 
 
     <div class="video-grid mt-5">
-    
-    
-    
-    
-    
 	<c:forEach items="${ videoList.items.item }" var="item">
         <!-- 동영상 아이템  -->
         <div class="video-item">
