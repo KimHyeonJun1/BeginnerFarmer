@@ -10,53 +10,57 @@
 <meta charset="UTF-8">
 <title>초보농부 ${title}</title>
 <style>
+/* 	동영상 */
+     /* 각 동영상 카드 스타일 */
+    .video-item {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
 
-        /* 부모 컨테이너 스타일 */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 가로로 4개 */
-            gap: 25px; /* 각 동영상 간 간격 */
-            max-width: 1200px;
-            margin: auto;
-        }
-        
-        /* 각 동영상 카드 스타일 */
-        .video-item {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
+    /* 동영상 썸네일 스타일 */
+    .video-thumbnail {
+        width: 100%;
+        height: 150px; /* 썸네일 높이 */
+        background-color: #ddd; /* 썸네일 없을 때 기본 배경 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-        /* 동영상 썸네일 스타일 */
-        .video-thumbnail {
-            width: 100%;
-            height: 150px; /* 썸네일 높이 */
-            background-color: #ddd; /* 썸네일 없을 때 기본 배경 */
-            display: flex;
-    		justify-content: center;
-    		align-items: center;
-    		overflow: hidden; /* 필요 시 여백을 자르지 않으려면 삭제 가능 */
-        }
-        
-        .video-thumbnail img {
-		    width: 100%;
-		    height: 100%;
-		    object-fit: contain; /* 이미지 비율을 유지하며 썸네일 크기에 맞춤 */
-		}
+    .video-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* 이미지 비율을 유지하며 썸네일 크기에 맞춤 */
+    }
 
-        /* 동영상 제목 스타일 */
-        .video-title {
-            padding: 10px;
-            font-size: 1rem;
-            color: #333;
-            display: flex;
-        }
+    /* 동영상 제목 스타일 */
+    .video-title {
+        padding: 10px;
+        font-size: 1rem;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+       .container_2 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4개의 그리드로 나누기 */
+        gap: 30px; /* 그리드 간 간격 */
+        border: 3px solid #198754; /* 전체 테두리 실선 */
+        border-radius: 20px;
+        padding: 30px;
+    }
+       
 /*------------------------------------------------------------------------------- */
 
+/* 작물 난이도 */
   /* 전체 그리드 설정 */
-        .container {
+        .container_1 {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 4개의 그리드로 나누기 */
             grid-gap: 10px; /* 그리드 간 간격 */
@@ -78,6 +82,14 @@
             margin: 30px;
             place-items: center; /* 텍스트 중앙 정렬 */
         }
+        
+        /* 이미지 스타일 */
+		.grid-item-1 img {
+		    width: 200px; /* 이미지 너비 */
+		    height: auto; /* 이미지 비율 유지 */
+		    cursor: pointer; /* 마우스 커서가 이미지 위로 오면 손 모양 */
+		}
+
 
         /* 두 번째, 세 번째, 네 번째 그리드 - 텍스트 및 항목 배치 */
         .grid-item-2, .grid-item-3, .grid-item-4 {
@@ -159,21 +171,27 @@
     
 <div class="mt-5">
     
-	<div class="container">
+	<div class="container_1">
         <!-- 첫 번째 그리드: 작물 추천 -->
         <div class="grid-item grid-item-1">
-            <div>작물 추천</div>
+	        <img src="<c:url value='/img/bubble.png'/>" alt="작물추천 말풍선">
         </div>
+        
+        
+<!--         <div class="grid-item grid-item-1"> -->
+<!--             <div>작물 추천</div> -->
+<!--         </div> -->
         
 
         <!-- 두 번째 그리드: 초보 및 작물 목록 -->
         <div class="grid-item grid-item-2 ">
             <div class="text-top">초보</div>
             <div class="items ">
-            	<button class="crop-btn">딸기</button>
+<!--             	<a href="guide/info?plant_id=1" style="text-decoration: none;"><button class="crop-btn">상추</button></a> -->
+            	<button class="crop-btn">상추</button>
+		        <button class="crop-btn">깻잎</button>
 		        <button class="crop-btn">부추</button>
-		        <button class="crop-btn">상추</button>
-		        <button class="crop-btn">배추</button>
+		        <button class="crop-btn">시금치</button>
                 
             </div>
         </div>
@@ -182,10 +200,10 @@
         <div class="grid-item grid-item-3">
             <div class="text-top">중수</div>
             <div class="items">
-            	<button class="crop-btn">딸기</button>
-		        <button class="crop-btn">부추</button>
-		        <button class="crop-btn">상추</button>
-		        <button class="crop-btn">배추</button>
+            	<button class="crop-btn">배추</button>
+		        <button class="crop-btn">케일</button>
+		        <button class="crop-btn">파</button>
+		        <button class="crop-btn">방울토마토</button>
             </div>
         </div>
 
@@ -193,25 +211,54 @@
         <div class="grid-item grid-item-4">
             <div class="text-top">고수</div>
             <div class="items">
-            	<button class="crop-btn">딸기</button>
-		        <button class="crop-btn">부추</button>
-		        <button class="crop-btn">상추</button>
-		        <button class="crop-btn">배추</button>
+            	<button class="crop-btn">고추</button>
+		        <button class="crop-btn">오이</button>
+		        <button class="crop-btn">딸기</button>
+		        <button class="crop-btn">가지</button>
             </div>
         </div>
     </div>    
 </div>
 
+<div class="container_2 mt-5">
 
-    <div class="video-grid mt-5">
-<%-- 	<c:forEach items="${ videoList.items.item }" var="item"> --%>
-        <!-- 동영상 아이템  -->
-        <div class="video-item">
+
+	<c:forEach items="${ videoList.items.item }" var="item">
+	    
+	    <div class="video-item">
             <div class="video-thumbnail"> <a target="_blank" href="${ item.videoLink }"><img alt="" src="${item.videoImg}"></a>  </div>
             <div class="video-title">${item.videoTitle}</div>
         </div>
-<%--     </c:forEach> --%>
-    </div>
+        
+	</c:forEach>
+
+<!--     두 번째 유튜브 영상 스타일 아이템 -->
+<!--     <div class="video-item"> -->
+<!--         <div class="video-thumbnail"> -->
+<!--             <img src="thumbnail2.jpg" alt="Thumbnail 2"> -->
+<!--         </div> -->
+<!--         <div class="video-title">영상 제목 2</div> -->
+<!--     </div> -->
+
+<!--     세 번째 유튜브 영상 스타일 아이템 -->
+<!--     <div class="video-item"> -->
+<!--         <div class="video-thumbnail"> -->
+<!--             <img src="thumbnail3.jpg" alt="Thumbnail 3"> -->
+<!--         </div> -->
+<!--         <div class="video-title">영상 제목 3</div> -->
+<!--     </div> -->
+
+<!--     네 번째 유튜브 영상 스타일 아이템 -->
+<!--     <div class="video-item"> -->
+<!--         <div class="video-thumbnail"> -->
+<!--             <img src="thumbnail4.jpg" alt="Thumbnail 4"> -->
+<!--         </div> -->
+<!--         <div class="video-title">영상 제목 4</div> -->
+<!--     </div> -->
+</div>
+
+
+
     
 
     <!-- Services Section -->
