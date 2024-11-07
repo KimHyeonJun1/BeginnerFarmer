@@ -5,11 +5,14 @@
 
 
 
-
+<!-- to_char(time_log, 'hh24:mi') as time_log -->
 <!-- 온습조도 정보 조회 -->
 <select id="getOneTemperature" resultType="temperature">
-	select * from plants_logs_select
+	select log_numb, temperature, humid, bright, moisture
+	from plants_data
 	where  userid = #{userid_log} and plant_id = #{plantid_log}
+	ORDER BY log_numb DESC 
+    FETCH FIRST 1 ROWS ONLY
 </select>
 
 <!-- 플랜테이블 정보 조회 -->
@@ -21,21 +24,13 @@
 
 
 
-<!-- 플랜로그조회 테이블 목록 조회 -->
-<select id="getListOfTemperature" resultType="temperature">
-select * from plants_logs_select
-</select>
-
-
-
-
-<!-- 온도 -->
+<!-- 온도/습도/조도/토양습도 -->
 <!-- 최근 10개의 데이터 조회 -->
 <select id="getCountByTemperature" resultType="LowerMap">
-    SELECT temperature, humid, bright, moisture, to_char(time_log, 'HH24:MI') as time_log 
-    FROM plants_logs_update 
+    SELECT log_numb, temperature, humid, bright, moisture, to_char(time_log, 'hh24:mi') as time_log
+    FROM plants_log
     WHERE userid = #{userid_log} and plant_id = #{plantid_log}
-    ORDER BY time_log DESC 
+    ORDER BY log_numb DESC 
     FETCH FIRST 10 ROWS ONLY
 </select>
 
@@ -53,7 +48,7 @@ SELECT *
 FROM (
     SELECT row_number() over(order by water_numb) no, 
            water_numb,
-           TO_CHAR(waterdate, 'YYYY-MM-DD HH24:MI:SS') AS waterdate,
+           TO_CHAR(waterdate, 'YY-MM-DD HH24:MI:SS') AS waterdate,
            soilmoisture
     FROM water_manage 
     inner join plant using (plant_id)
@@ -63,15 +58,6 @@ FROM (
 WHERE no BETWEEN #{page.beginList} AND #{page.endList}  <!-- 페이지 범위에 따라 결과 제한 -->
 ORDER BY no desc
 </select>
-
-
-<!-- <select id="getListOfWater" resultType="water"> -->
-<!-- select * from  -->
-<!-- (SELECT row_number() over(order by water_numb) no, water_numb, -->
-<!-- TO_CHAR(waterdate, 'YYYY-MM-DD HH24:MI:SS') AS waterdate, soilmoisture  -->
-<!-- from water_manage where userid = #{userid} and plant_id = #{plantid_log}) -->
-<!-- order by water_numb desc -->
-<!-- </select> -->
 
 
 </mapper>

@@ -25,14 +25,15 @@
 <!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->
 <select id="countOfUserPlant" resultType="Integer">
 select count(*) from userplant 
-where userid_log = #{userid_log}
+where userid_log = #{userid_log} and plantid_log is null
 </select>
 
 
+<!-- 전체 작물목록 조회 -->
 
-<!-- 전체작물목록조회 -->
+<!-- 자신이 등록한 작물 빼고 전체 작물 목록조회 -->
 <select id="getListOfManage" resultType="manage">
-select * from plant <if test="userid_log != null">where plant_id not in( select plantid_log from userplant where userid_log = #{userid_log})</if>
+select * from plant <if test="userid_log != null">where plant_id not in( select plantid_log from userplant where userid_log = #{userid_log} and plantid_log is not null)</if>
 </select>
 
 <!-- 작물 등록 -->
@@ -54,5 +55,32 @@ SELECT p.*
 DELETE FROM userplant WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log}
 </delete>
 
+
+
+<!-- 디바이스 조회 -->
+<select id="getListOfDevice" resultType="manage">
+select * from userplant
+<if test="userid != null">where userid_log = #{userid}</if>
+</select>
+
+
+<!-- 디바이스 조회 -->
+<select id="getListOfDeviceNotMatch" resultType="manage">
+select * from userplant where userid_log is null
+</select>
+<!-- 디바이스 조회 -->
+<select id="getListOfMember" resultType="member">
+select * from member where role = upper('user')
+</select>
+
+<!-- 디바이스 등록 -->
+<insert id="registerDevice">
+update userplant set userid_log = #{userid} 
+where mac_address = #{mac_address}
+</insert>
+<!-- 디바이스 연결해제 -->
+<update id="updateDeviceDisconn">
+update userplant set userid_log = null, plantid_log = null where mac_address = #{mac_address}
+</update>
 
 </mapper>

@@ -20,7 +20,10 @@
 }
 </style>
 <body>
+<div class="d-flex justify-content-between mt-2 mb-5">
 <h3 class="my-2">선택화면</h3>
+<button class="btn btn-success me-5" id="d-insert">디바이스 등록</button>
+</div>
 <div class="box">
 <div class="d-flex btn-toolbar gap-2 justify-content-center mt-5">
    <button class="btn btn2 btn-outline-success px-4" id="btn-delete" >삭제</button>
@@ -72,7 +75,9 @@ $("#btn-delete").on("click", function(){
 	.submit();
 })
 
-
+$("#d-insert").on("click", function(){
+	location='device';
+})
 </script>
 
 

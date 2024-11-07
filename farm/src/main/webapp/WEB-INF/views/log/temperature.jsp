@@ -300,90 +300,6 @@ function lineChart(info){
 	console.log(Math.min(...info.data.bright))
 }
 
-//   대기습도차트
-// $(document).ready(function(){
-	
-//   var ctx = document.getElementById('myChart_hum');
-// //   var labels = getRecentTimeLabels().reverse();
-//   var data = {
-//       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-//       datasets: [{
-//           label: ' 대기습도',
-//           data: [],
-//           borderColor: '#36A2EB',
-//           backgroundColor: '#9BD0F5',
-//           borderWidth: 1
-//       }]
-//   };
-// })
-// //Chart.js 생성
-//   var ctx = document.getElementById('myChart_hum');
-//   var myChart = new Chart(ctx, {
-//       type: 'line', // 또는 다른 차트 유형
-//       data: data,
-//       options: {
-//           responsive: true,
-//           scales: {
-//               y: {
-//                   beginAtZero: true,
-//               }
-//           }
-//       }
-//   });
-  
-  
-// //   토양습도차트
-  
-//   var ctx = document.getElementById('myChart_moisture');
-// //   var labels = getRecentTimeLabels().reverse();
-//   var data = {
-// //       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-//       datasets: [{
-//           label: ' 토양습도',
-//           data: [/* 데이터 배열 */],
-//           borderColor: 'rgb(75, 192, 192)',
-//           backgroundColor: 'rgb(75, 192, 192)',
-//           borderWidth: 1
-//       }]
-//   };
-// //Chart.js 생성
-//   var ctx = document.getElementById('myChart_moisture');
-//   var myChart = new Chart(ctx, {
-//       type: 'line', 
-//       data: data,
-//       options: setOptions()
-//   });
-// //   조도차트
-//   var ctx = document.getElementById('myChart_bright');
-// //   var labels = getRecentTimeLabels().reverse();
-//   var data = {
-// //       labels: labels.reverse(), // 최신 데이터가 뒤로 가게 하기
-//       datasets: [{
-//           label: ' 조도',
-//           data: [/* 데이터 배열 */],
-//           borderColor: 'rgb(255, 159, 64)',
-//           backgroundColor: 'rgb(255, 159, 64)',
-//           borderWidth: 1
-//       }]
-//   };
-// //Chart.js 생성
-//   var ctx = document.getElementById('myChart_bright');
-//   var myChart = new Chart(ctx, {
-//       type: 'line', 
-//       data: data,
-//       options: setOptions()
-      
-//   });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   //서버에 plant정보 저장하기
   $("#select-plant").change(function() {
@@ -402,6 +318,8 @@ function lineChart(info){
 	            }
 	        });
 	}); 
+  
+  
 </script>
 
 </body>

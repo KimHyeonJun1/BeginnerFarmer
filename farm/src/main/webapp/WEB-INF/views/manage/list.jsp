@@ -20,13 +20,14 @@
       
 
 			<div class="text-box">
-			<a class="link" href='<c:url value="${empty auth_user ? '/member/login' : '/manage/register'}"/>'>
+			<c:set var="member" value="${empty auth_user ? '' : (auth_user.role == 'USER' ? '_user' : '_admin')}"/>
+			<a class="link" href='<c:url value="${empty auth_user ? '/member/login' : '/manage/device'}"/>${member}'>
        <div class="plant-mg my-2">
        		 <img src="<c:url value='/img/clover.png'/>" alt="식물">
         <div class="speech-bubble"> 여기를 클릭!</div>
        </div>
        </a>
-			  <h3>작물을 등록하세요</h3>
+			  <h3>제품을 등록하세요</h3>
 			</div>        	
     </div>
 </body>

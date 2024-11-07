@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,18 +11,21 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.farm.manage.ManageMapper;
 import kr.co.farm.manage.ManageVO;
+import kr.co.farm.member.MemberMapper;
+import kr.co.farm.member.MemberVO;
 import lombok.RequiredArgsConstructor;
 
 @Controller	@RequestMapping("/manage") @RequiredArgsConstructor
 public class ManageController {
 
 	private final ManageMapper mapper;
-		
+	private final MemberMapper memberMapper;	
+	
+
+	
 	
 	//작물 정보 삭제 요청
 	@DeleteMapping("/delete")
@@ -32,17 +34,62 @@ public class ManageController {
         mapper.deleteUserPlant(userid_log, plantid_log);
         return "redirect:info";
     }
-	
-
-	
-	
 	//작물 정보 화면 요청
 	@RequestMapping("/info")
-	 public String info(Authentication user, Model model, HttpSession session) {
-        String userid_log = user.getName();
-        List<ManageVO> plant = mapper.getUserPlants(userid_log); 
-        model.addAttribute("plant", plant); 
-        return "manage/info";
+	public String info(Authentication user, Model model, HttpSession session) {
+		String userid_log = user.getName();
+		Integer plantid_log = (Integer) session.getAttribute("plantid_log");
+		List<ManageVO> plant = mapper.getUserPlants(userid_log); 
+		model.addAttribute("plant", plant); 
+		return "manage/info";
+	}
+	
+	
+	//디바이스 제품 등록 처리 요청
+	@PostMapping("/device")
+	public String sign(Authentication user, ManageVO vo, HttpSession session) {
+		
+		mapper.registerDevice(vo);
+		return "redirect:device";
+	}
+
+	//디바이스 제품 등록 처리 요청
+	@PostMapping("/device-disconn")
+	public String device_disconn(Authentication user, ManageVO vo, HttpSession session) {
+		mapper.updateDeviceDisconn(vo);
+		return "redirect:device";
+	}
+	
+	//디바이스 등록 화면 요청
+	@GetMapping("/device_admin")
+	public String device(Authentication user, ManageVO vo, Model model, HttpSession session) {
+		String userid_log = user.getName();
+		Integer plantid_log = (Integer) session.getAttribute("plantid_log");
+
+		List<ManageVO> deviceList = mapper.getListOfDevice();
+		model.addAttribute("deviceList", deviceList);
+		
+	    List<MemberVO> memberList = mapper.getListOfMember(); //회원목록 조회-관리자
+		model.addAttribute("memberList", memberList);
+		
+		
+		return "manage/device_admin";
+		
+	}
+	@GetMapping("/device_user")
+	public String device_user(Authentication user, ManageVO vo, Model model, HttpSession session) {
+		String userid_log = user.getName();
+		Integer plantid_log = (Integer) session.getAttribute("plantid_log");
+		
+		List<ManageVO> deviceList = mapper.getListOfDevice(userid_log);
+		model.addAttribute("deviceList", deviceList);
+		
+		List<ManageVO> plant = mapper.getListOfManage(userid_log); 
+		model.addAttribute("plant", plant); 
+		
+		
+		return "manage/device_user";
+		
 	}
 	
 	
@@ -60,14 +107,14 @@ public class ManageController {
 	   @GetMapping("/register")
 	   public String register(Authentication user, Model model, HttpSession session) {
 		   String userid_log = user.getName();
-
-	        List<ManageVO> plant = mapper.getListOfManage(userid_log); //기존꺼
-	        model.addAttribute("plant", plant);
-	        return "manage/register";
+		   Integer plantid_log = (Integer) session.getAttribute("plantid_log");
+	       List<ManageVO> plant = mapper.getListOfManage(userid_log); //기존꺼
+	       model.addAttribute("plant", plant);
+	       return "manage/register";
 	    }
 
 	   
-	   		//작물목록 화면 요청, 정보가 등록되어 있으면 info 없으면 list화면
+//	   		//작물목록 화면 요청, 정보가 등록되어 있으면 info 없으면 list화면
 	   		@RequestMapping("/list")
 	   		public String list(Authentication user, HttpSession session, Model model) {
 	   			
@@ -81,16 +128,42 @@ public class ManageController {
 	   				model.addAttribute("list", list);
 	   				int count = mapper.countOfUserPlant(user.getName());
 	   				if(count == 0) {
+	   					return "redirect:list";
+//	   					return "redirect:info";
 	   					
-	   					return "manage/list";
 	   				}else {
+//	   					return "redirect:info";
+	   					return "";
+//	   					return "manage/list";
 	   					
-	   					return "redirect:info";
 	   				}
 	   			}
+	   		}
 	   			
+//	   			//작물목록 화면 요청, 정보가 등록되어 있으면 info 없으면 list화면
+//	   			@RequestMapping("/device")
+//	   			public String device(Authentication user, HttpSession session, Model model) {
+//	   				
+//	   				session.setAttribute("category", "ma");
+//	   				
+//	   				if(user == null ) {
+//	   					
+//	   					return "manage/device";
+//	   				}else {
+//	   					List<ManageVO> list = mapper.getListOfManage(user.getName());
+//	   					model.addAttribute("list", list);
+//	   					int count = mapper.countOfUserPlant(user.getName());
+//	   					if(count == 0) {
+//	   						
+//	   						return "manage/list";
+//	   					}else {
+//	   						
+//	   						return "manage/device";
+//	   					}
+//	   				}
+	   				
 
-	   }
+//	   }
 		   
 		
 		

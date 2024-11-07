@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import kr.co.farm.member.MemberVO;
+
 @Mapper
 public interface ManageMapper {
 //작물관리
@@ -18,7 +20,9 @@ public interface ManageMapper {
 	
 	ManageVO getOneManage(int plantid_log);
 	
-
+	
+	
+	
 	//userplant의 userid_log 조회
 	int countOfUserPlant(String userid_log); 
 	
@@ -26,7 +30,8 @@ public interface ManageMapper {
     List<ManageVO> getListOfManage(String userid_log);
     
     //전체 작물 조회
-    List<ManageVO> getListOfManage();
+    List<ManageVO> getListOfManage(int plant_id);
+    
     
     
     // 사용자별 작물 조회
@@ -41,4 +46,20 @@ public interface ManageMapper {
 //	// 선택한 유저의 정보 조회
 //    ManageVO getOneManage(String userid_log, int plantid_log);
 	
+//    디바이스 전체조회
+    List<ManageVO> getListOfDevice();
+    //자신의 디바이스 목록조회
+    List<ManageVO> getListOfDevice(String userid);
+    
+    
+    List<ManageVO> getListOfDeviceNotMatch();
+    List<MemberVO> getListOfMember();        //회원목록 조회-관리자
+    
+    
+    
+    int updateDeviceDisconn(ManageVO vo);
+    
+    //제품 등록
+    int registerDevice(ManageVO vo);
+    
 }
