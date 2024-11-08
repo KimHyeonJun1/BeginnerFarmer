@@ -36,7 +36,7 @@
 </c:forEach>
 
 <c:if test="${ !empty page.list }">
-<jsp:include page="/WEB-INF/views/include/page.jsp"/>
+<jsp:include page="/WEB-INF/views/include/subPage.jsp"/>
 </c:if>
 
 <script>

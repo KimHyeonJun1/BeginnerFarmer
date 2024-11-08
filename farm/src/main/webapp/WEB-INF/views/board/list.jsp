@@ -27,7 +27,6 @@
 			           class="btn btn-success text-white"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
 			            ${bt.board_type_name}
 			        </a>
-<%-- 			        href="<c:url value='/board/list?board_type_id=${bt.board_type_id}' />"  --%>
 			    </c:forEach>
 			</div>
 			
@@ -77,8 +76,7 @@
 <tr>
 	<td class="text-center">${ vo.no }</td>
 	<td class="text-center">${ vo.type_name }</td>
-	<td><a class="text-link" href="info?board_id=${ vo.board_id }&board_type_id=${ board_type_id}">${ vo.board_title }</a></td>
-<%-- 	<td><a class="text-link" href="info?board_id=${ vo.board_id }">${ vo.board_title }</a></td> --%>
+	<td><a class="text-link" href="javascript:info( ${ vo.board_id } )">${ vo.board_title }</a></td>
 	<td class="text-center">${ vo.board_writer }</td>
 	<td class="text-center">${ vo.board_writedate }</td>
 	<td class="text-center">${ vo.board_readcnt }</td>
@@ -112,6 +110,14 @@
 function boardType(board_type_id){
 	$("[name=board_type_id]").val(board_type_id)
 	$("form").submit()
+}
+
+function info( board_id ){
+	// form태그에 search, keyword, listSize
+	$("form").append(`<input type="hidden" name="board_id" value="\${board_id}">`)
+			 .append(`<input type="hidden" name="pageNo" value="${page.pageNo}">`)
+			 .attr("action", "info")
+			 .submit();
 }
 
 $("[name=listSize]").on("change", function(){

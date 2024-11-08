@@ -45,25 +45,50 @@
 </body>
 
 <script>
-$("#btn-list").on("click",function(){
-	location = "list?board_type_id=${board_type_id}"
-})
+var info = { 
+			 id:			"${vo.board_id}",
+			 pageNo:		"${page.pageNo}",
+			 search:		"${page.search}",
+			 keyword:		"${page.keyword}",
+			 listSize:		"${page.listSize}"
+			}
 
-
-$("#btn-modify").on("click", function() {
-	location = "modify?board_id=${vo.board_id}";
-});
-
-
-$("#btn-delete").on("click", function() {
-	if( confirm("정말 삭제하시겠습니까?")) {
-		$("<form method='post' action='delete'></form>")
-		.appendTo("body")
-		.append(`<input type="hidden" name="board_id" value="${vo.board_id}">`)
-		.append(`<input type="hidden" name="_method" value="delete">`)
-		.submit()
-		
+$("#btn-list, #btn-modify, #btn-delete").on("click", function(){
+	var id = $(this).attr("id");			// btn-list, btn-modify, btn-delete
+	id = id.substr( id.indexOf("-")+1 )		// list, modify, delete
+	
+	$(`<form method="post" action="\${id}"></form>`)
+	.appendTo("body")
+	.append(addToForm(info));
+	
+	if( id=="delete"){
+		if( confirm("정말 삭제하시겠습니까?")){
+			$("form").submit();
+		}
+	} else {
+		$("form").submit()
 	}
 })
+
+// $("#btn-list").on("click",function(){
+// 	location = "list?board_type_id=${board_type_id}"
+// })
+
+
+// $("#btn-modify").on("click", function() {
+// 	location = "modify?board_id=${vo.board_id}";
+// });
+
+
+// $("#btn-delete").on("click", function() {
+// 	if( confirm("정말 삭제하시겠습니까?")) {
+// 		$("<form method='post' action='delete'></form>")
+// 		.appendTo("body")
+// 		.append(`<input type="hidden" name="board_id" value="${vo.board_id}">`)
+// 		.append(`<input type="hidden" name="_method" value="delete">`)
+// 		.submit()
+		
+// 	}
+// })
 </script>
 </html>

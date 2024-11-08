@@ -60,7 +60,7 @@ public class BoardController {
 	}
 	
 	// 댓글 목록 조회 요청
-	@RequestMapping("/comment/list/{id}/{pageNO}")
+	@RequestMapping("/comment/list/{id}/{pageNo}")
 	public String commentList( @PathVariable int id, Model model, PageVO page) {
 		// DB에서 해당글의 댓글 목록을 조회해 와서 화면의 페이지에 담기
 		page.setListSize(5);

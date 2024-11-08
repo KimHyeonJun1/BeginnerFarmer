@@ -50,7 +50,7 @@ public class LoginSuccess implements AuthenticationSuccessHandler {
 			else if( url.contains("notice") ) session.setAttribute("category", "no");
 			else if( url.contains("manage") ) session.setAttribute("category", "ma");
 			else if( url.contains("monitor") ) session.setAttribute("category", "mo");
-			else if( url.contains("manage") ) session.setAttribute("category", "te");
+			else if( url.contains("temperature") ) session.setAttribute("category", "te");
 			else if( url.contains("water_management") ) session.setAttribute("category", "wa");
 			else if( url.contains("diary") ) session.setAttribute("category", "di");
 		}

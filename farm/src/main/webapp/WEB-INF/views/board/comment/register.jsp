@@ -52,6 +52,7 @@ $(document)
 	if( $(this).val().trim().length==0 ) viewStatus( $(this).closest(".comment") )
 })
 .on("click", ".pagination a", function(){
+// 	console.log($(this).data("page"))
 	// 클릭한 페이지 댓글목록 조회
 	if( ! $(this).hasClass("active") ) commentList( $(this).data("page") )
 })
