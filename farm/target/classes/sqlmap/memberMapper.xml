@@ -27,6 +27,7 @@ where userid = #{userid}
 update member set userpw = #{userpw} where userid = #{userid}
 </update>
 
+
 <!-- 아이디와 이메일이 일치하는 회원정보 조회 -->
 <select id="getOneMemberByUseridAndEmail" resultType="member">  
 select * from member

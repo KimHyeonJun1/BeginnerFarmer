@@ -40,7 +40,7 @@
 	<button class="btn box1 fs-5 gap-3">물 주기
 		<i class="fa-solid fa-oil-can fa-flip-horizontal fs-1" style="color: #1c76ba;"></i>
 	</button>
-	<div class="box2 fs-5 gap-2">현재토양습도
+	<div class="box2 fs-5 gap-2">현재토양습도 ${temp.moisture }%
 		<i class="fa-solid fa-droplet fs-2 " style="color: #74C0FC;"></i>
 	</div>
 </div>
@@ -128,6 +128,7 @@ $("#select-plant").change(function() {
             }
         });
 });
+
 </script>	
 </body>
 

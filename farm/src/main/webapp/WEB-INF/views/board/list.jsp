@@ -27,7 +27,6 @@
 			           class="btn btn-success text-white"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
 			            ${bt.board_type_name}
 			        </a>
-<%-- 			        href="<c:url value='/board/list?board_type_id=${bt.board_type_id}' />"  --%>
 			    </c:forEach>
 			</div>
 			
@@ -43,7 +42,7 @@
 	</div>
 	<!-- 로그인되어 있는 경우만 글쓰기 가능 -->
 	<sec:authorize access = "isAuthenticated()">
-		<button class="btn btn-success" onclick="location='register'">글쓰기</button>
+		<button type="button" class="btn btn-success" onclick="location='register'">글쓰기</button>
 	</sec:authorize>
 </div>
 
@@ -56,7 +55,8 @@
 	<col width="150px">
 	<col width="100px">
 </colgroup>
-<tr><th>번호</th><th>게시판</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
+<tr><th class="text-center">번호</th><th class="text-center">게시판</th><th>제목</th><th class="text-center">작성자</th>
+<th class="text-center">작성일자</th><th class="text-center">조회수</th></tr>
 
 <c:if test="${ empty page.list }">
 	<tr><td colspan="6" class="text-center">게시판 글이 없습니다.</td></tr>
@@ -74,13 +74,12 @@
 
 <c:forEach items="${ page.list }" var="vo">
 <tr>
-	<td>${ vo.no }</td>
-	<td>${ vo.type_name }</td>
-	<td><a class="text-link" href="info?board_id=${ vo.board_id }&board_type_id=${ board_type_id}">${ vo.board_title }</a></td>
-<%-- 	<td><a class="text-link" href="info?board_id=${ vo.board_id }">${ vo.board_title }</a></td> --%>
-	<td>${ vo.board_writer }</td>
-	<td>${ vo.board_writedate }</td>
-	<td>${ vo.board_readcnt }</td>
+	<td class="text-center">${ vo.no }</td>
+	<td class="text-center">${ vo.type_name }</td>
+	<td><a class="text-link" href="javascript:info( ${ vo.board_id } )">${ vo.board_title }</a></td>
+	<td class="text-center">${ vo.board_writer }</td>
+	<td class="text-center">${ vo.board_writedate }</td>
+	<td class="text-center">${ vo.board_readcnt }</td>
 </tr>
 </c:forEach>
 </table>
@@ -113,10 +112,18 @@ function boardType(board_type_id){
 	$("form").submit()
 }
 
-// $("[name=listSize]").on("change", function(){
-// 	$("form").submit()
-// })
-// $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
+function info( board_id ){
+	// form태그에 search, keyword, listSize
+	$("form").append(`<input type="hidden" name="board_id" value="\${board_id}">`)
+			 .append(`<input type="hidden" name="pageNo" value="${page.pageNo}">`)
+			 .attr("action", "info")
+			 .submit();
+}
+
+$("[name=listSize]").on("change", function(){
+	$("form").submit()
+})
+$("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
 
 </script>
 

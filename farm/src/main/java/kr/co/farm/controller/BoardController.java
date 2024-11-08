@@ -1,5 +1,6 @@
 package kr.co.farm.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.farm.board.BoardMapper;
 import kr.co.farm.board.BoardTypeVO;
 import kr.co.farm.board.BoardVO;
+import kr.co.farm.common.CommentVO;
 import kr.co.farm.common.CommonUtility;
 import kr.co.farm.common.PageVO;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +34,52 @@ public class BoardController {
 	
 	private final BoardMapper mapper;
 	private final CommonUtility common;
+	
+	// 댓글 삭제처리 요청
+	@ResponseBody @DeleteMapping("/comment/delete/{id}")
+	public boolean commentDelete(@PathVariable int id) {
+		// 해당 댓글을 DB에서 삭제
+		return mapper.deleteComment(id)==1 ? true : false;
+	}
+	
+	// 댓글 변경 저장처리 요청
+	@ResponseBody @PutMapping("/comment/modify")
+	public HashMap<String, Object> commentModify(CommentVO vo) {
+		// 화면에서 입력한 정보로 DB에 변경저장
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if( mapper.updateComment(vo)==1 ) {
+			map.put("success", true);
+			map.put("message", "수정완료");
+			map.put("content", vo.getContent());
+		} else {
+			map.put("success", false);
+			map.put("message", "수정실패");
+		}
+		
+		return map;
+	}
+	
+	// 댓글 목록 조회 요청
+	@RequestMapping("/comment/list/{id}/{pageNo}")
+	public String commentList( @PathVariable int id, Model model, PageVO page) {
+		// DB에서 해당글의 댓글 목록을 조회해 와서 화면의 페이지에 담기
+		page.setListSize(5);
+		page.setTotalList(mapper.getCountOfComment(id));
+		page.setList(mapper.getListOfComment(id, page));
+		model.addAttribute("page", page);
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		
+		return "board/comment/list";
+	}
+	
+	// 댓글 등록 처리 요청
+	@ResponseBody @PostMapping("/comment/register")
+	public boolean register(CommentVO vo, Authentication auth) {
+		vo.setWriter( auth.getName() );	// 글쓴이 지정
+		
+		return mapper.registerComment(vo)== 1 ? true : false;
+	}
 	
 	// 게시판 삭제처리
 	@DeleteMapping("/delete")
@@ -61,13 +110,15 @@ public class BoardController {
 	
 	// 게시판 정보화면 요청
 	@RequestMapping("/info")
-	public String info(int board_id, Model model, int board_type_id) {
+	public String info(int board_id, Model model, int board_type_id, PageVO page) {
 		// 조회수 증가
 		mapper.updateReadCount(board_id);
-		model.addAttribute("board_type_id", board_type_id);
 		// 선택한 게시판 글을 DB에서 조회해와서 정보화면에 출력할 수 있게 Model 객체에 담기
 		BoardVO vo = mapper.getOneBoard(board_id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("board_type_id", board_type_id);
+		model.addAttribute("page", page);
+		model.addAttribute("crlf", "\r\n");
 		
 		return "board/info";
 	}
