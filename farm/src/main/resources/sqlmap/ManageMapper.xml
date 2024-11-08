@@ -25,22 +25,38 @@
 <!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->
 <select id="countOfUserPlant" resultType="Integer">
 select count(*) from userplant 
-where userid_log = #{userid_log} and plantid_log is null
+where userid_log = #{userid_log} and plantid_log is not null
 </select>
+
+
 
 
 <!-- 전체 작물목록 조회 -->
-
-<!-- 자신이 등록한 작물 빼고 전체 작물 목록조회 -->
 <select id="getListOfManage" resultType="manage">
-select * from plant <if test="userid_log != null">where plant_id not in( select plantid_log from userplant where userid_log = #{userid_log} and plantid_log is not null)</if>
+select * from plant 
 </select>
 
-<!-- 작물 등록 -->
-<insert id="registerUserPlant" >
-insert into userplant (userid_log, plantid_log)
-values ( #{userid_log}, #{plantid_log} )
-</insert>
+<!-- 유저의 디바이스 개수 조회-->
+<select id="countOfUserDevice" resultType="integer">
+select count(*) from plants_data where mac_address = #{mac_address} and userid_log = #{userid_log}
+</select>
+
+<!-- 장치별 식물 목록 가져오기 -->
+<select id="getListOfPlantByDevice" resultType="guide">
+select plant_id, plant_name
+from plant p left outer join userplant d on p.plant_id = d.plantid_log
+where 
+<choose>
+<when test="plant_id == -1">
+p.plant_id not in (select plantid_log from userplant 
+					where userid_log = #{userid_log} and plantid_log is not null )
+</when> 
+<otherwise>
+d.plantid_log = #{plant_id}
+</otherwise>
+</choose>
+order by plant_name 
+</select>
 
 <!-- 자신이 등록한 작물 정보 조회 -->
 <select id="getUserPlants" resultType="manage">
@@ -64,23 +80,32 @@ select * from userplant
 </select>
 
 
-<!-- 디바이스 조회 -->
-<select id="getListOfDeviceNotMatch" resultType="manage">
-select * from userplant where userid_log is null
-</select>
-<!-- 디바이스 조회 -->
+<!-- 관리자를 제외한 유저목록 조회 -->
 <select id="getListOfMember" resultType="member">
 select * from member where role = upper('user')
 </select>
 
-<!-- 디바이스 등록 -->
-<insert id="registerDevice">
+<!-- 관리자 디바이스 등록 -->
+<update id="registerDevice">
 update userplant set userid_log = #{userid} 
 where mac_address = #{mac_address}
-</insert>
-<!-- 디바이스 연결해제 -->
+</update>
+<!-- 관리자 디바이스 연결해제 -->
 <update id="updateDeviceDisconn">
 update userplant set userid_log = null, plantid_log = null where mac_address = #{mac_address}
 </update>
+
+<!-- 사용자 디바이스 연결해제 -->
+<update id="updateUserDeviceDisconn">
+update userplant set plantid_log = null where mac_address = #{mac_address}
+</update>
+
+<!-- 사용자가 디바이스와 작물 연결등록 -->
+<update id="registerUserPlant">
+update userplant set plantid_log = #{plant_id} where mac_address = #{mac_address}
+ 
+</update>
+
+
 
 </mapper>

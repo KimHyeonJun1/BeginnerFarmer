@@ -5,8 +5,8 @@
 
 <insert id="arduinoSave" >
 insert into plants_log(mac_address, temperature, humid, bright, moisture, userid, plant_id )
-values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid from device where mac_address = #{mac_address}),
- (select plant_id from device where mac_address = #{mac_address}) ) 
+values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid_log from userplant where mac_address = #{mac_address}),
+ (select plantid_log from userplant where mac_address = #{mac_address}) ) 
 </insert>
 
 <update id="arduinoUpdate" >

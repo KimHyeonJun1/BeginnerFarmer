@@ -96,9 +96,9 @@ display: grid;
 		
 		<div class="item text-center"><h4 class="mb-3">현재 상태</h4>
 			<div class="d-flex">
-			<div class="box4">
+			<div class="speech-bubble">
    				 <c:if test="${not empty conditionMessage}">
-      				  <h3 class="mt-2 result-message">${conditionMessage}</h3>
+      				  <h5 class="mt-2 result-message">${conditionMessage}</h5>
    				 </c:if>
 			</div>
 			</div>

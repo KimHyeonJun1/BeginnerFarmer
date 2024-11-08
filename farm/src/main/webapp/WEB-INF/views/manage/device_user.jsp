@@ -12,7 +12,7 @@
 
 <div class="box">
 
-<form method="post" action="device">
+<form method="post" action="device_user_conn">
 <table class="table tb-row">
 <colgroup>
     <col width="200px">
@@ -29,7 +29,7 @@
     </c:if>
     	<option value="">제품선택</option>
          <c:forEach items="${deviceList}" var="p">
-         <option value="${p.mac_address}" data-id="${p.userid_log }">${p.device_numb}</option>
+         <option value="${p.mac_address}" data-id="${p.plantid_log }">${p.device_numb}</option>
          </c:forEach>
       </select>
     </div>
@@ -39,14 +39,9 @@
     <td><div class="row">
     <div class="col-auto">
    <div class="col-auto d-flex align-items-center flex-column">
-      <select class="form-select w-px250 mt-3"  name="userid" id="select-plant">
+      <select class="form-select w-px250 mt-3"  name="plant_id" id="select-plant">
          <option value="-1">작물선택</option>
-         <c:if test="${! empty deviceList}">
-         <c:forEach items="${plant}" var="p">
-         <option value="${p.plant_id}">${p.plant_name}</option>
-         </c:forEach>
-         </c:if>
-         
+
       </select>
         </div>
    </div>
@@ -59,7 +54,7 @@
 <div class="btn-toolbar justify-content-center gap-2">
     <button type="submit" class="btn btn-primary px-4 d-none" id="btn-save">연결</button>
     <button type="submit" class="btn btn-primary px-4 d-none" id="btn-no">해제</button>
-    <button type="button" class="btn btn-outline-primary px-4" onclick="location='list'">취소</button>
+    <button type="button" class="btn btn-outline-primary px-4" onclick="location='info'">뒤로가기</button>
 </div>
 
 </div>
@@ -68,41 +63,55 @@
 
 <script>
 
-$("#select-mac_address").on("change", function(){ 
-	var userid = $("#select-mac_address option:selected").data("id")
-	 userid = userid == "" ? -1 : userid
-	console.log(userid)
-	if(userid== -1 ){
+$("#select-plant").on("change", function(){
+	if ($(`#select-plant`).val() == -1   ) return
+	if($("#select-mac_address option:selected").data("id") == 0 ){
 		$("#btn-save").removeClass("d-none")
 		$("#btn-no").addClass("d-none")
-		$(`#select-userid option`).removeClass("d-none")
 		
 	}else{
 		$("#btn-no").removeClass("d-none")
 		$("#btn-save").addClass("d-none")
 		
-		$(`#select-userid option`).addClass("d-none")
-		$(`#select-userid option[value=\${userid}]`).removeClass("d-none")
 	}
+	
+})
+$("#select-mac_address").on("change", function(){ 
+	var plant_id = $("#select-mac_address option:selected").data("id")
+	 plant_id = plant_id == "" ? -1 : plant_id
+// 	console.log(plant_id)
+// 			 console.log( $("#select-plant option:eq(0)").nextAll($("#select-plant option")).html())
+			 $(`#select-plant`).empty()
+		$.ajax({
+			url: "device-plant",
+			data: {mac_address:$("#select-mac_address").val(), plant_id:plant_id}
+			
+		})
+			.done(function(response){
+				console.log(response)
+				var option = `<option value="-1">작물선택</option>`;
+				for( var item of response ){
+				option += ` <option value="\${item.plant_id}">\${item.plant_name}</option>`
+					
+				}
+				$(`#select-plant`).append( option)
+			})
 		
-		
-		
-	$(`#select-userid option[value=\${userid}]`).prop("selected", true)
+	$(`#select-plant option[value=\${plant_id}]`).prop("selected", true)
 })
 
 $("#btn-save").on("click", function(){
-	if($(`#select-userid`).val()==-1)
-		alert("사용자를 선택하세요")
+	if($(`#select-plant`).val()==-1)
+		alert("작물을 선택하세요")
 		else{
    $("form").submit();
 			
 		}
 })
 
-$("#btn-no").on("click", function(){
-	
-	
-$("form").attr("action", "device-disconn").submit();
+$("#btn-no").on("click", function(){	
+	if(confirm("정말 해제하시겠습니까?"))
+$("form").attr("action", "device-disconn_user").submit();
 })
 
 $("#btn-cancel").on("click", function(){

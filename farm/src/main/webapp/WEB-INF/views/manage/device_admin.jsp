@@ -12,7 +12,7 @@
 
 <div class="box">
 
-<form method="post" action="device">
+<form method="post" action="device_admin_conn">
 <table class="table tb-row">
 <colgroup>
     <col width="200px">
@@ -94,12 +94,34 @@ $("#btn-save").on("click", function(){
    $("form").submit();
 			
 		}
+// 	location='device_admin';
 })
 
+
 $("#btn-no").on("click", function(){
-	
-	
+	if(confirm("정말 해제하시겠습니까?")){
+	 	$.ajax({
+	 		url: "device-user",
+	 		data: {mac_address:$("#select-mac_address").val(), userid:$("#select-userid").val()}
+	 	})
+	 		.done(function(response){
+	 			console.log(response)
+	 			if(response){
+	 				if(confirm("실제 사용중인 장비입니다. \n정말 해제하시겠습니까?")){
+	 					
    $("form").attr("action", "device-disconn").submit();
+	 				}
+	 			}
+	 			else{
+   $("form").attr("action", "device-disconn").submit();
+	 				
+	 			}
+	 		})
+	 			
+		
+	}
+	
+//    location='device_admin';
 })
 
 $("#btn-cancel").on("click", function(){

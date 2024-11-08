@@ -21,20 +21,19 @@
 </style>
 <body>
 <div class="d-flex justify-content-between mt-2 mb-5">
-<h3 class="my-2">선택화면</h3>
-<button class="btn btn-success me-5" id="d-insert">디바이스 등록</button>
+<h3 class="my-2">작물관리</h3>
 </div>
 <div class="box">
 <div class="d-flex btn-toolbar gap-2 justify-content-center mt-5">
-   <button class="btn btn2 btn-outline-success px-4" id="btn-delete" >삭제</button>
-   <button class="btn btn1 btn-success px-4" id="btn-insert">추가</button>
+<button class="btn btn1 btn-success me-5" id="d-insert">디바이스 관리</button>
 </div>
 
 <div class="row mb-3 justify-content-center">
    <div class="col-auto d-flex align-items-center flex-column">
       <label class="ml-5 me-2 fs-4 mb-3 ">관리할 작물을 선택하세요</label>
       <select class="form-select w-px350 mt-3"  name="plant_id" id="select-plant">
-         <option value="${plantid_log}">선택</option>
+         <option value="">선택</option>
+<%--          <option value="${plantid_log}">선택</option> --%>
          <c:forEach items="${plant}" var="p">
          <option  <c:if test="${vo.plant_id eq p.plant_id}">selected</c:if> value="${p.plant_id}">${p.plant_name}</option>
          </c:forEach>
@@ -62,21 +61,21 @@ $("#select-plant").change(function() {
 });
 
 
-$("#btn-insert").on("click", function(){
-	location='register';
-})
+// $("#btn-insert").on("click", function(){
+// 	location='register';
+// })
 	
-$("#btn-delete").on("click", function(){
-	var plantid = $(`[name=plant_id] option:selected`).val();
-	$("<form method='post' action='delete'></form>")
-	.appendTo("body")
-	.append(`<input type="hidden" name="_method" value="delete">`)
-	.append(`<input type="hidden" name="plantid_log" value="\${plantid}">`)
-	.submit();
-})
+// $("#btn-delete").on("click", function(){
+// 	var plantid = $(`[name=plant_id] option:selected`).val();
+// 	$("<form method='post' action='delete'></form>")
+// 	.appendTo("body")
+// 	.append(`<input type="hidden" name="_method" value="delete">`)
+// 	.append(`<input type="hidden" name="plantid_log" value="\${plantid}">`)
+// 	.submit();
+// })
 
 $("#d-insert").on("click", function(){
-	location='device';
+	location='device_user';
 })
 </script>
 
