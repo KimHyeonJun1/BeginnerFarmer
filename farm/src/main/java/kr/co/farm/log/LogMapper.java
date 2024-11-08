@@ -18,6 +18,10 @@ public interface LogMapper   {
 //	List<HashMap<String, Object>> getCountByMoisture();	//토양습도
 //	List<HashMap<String, Object>> getCountByBright();	//조도
 	
+	
+
+	
+	
 	// 온습조도 정보조회
 	TemperatureVO getOneTemperature(String userid_log, int plantid_log);
 	

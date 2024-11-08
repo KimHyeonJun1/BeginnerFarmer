@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.farm.arduino.ArduinoMapper">
+
+
+<insert id="arduinoSave" >
+insert into plants_log(mac_address, temperature, humid, bright, moisture, userid, plant_id )
+values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid_log from userplant where mac_address = #{mac_address}),
+ (select plantid_log from userplant where mac_address = #{mac_address}) ) 
+</insert>
+
+<update id="arduinoUpdate" >
+{
+	call pr_plants_data( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture} )
+}
+<!--  
+insert into plants_data(mac_address, temperature, humid, bright, moisture, userid,plant_id   )
+values(#{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid from device where mac_address = #{mac_address}),
+ (select plant_id from device where mac_address = #{mac_address}))
+-->
+</update>
+
+<select id="getOneRelay" resultType="log">
+select * from plants_data where mac_address = #{mac_address}
+</select>
+
+
+</mapper>

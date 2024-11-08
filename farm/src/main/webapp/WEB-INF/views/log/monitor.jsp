@@ -27,7 +27,7 @@ justfiy-content: center;
 <h3 class="my-2">실시간모니터링</h3>
 	
 <div class="d-flex justify-content-center mb-3">	
-<h3 class="mb-4 fs-10 me-5">${vo.plant_name}가 자라고 있어요 !</h3>
+<h3 class="mb-4 fs-10 me-5">${vo.plant_name} 자라고 있어요 !</h3>
 <form method="post" action="monitor">
 <select class=" form-select w-px150 gap-4" name="plant_id" id="select-plant" onchange="submit()">
          <option value="${plantid_log}">${vo.plant_name}</option>
@@ -67,6 +67,7 @@ $("#select-plant").change(function() {
             }
         });
 });
+
 </script>	
 	
 	

@@ -1,6 +1,5 @@
 package kr.co.farm.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -62,6 +61,10 @@ public class LogController {
 		List<ManageVO> plant = manageMapper.getUserPlants(userid_log); 
 		model.addAttribute("plant", plant); 
 		
+		//온/습/조도 정보 조회
+		TemperatureVO temp = mapper.getOneTemperature(userid_log, plantid_log);
+		model.addAttribute("temp", temp);
+		
 		ManageVO selectedPlant = manageMapper.getPlantInfo(userid_log, plantid_log); 
 		model.addAttribute("vo", selectedPlant);
 		
@@ -71,7 +74,7 @@ public class LogController {
 	
 	
 	
-	
+	// 온도/습도/조도 화면
 	@RequestMapping("/temperature")
 	public String LogTemperature(Authentication user, Model model, HttpSession session) {
 		if(user == null) {
@@ -83,10 +86,10 @@ public class LogController {
 			return "redirect:/manage/list"; // 선택된 plantid_log가 없으면 info 페이지로 리다이렉트
 		}
 		
-
 		//사용자의 등록된 작물목록 조회
 		List<ManageVO> plant = manageMapper.getUserPlants(userid_log); 
 		model.addAttribute("plant", plant); 
+		
 		
 		//온/습/조도 정보 조회
 		TemperatureVO temp = mapper.getOneTemperature(userid_log, plantid_log);
@@ -95,9 +98,33 @@ public class LogController {
 		//플랜테이블 정보 조회
 		GuideVO standardInfo = mapper.getPlantStandardInfo(plantid_log);
 		model.addAttribute("vo", standardInfo);
+		if(temp != null) {
+			String message = "";
+			
+			// 온도와 습도 상태 메시지 생성
+			if (temp.getTemperature() > standardInfo.getStandard_temp()) {
+				message += "적정온도 보다 높습니다." + "<br>";
+			} else if (temp.getTemperature() < standardInfo.getStandard_temp()) {
+				message += "적정온도 보다 낮습니다."  + "<br>";
+			} else {
+				message += "적정온도입니다."  + "<br>";
+			}
+			
+			// 습도 상태 메시지 생성
+			if (temp.getHumid() > standardInfo.getStandard_hum()) {
+				message += "적정습도 보다 높습니다.";
+			} else if (temp.getHumid() < standardInfo.getStandard_hum()) {
+				message += "적정습도 보다 낮습니다.";
+			} else {
+				message += "적정습도입니다.";
+			}
+			
+			// 결과 메시지를 모델에 추가
+			model.addAttribute("conditionMessage", message.trim());
 		
 		
 		
+		}
 		session.setAttribute("category", "te");
 		return "log/temperature";
 	}
