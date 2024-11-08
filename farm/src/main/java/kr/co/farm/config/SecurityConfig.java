@@ -43,8 +43,19 @@ public class SecurityConfig {
 	//보안 필터 체인 - 인증,인가를 위한 필터들의 모음
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		
+		//작물가이드(guide), 주간농사정보(weekInfo), 농업기술동영상(video) : 모든 접근허용
+		// 게시판, 공지글(목록,정보) : 모든 접근 허용 | 하지만 관찰일지(목록,조회)는 사용자 권한 필요
+		// 공지글(notice) : 관리자 권한 필요
+		// 게시판, 관찰일지 작성 : 사용자 권한 필요 
+		
 		http.authorizeRequests()
-			.antMatchers("/**").permitAll() //모든 요청에 대한 접근 허용
+//			.antMatchers("/**").permitAll() //모든 요청에 대한 접근 허용
+			.antMatchers("/guide/**", "/weekInfo/**", "/video/**").permitAll()
+			.antMatchers("/board/list", "/board/info","/notice/list", "/notice/info").permitAll()
+			.antMatchers("/notice/register").hasAnyAuthority("ADMIN")
+			.antMatchers("/**/register").hasAnyAuthority("USER")
+	
 		
 			//스프링시큐리티 로그인 적용하기
 			.and()

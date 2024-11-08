@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: farm_app
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: ${oracle.url}
+    username: ${oracle.username}
+    password: ${oracle.password}
+  config:
+    import: classpath:info.yml		
+server:
+  port: 8082
+  servlet:
+    context-path: /app		
+#메퍼파일 위치 지정
+mybatis:
+    mapper-locations: classpath:sqlmap/*Mapper.xml
+    config-location: classpath:sqlmap/typeConfig.xml 

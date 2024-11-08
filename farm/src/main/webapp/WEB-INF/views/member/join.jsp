@@ -11,11 +11,11 @@
 	<div class="row justify-content-center">
 			<div class="card shadow-lg border-0 rounded-lg my-5">
 				<div class="card-body p-5">
-					<div class="d-flex justify-content-between">
-						<a href="<c:url value='/' />"> <img
-							src="<c:url value='/img/join.png' />"></a>
+					<div class="d-flex justify-content-center">
+						<a href="<c:url value='/' />"> 
+						<img width="400" height="200" src="<c:url value='/img/logogo1.png'/>"> </a>
 					</div>
-						<h3 class="my-4">회원가입</h3>
+<!-- 						<h3 class="my-4">회원가입</h3> -->
 
 					<div class="mb-2 text-danger fw-bold">* 는 필수입력항목입니다</div>
 					<form method="post" action="register" enctype=multipart/form-data>
@@ -49,7 +49,7 @@
 											<a class="btn btn-success" id="btn-userid">중복확인</a>
 										</div>
 										<div class="col-auto desc fw-bold"></div>
-										<div class="mt-2">아이디는 영문 소문자나 숫자 5자~10자</div>
+										<div class="d-flex mt-2">아이디는 영문 소문자나 숫자 5자~10자</div>
 									</div>
 								</td>
 							</tr>
