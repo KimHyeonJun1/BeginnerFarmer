@@ -22,9 +22,9 @@
 		</div>
 	</form>
 	<!-- 관리자로 로그인되어 있는 경우만 글쓰기 가능 -->
-<%-- 	<c:if test="${ loginInfo.role == 'ADMIN' }"> --%>
-	<button class="btn btn-success" onclick="location='register'">글쓰기</button>
-<%-- 	</c:if> --%>
+	<sec:authorize access="hasAuthority('ADMIN')">
+		<button class="btn btn-success" onclick="location='register'">글쓰기</button>
+	</sec:authorize>
 </div>
 <table class="table tb-list">
 <colgroup>

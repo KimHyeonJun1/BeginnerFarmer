@@ -9,7 +9,6 @@ import kr.co.farm.common.PageVO;
 @Mapper
 public interface NoticeMapper {
 	int registerNotice(NoticeVO vo);			// 신규 공지글 등록
-	List<NoticeVO> getListOfNotice();	// 공지글 목록조회
 	List<Object> getListOfNotice(PageVO page);	// 공지글 목록조회
 	NoticeVO getOneNotice(int id);				// 공지글 정보조회
 	int updateNotice(NoticeVO vo);				// 공지글 정보변경저장
