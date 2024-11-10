@@ -39,7 +39,7 @@ public class FarmController {
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model, PageVO page) {
 		session.setAttribute("category", "home");
-		page.setListSize(4);
+		page.setListSize(6);
 
 		//농사로에서 농업기술동영상 리스트 조회
 		StringBuffer url = new StringBuffer(videoListURL);
