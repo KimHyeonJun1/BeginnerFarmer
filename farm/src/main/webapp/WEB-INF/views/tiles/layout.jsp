@@ -68,7 +68,13 @@
   <!-- summer note js -->
   <script src="<c:url value='/js/summernote/summernote-lite.js' />"></script>
   <script src="<c:url value='/js/summernote/lang/summernote-ko-KR.js' />"></script>
-  
+
+  <script>
+	var socketURL = 
+			`ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/notify-websocket`
+	var authID = `${auth_user.userid}`	
+	var context = `${pageContext.request.contextPath}`	
+  </script>
 
   
   <!-- Main CSS File -->
@@ -86,6 +92,10 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  
+  
 </head>
 
 <body class="index-page">
@@ -157,6 +167,17 @@
 	                         <a href="#!">${auth_user.name}님</a>
 
                  </c:if>
+                 
+                 <li class="nav-item dropdown me-5">
+					<a id="notify" class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">	
+						<span>
+							<i class="fs-3 fa-regular fa-bell mb-2"></i></span>
+						<span id="notify-count" class="notify-on"></span> 
+					</a>
+					
+					<div id="dropdown-list" class="w-px300 dropdown-menu dropdown-menu-end"></div>
+				</li>
+
 
        	 	</c:if>
       	 </ul>
