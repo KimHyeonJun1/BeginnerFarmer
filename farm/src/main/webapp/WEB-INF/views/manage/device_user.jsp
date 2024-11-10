@@ -111,7 +111,7 @@ $("#btn-save").on("click", function(){
 
 $("#btn-no").on("click", function(){	
 	if(confirm("정말 해제하시겠습니까?"))
-// $("form").attr("action", "device-disconn_user").submit();
+$("form").attr("action", "device-disconn_user").submit();
 // })
 
 
@@ -129,7 +129,7 @@ $("#btn-no").on("click", function(){
     });
 
     // 폼 제출 (해제 처리로 전송)
-    $("form").attr("action", "device-disconn_user").submit();
+//     $("form").attr("action", "device-disconn_user").submit();
 });
 
 
