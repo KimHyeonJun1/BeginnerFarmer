@@ -159,7 +159,7 @@
     	      <c:if test="${not empty auth_user and auth_user.role == 'ADMIN'}">
 		          <li class="dropdown"><a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}" href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
 		            <ul>
-		                <li><a href="<c:url value='/manage/list'/>">제품등록</a></li>
+		                <li><a href="<c:url value='/manage/list'/>">제품관리</a></li>
 		            </ul>
 		          </li>
 	          </c:if>
