@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
-
+                            	
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +10,15 @@
 <title>초보농부 ${title}</title>
 <style>
 /* 	동영상 */
+
+ /* 부모 컨테이너 스타일 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); 
+            gap: 25px; /* 각 동영상 간 간격 */
+            margin: auto;
+            padding: 30px;
+        }
      /* 각 동영상 카드 스타일 */
     .video-item {
         background-color: #f9f9f9;
@@ -70,8 +78,6 @@
 
         /* 각 그리드 설정 */
         .grid-item {
-/*             border: 1px solid #000; /* 각 그리드의 실선 */ */
-/*             padding: 30px; */
             margin: 30px;
             height: 200px; /* 높이 설정 */
         }
@@ -127,9 +133,25 @@
 					    transition: background-color 0.3s ease; /* 마우스 오버 시 배경색 변화 효과 */
 						}
 
-.crop-btn:hover {
-    background-color: #155d41; /* 마우스 오버 시 배경색 변화 */
-}
+			.crop-btn:hover {
+			    background-color: #155d41; /* 마우스 오버 시 배경색 변화 */
+			}
+		
+			.rowgroup2 {
+		    position: relative;
+		    background-color: #f3fbf8;
+		    padding-bottom: 80px !important;
+		    }
+		    
+		    .center-content {
+		    display: flex;
+		    justify-content: center; /* 가로 중앙 정렬 */
+		    align-items: center; /* 세로 중앙 정렬 */
+		    text-align: center; /* 텍스트 가운데 정렬 */
+		    width: 100%; /* 가로로 부모 요소의 전체를 채우기 */
+		    height: 100%; /* 부모 요소에 맞게 높이 설정 */
+		}
+
 }
 
 </style>
@@ -138,128 +160,102 @@
         
  <div id="page-content-wrapper">
    <div class="container-fluid">
+ 
+<!-- 메인이미지 Session   -->
+<section id="hero" class="hero section dark-background1">
+
+  <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+    <div class="carousel-item active">
+      <img src="<c:url value='/img/hero-1.png'/>" alt="초보농부-1">
+    </div>
+
+    <div class="carousel-item">
+      <img src="<c:url value='/img/hero-2.png'/>" alt="초보농부-2">
+    </div>
+
+    <div class="carousel-item">
+      <img src="<c:url value='/img/hero-3.png'/>" alt="초보농부-3">
+    </div>
+
+    <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+    </a>
+
+    <ol class="carousel-indicators"></ol>
+
+  </div>
+
+</section>
+
+<!-- 농업기술 동영상 Section     -->
+ <section class="rowgroup2 ">
+	<div class="center-content">
+        <h1>영상으로 보는 농업기술</h1>
+    </div>
+	<div class="video-grid mt-5">
+		<c:forEach items="${ videoList.items.item }" var="item">
+		    
+		    <div class="video-item">
+	            <div class="video-thumbnail"> <a target="_blank" href="${ item.videoLink }"><img alt="" src="${item.videoImg}"></a>  </div>
+	            <div class="video-title">${item.videoTitle}</div>
+	        </div>
+	        
+		</c:forEach>
+	</div>
+</section>
     
-    <section id="hero" class="hero section dark-background1">
-
-      <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-
-        <div class="carousel-item active">
-          <img src="<c:url value='/img/hero-1.png'/>" alt="초보농부-1">
-        </div>
-
-        <div class="carousel-item">
-          <img src="<c:url value='/img/hero-2.png'/>" alt="초보농부-2">
-        </div>
-
-        <div class="carousel-item">
-          <img src="<c:url value='/img/hero-3.png'/>" alt="초보농부-3">
-        </div>
-
-        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
-
-        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-        <ol class="carousel-indicators"></ol>
-
-      </div>
-	
-    </section>
-    
-<div class="mt-5">
-    
-	<div class="container_1">
-        <!-- 첫 번째 그리드: 작물 추천 -->
-        <div class="grid-item grid-item-1">
-	        <img src="<c:url value='/img/bubble.png'/>" alt="작물추천 말풍선">
-        </div>
-        
-        
-<!--         <div class="grid-item grid-item-1"> -->
-<!--             <div>작물 추천</div> -->
-<!--         </div> -->
-        
-
-        <!-- 두 번째 그리드: 초보 및 작물 목록 -->
-        <div class="grid-item grid-item-2 ">
-            <div class="text-top">초보</div>
-            <div class="items ">
-<!--             	<a href="guide/info?plant_id=1" style="text-decoration: none;"><button class="crop-btn">상추</button></a> -->
-            	<button class="crop-btn">상추</button>
-		        <button class="crop-btn">깻잎</button>
-		        <button class="crop-btn">부추</button>
-		        <button class="crop-btn">시금치</button>
-                
-            </div>
-        </div>
-
-        <!-- 세 번째 그리드: 초보 및 작물 목록 -->
-        <div class="grid-item grid-item-3">
-            <div class="text-top">중수</div>
-            <div class="items">
-            	<button class="crop-btn">배추</button>
-		        <button class="crop-btn">케일</button>
-		        <button class="crop-btn">파</button>
-		        <button class="crop-btn">방울토마토</button>
-            </div>
-        </div>
-
-        <!-- 네 번째 그리드: 초보 및 작물 목록 -->
-        <div class="grid-item grid-item-4">
-            <div class="text-top">고수</div>
-            <div class="items">
-            	<button class="crop-btn">고추</button>
-		        <button class="crop-btn">오이</button>
-		        <button class="crop-btn">딸기</button>
-		        <button class="crop-btn">가지</button>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<div class="container_2 mt-5">
-
-
-	<c:forEach items="${ videoList.items.item }" var="item">
+<!-- 난이도별 작물 추천 Section -->
+<section> 
+	<div class="mt-5">
 	    
-	    <div class="video-item">
-            <div class="video-thumbnail"> <a target="_blank" href="${ item.videoLink }"><img alt="" src="${item.videoImg}"></a>  </div>
-            <div class="video-title">${item.videoTitle}</div>
-        </div>
-        
-	</c:forEach>
+		<div class="container_1">
+	        <!-- 첫 번째 그리드: 작물 추천 -->
+	        <div class="grid-item grid-item-1">
+		        <img src="<c:url value='/img/bubble.png'/>" alt="작물추천 말풍선">
+	        </div>
+	        
+	        <!-- 두 번째 그리드: 초보 및 작물 목록 -->
+	        <div class="grid-item grid-item-2 ">
+	            <div class="text-top">초보</div>
+	            <div class="items ">
+	            	<button class="crop-btn">상추</button>
+			        <button class="crop-btn">깻잎</button>
+			        <button class="crop-btn">부추</button>
+			        <button class="crop-btn">시금치</button>
+	                
+	            </div>
+	        </div>
+	
+	        <!-- 세 번째 그리드: 초보 및 작물 목록 -->
+	        <div class="grid-item grid-item-3">
+	            <div class="text-top">중수</div>
+	            <div class="items">
+	            	<button class="crop-btn">배추</button>
+			        <button class="crop-btn">케일</button>
+			        <button class="crop-btn">파</button>
+			        <button class="crop-btn">방울토마토</button>
+	            </div>
+	        </div>
+	
+	        <!-- 네 번째 그리드: 초보 및 작물 목록 -->
+	        <div class="grid-item grid-item-4">
+	            <div class="text-top">고수</div>
+	            <div class="items">
+	            	<button class="crop-btn">고추</button>
+			        <button class="crop-btn">오이</button>
+			        <button class="crop-btn">딸기</button>
+			        <button class="crop-btn">가지</button>
+	            </div>
+	        </div>
+	    </div>    
+	</div>
+ </section>
 
-<!--     두 번째 유튜브 영상 스타일 아이템 -->
-<!--     <div class="video-item"> -->
-<!--         <div class="video-thumbnail"> -->
-<!--             <img src="thumbnail2.jpg" alt="Thumbnail 2"> -->
-<!--         </div> -->
-<!--         <div class="video-title">영상 제목 2</div> -->
-<!--     </div> -->
-
-<!--     세 번째 유튜브 영상 스타일 아이템 -->
-<!--     <div class="video-item"> -->
-<!--         <div class="video-thumbnail"> -->
-<!--             <img src="thumbnail3.jpg" alt="Thumbnail 3"> -->
-<!--         </div> -->
-<!--         <div class="video-title">영상 제목 3</div> -->
-<!--     </div> -->
-
-<!--     네 번째 유튜브 영상 스타일 아이템 -->
-<!--     <div class="video-item"> -->
-<!--         <div class="video-thumbnail"> -->
-<!--             <img src="thumbnail4.jpg" alt="Thumbnail 4"> -->
-<!--         </div> -->
-<!--         <div class="video-title">영상 제목 4</div> -->
-<!--     </div> -->
-</div>
-
-
-
-    
 
     <!-- Services Section -->
     <section id="services" class="services section">

@@ -68,7 +68,13 @@
   <!-- summer note js -->
   <script src="<c:url value='/js/summernote/summernote-lite.js' />"></script>
   <script src="<c:url value='/js/summernote/lang/summernote-ko-KR.js' />"></script>
-  
+
+  <script>
+	var socketURL = 
+			`ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/notify-websocket`
+	var authID = `${auth_user.userid}`	
+	var context = `${pageContext.request.contextPath}`	
+  </script>
 
   
   <!-- Main CSS File -->
@@ -86,6 +92,10 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  
+  
 </head>
 
 <body class="index-page">
@@ -119,6 +129,8 @@
               <li><a href="<c:url value='/notice/list'/>">공지사항</a></li>
             </ul>
           </li>
+          
+          <c:if test="${empty auth_user  }"  >
           <li class="dropdown"><a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}" href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
                 <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
@@ -128,6 +140,31 @@
 				<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
             </ul>
           </li>
+          </c:if>
+          
+          <c:if test="${not empty auth_user  }"  >
+	          <c:if test="${not empty auth_user and auth_user.role == 'USER' }"  >
+	          	
+		          <li class="dropdown"><a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}" href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+		            <ul>
+		                <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
+						<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
+						<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+						<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
+						<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
+		            </ul>
+		          </li>
+	          </c:if>
+          
+    	      <c:if test="${not empty auth_user and auth_user.role == 'ADMIN'}">
+		          <li class="dropdown"><a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}" href="/farm/manage/list"><span>나의농장</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+		            <ul>
+		                <li><a href="<c:url value='/manage/list'/>">제품등록</a></li>
+		            </ul>
+		          </li>
+	          </c:if>
+          </c:if>
+          
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -157,6 +194,17 @@
 	                         <a href="#!">${auth_user.name}님</a>
 
                  </c:if>
+                 
+                 <li class="nav-item dropdown me-5">
+					<a id="notify" class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">	
+						<span>
+							<i class="fs-3 fa-regular fa-bell mb-2"></i></span>
+						<span id="notify-count" class="notify-on"></span> 
+					</a>
+					
+					<div id="dropdown-list" class="w-px300 dropdown-menu dropdown-menu-end"></div>
+				</li>
+
 
        	 	</c:if>
       	 </ul>
@@ -176,7 +224,6 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <c:if test="${ category != 'home' }">
-
 
 	<div class="bg-light border-end" id="sidebar-wrapper" style="width: 200px;">
         <div class="list-group list-group-flush">
