@@ -101,7 +101,7 @@ $("#btn-save").on("click", function(){
 $("#btn-no").on("click", function(){
 	if(confirm("정말 해제하시겠습니까?")){
 	 	$.ajax({
-	 		url: "device-user",
+	 		url: "device_user",
 	 		data: {mac_address:$("#select-mac_address").val(), userid:$("#select-userid").val()}
 	 	})
 	 		.done(function(response){

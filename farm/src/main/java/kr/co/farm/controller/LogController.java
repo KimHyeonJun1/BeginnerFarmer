@@ -27,12 +27,21 @@ public class LogController {
 	private final ManageMapper manageMapper;
 	private final LogMapper mapper;
 	
+	//세션에 선택한 작물 정보 저장
 	@PostMapping("/saveSelectedPlant")
 	@ResponseBody
 	public void saveSelectedPlant(@RequestParam("plantid_log") int plantid_log, HttpSession session) {
 		session.setAttribute("plantid_log", plantid_log);
 		
 	}
+	//세션에 선택한 작물 정보 삭제
+	@PostMapping("/removeSelectedPlant")
+	@ResponseBody
+	public void removeSelectedPlant(HttpSession session) {
+	    // 세션에서 plantid_log 속성 제거
+	    session.removeAttribute("plantid_log");
+	}
+	
 	
 	@RequestMapping("/water_management")
 	public String LogWaterManagement(Authentication user, HttpSession session, Model model,  PageVO page) {

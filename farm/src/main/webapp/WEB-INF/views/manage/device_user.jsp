@@ -111,8 +111,28 @@ $("#btn-save").on("click", function(){
 
 $("#btn-no").on("click", function(){	
 	if(confirm("정말 해제하시겠습니까?"))
-$("form").attr("action", "device-disconn_user").submit();
-})
+// $("form").attr("action", "device-disconn_user").submit();
+// })
+
+
+ // 서버에 해제 상태를 알리는 Ajax 요청
+    $.ajax({
+        type: "POST",
+        url: "/farm/log/removeSelectedPlant",
+        data: { mac_address: $("#select-mac_address").val() },  // 필요한 데이터 추가
+        success: function(response) {
+            console.log("서버에서 연결 해제 완료");
+        },
+        error: function() {
+            console.error("서버에서 연결 해제 실패");
+        }
+    });
+
+    // 폼 제출 (해제 처리로 전송)
+    $("form").attr("action", "device-disconn_user").submit();
+});
+
+
 
 $("#btn-cancel").on("click", function(){
    location='info';
