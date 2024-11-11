@@ -26,7 +26,7 @@ where board_id = #{board_id}
 <!-- 미확인 댓글 읽음(확인) 처리 -->
 <update id="updateUncheckedComment">
 update board_comment
-set notify=1
+set notify = 1
 where notify = 0
 and board_id in ( select board_id from board where board_writer = #{userid} )
 

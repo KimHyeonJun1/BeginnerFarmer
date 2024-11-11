@@ -128,6 +128,9 @@ textarea.form-control { resize: none; height:250px }
 .me-6 {
 	margin-right: 140px; 
 }
+.me-7 {
+	margin-right: 180px; 
+}
 
 .box {
     width: 50%;

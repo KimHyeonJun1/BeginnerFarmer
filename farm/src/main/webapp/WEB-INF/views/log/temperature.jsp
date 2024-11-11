@@ -153,8 +153,8 @@ display: grid;
 				</div>
 			</div>
 			</div>
-		<div class="item">
-			<div class="d-flex">
+<!-- 		<div class="item"> -->
+			<div class="d-flex justify-content-center me-7">
 				<div class="box3">
 				
 					<div>
@@ -164,16 +164,16 @@ display: grid;
 				
 				
 				</div>
-				<div class="box3">
+<!-- 				<div class="box3"> -->
 				
-					<div>
-  						<canvas id="myChart_bright"></canvas>
-					</div>
+<!-- 					<div> -->
+<%--   						<canvas id="myChart_bright"></canvas> --%>
+<!-- 					</div> -->
 				
 				
-				</div>
+<!-- 				</div> -->
 			</div>
-		</div>
+<!-- 		</div> -->
 		
 
 			

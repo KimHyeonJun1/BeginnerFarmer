@@ -277,9 +277,8 @@
             </div>
            
            
-           
             <!-- 메인 카테고리 3 -->
-            <c:if test="${ not empty auth_user and auth_user.role == 'USER' }">
+            <c:if test="${  empty auth_user or auth_user.role == 'USER' }">
             <a class="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'active' : ''}
             			list-group-item list-group-item-action list-group-item-light dropdown-toggle" data-bs-toggle="collapse" href="#category3" role="button"
             			aria-expanded="${ category eq 'ma' || category eq 'mo' || category eq 'te' || category eq 'wa' || category eq 'di' ? 'true' : 'false'}"
@@ -295,7 +294,6 @@
                     <a class="${ category eq 'di' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/diary/list'/>">관찰일지</a>
                 </div>
             </div>
-            	
             </c:if>
             <c:if test="${not empty auth_user and auth_user.role == 'ADMIN' }">
             	  <a class="${ category eq 'ma' ? 'active' : ''}
@@ -309,7 +307,6 @@
                     <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/manage/list'/>">제품관리</a>
                 </div>
             </div>
-            	 
             	 </c:if>
         </div>
     </div>

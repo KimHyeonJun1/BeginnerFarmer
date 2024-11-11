@@ -8,6 +8,7 @@ insert into plants_log(mac_address, temperature, humid, bright, moisture, userid
 values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid_log from userplant where mac_address = #{mac_address}),
  (select plantid_log from userplant where mac_address = #{mac_address}) ) 
 </insert>
+<!--  (select plantid_log from userplant where mac_address = #{mac_address}) )  -->
 
 <update id="arduinoUpdate" >
 {

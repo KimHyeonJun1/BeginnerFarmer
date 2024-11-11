@@ -6,12 +6,12 @@
 
 
 
-<select id="getUserPlant" resultType="manage">
-    SELECT p.plant_id AS plantid_log, p.plant_name
-    FROM userplant up
-    JOIN plant p ON up.plantid_log = p.plant_id
-    WHERE up.userid_log = #{userid_log}
-</select>
+<!-- <select id="getUserPlant" resultType="manage"> -->
+<!--     SELECT p.plant_id AS plantid_log, p.plant_name -->
+<!--     FROM userplant up -->
+<!--     JOIN plant p ON up.plantid_log = p.plant_id -->
+<!--     WHERE up.userid_log = #{userid_log} -->
+<!-- </select> -->
 
 <select id="getPlantInfo" resultType="manage">
     SELECT p.plant_id AS plantid_log, p.plant_name, TRUNC(SYSDATE) - TRUNC(up.register_date)+1 AS today
@@ -41,6 +41,7 @@ select * from plant
 select count(*) from plants_data where mac_address = #{mac_address} and userid_log = #{userid_log}
 </select>
 
+<!-- 					where userid_log = #{userid_log} and plantid_log is not null ) -->
 <!-- 장치별 식물 목록 가져오기 -->
 <select id="getListOfPlantByDevice" resultType="guide">
 select plant_id, plant_name
@@ -52,7 +53,7 @@ p.plant_id not in (select plantid_log from userplant
 					where userid_log = #{userid_log} and plantid_log is not null )
 </when> 
 <otherwise>
-d.plantid_log = #{plant_id}
+d.plantid_log = #{plant_id} and d.mac_address = #{mac_address}
 </otherwise>
 </choose>
 order by plant_name 
@@ -97,7 +98,7 @@ update userplant set userid_log = null, plantid_log = null where mac_address = #
 
 <!-- 사용자 디바이스 연결해제 -->
 <update id="updateUserDeviceDisconn">
-update userplant set plantid_log = null where mac_address = #{mac_address}
+update userplant set plantid_log = null where mac_address = #{mac_address} 
 </update>
 
 <!-- 사용자가 디바이스와 작물 연결등록 -->
