@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.smart.notify.NotifyMapper">
+<mapper namespace="kr.co.farm.notify.NotifyMapper">
 
 <!-- 방명록 글의 미확인 댓글건수 조회 -->
 <select id="countUncheckedCommentOfBoard" resultType="integer">
@@ -11,12 +11,12 @@ where board_id = #{board_id}
 
 <!-- 미확인 댓글건수 조회 -->
 <select id="countOfUncheckedCommentOfUser" resultType="lowerMap">
-select count(*) comments from board_comment
-where board_id in (select id from board where writer = #{userid} )
+select count(*) comments from board_comment 
+where board_id in (select board_id from board where board_writer = #{userid} )
 and notify = 0
 </select>
 
-<!-- 방명록 글에 대한 미확인 댓글수 조회 -->
+<!-- 게시판 글에 대한 미확인 댓글수 조회 -->
 <select id="countCommentOfBoard" resultType="integer">
 select count(case when notify=0 then 0 end) notifycnt
 from board_comment
@@ -28,7 +28,7 @@ where board_id = #{board_id}
 update board_comment
 set notify=1
 where notify = 0
-and board_id in ( select id from board where writer = #{userid} )
+and board_id in ( select board_id from board where board_writer = #{userid} )
 
 </update>
 
@@ -37,7 +37,7 @@ and board_id in ( select id from board where writer = #{userid} )
 <select id="getListOfUncheckedComment" resultType="comment">
 select c.*, name
 from board_comment c inner join member on writer = userid 
-where notify = 0 and board_id in ( select id from board where writer = #{userid} )
+where notify = 0 and board_id in ( select board_id from board where board_writer = #{userid} )
 order by writedate desc
 </select>
 

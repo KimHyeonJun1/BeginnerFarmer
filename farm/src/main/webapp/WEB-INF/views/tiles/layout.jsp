@@ -69,13 +69,17 @@
   <script src="<c:url value='/js/summernote/summernote-lite.js' />"></script>
   <script src="<c:url value='/js/summernote/lang/summernote-ko-KR.js' />"></script>
 
+  
   <script>
 	var socketURL = 
 			`ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/notify-websocket`
 	var authID = `${auth_user.userid}`	
-	var context = `${pageContext.request.contextPath}`	
+	var context = `${pageContext.request.contextPath}`
+	var notifyURL = "<c:url value='/board/comment/notify'/>"
   </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  
+  <script src="<c:url value='/js/notify.js' />"></script>
   
   <!-- Main CSS File -->
   <link href="<c:url value='/css/main.css'/>" rel="stylesheet">

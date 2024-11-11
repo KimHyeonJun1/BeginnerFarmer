@@ -223,10 +223,10 @@
 	        <div class="grid-item grid-item-2 ">
 	            <div class="text-top">초보</div>
 	            <div class="items ">
-	            	<button class="crop-btn">상추</button>
-			        <button class="crop-btn">깻잎</button>
-			        <button class="crop-btn">부추</button>
-			        <button class="crop-btn">시금치</button>
+	            	<button class="crop-btn" onclick="goToPlantInfo(1)">상추</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(3)">깻잎</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(6)">부추</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(11)">시금치</button>
 	                
 	            </div>
 	        </div>
@@ -235,10 +235,10 @@
 	        <div class="grid-item grid-item-3">
 	            <div class="text-top">중수</div>
 	            <div class="items">
-	            	<button class="crop-btn">배추</button>
-			        <button class="crop-btn">케일</button>
-			        <button class="crop-btn">파</button>
-			        <button class="crop-btn">방울토마토</button>
+	            	<button class="crop-btn" onclick="goToPlantInfo(2)">배추</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(4)">케일</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(10)">파</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(5)">방울토마토</button>
 	            </div>
 	        </div>
 	
@@ -246,10 +246,10 @@
 	        <div class="grid-item grid-item-4">
 	            <div class="text-top">고수</div>
 	            <div class="items">
-	            	<button class="crop-btn">고추</button>
-			        <button class="crop-btn">오이</button>
-			        <button class="crop-btn">딸기</button>
-			        <button class="crop-btn">가지</button>
+	            	<button class="crop-btn" onclick="goToPlantInfo(7)">고추</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(8)">오이</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(9)">딸기</button>
+                    <button class="crop-btn" onclick="goToPlantInfo(12)">가지</button>
 	            </div>
 	        </div>
 	    </div>    
@@ -435,5 +435,15 @@
 	</section>
 	</div>
 	</div>
-	</body>
+	
+<script>
+// plant_if를 파라미터로 전달하는 함수
+function goToPlantInfo(plantId) {
+	location.href = "/farm/guide/plantInfo?plant_id=" + plantId;
+}
+
+
+</script>
+
+</body>
 </html>

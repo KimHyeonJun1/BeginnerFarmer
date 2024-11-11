@@ -10,7 +10,7 @@
 			<span>${vo.name }</span> 
 			<span>${vo.writedate}</span>
 		</div>
-		<div class="notify-comment fw-bold">${vo.board_content }</div>
+		<div class="notify-comment fw-bold">${vo.content }</div>
 		<div class="dropdown-divider"></div>
 	</div>
 	</c:forEach>

@@ -13,7 +13,7 @@
 				<div class="card-body p-5">
 					<div class="d-flex justify-content-center">
 						<a href="<c:url value='/' />"> 
-						<img width="400" height="200" src="<c:url value='/img/logogo1.png'/>"> </a>
+						<img width="400" height="200" src="<c:url value='/img/logo.png'/>"> </a>
 					</div>
 <!-- 						<h3 class="my-4">회원가입</h3> -->
 

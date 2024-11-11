@@ -23,6 +23,14 @@ public class FarmController {
 	private String  Key = "20241025JY4SUEANOT7KEEDB4U8A";
 	private String videoListURL = "http://api.nongsaro.go.kr/service/agriTechVideo/videoList";
 	
+	 // plant_id를 받아서 GuideController의 info 페이지로 리다이렉트
+    @RequestMapping("/guide/plantInfo")
+    public String redirectToGuideInfo(HttpSession session,int plant_id) {
+    	session.setAttribute("category", "gu");
+        // 해당 plant_id를 포함해 GuideController로 리다이렉트
+        return "redirect:/guide/info?plant_id=" + plant_id;
+    }
+	
 	
 	//농업기술동영상 리스트 데이터 요청
 		@ResponseBody @RequestMapping("/videoList")
