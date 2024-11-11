@@ -47,9 +47,37 @@ public class NoticeController {
 	
 	// 공지글 수정저장처리 요청
 	@PutMapping("/modify")
-	public String modify(NoticeVO vo, PageVO page) throws Exception{
+	public String modify(NoticeVO vo, PageVO page, MultipartFile file, HttpServletRequest request) throws Exception{
+		// 원래 공지글 정보 조회해오기
+		NoticeVO notice = mapper.getOneNotice(vo.getId());
+		
+		// 첨부파일이 없는 경우
+		if( file.isEmpty() ) {
+			// 원래 X -> 그대로 -> 처리X
+			// 원래 O -> 그대로: 화면에 파일명O -> DB정보로 수정정보에 담기
+			// 원래 O -> 파일삭제: 화면에 파일명X -> 물리적파일 삭제
+			if( !vo.getFilename().isEmpty() ) {
+				vo.setFilepath(notice.getFilepath());
+			}
+			
+		} else { // 첨부파일이 있는 경우
+			// 원래 X -> 새로첨부 -> DB에 저장되도록 수정정보에 담기
+			// 원래 O -> 바꿔첨부 -> DB에 저장되도록 수정정보에 담기 + 원래 첨부된 물리적파일 삭제
+			vo.setFilename(file.getOriginalFilename());
+			vo.setFilepath(common.fileUpload("notice", file, request));
+		}
+		
 		// 화면에서 입력한 정보로 DB에 변경저장
-		mapper.updateNotice(vo);
+		if( mapper.updateNotice(vo)==1 ) {
+			// 원래 O -> 파일삭제: 화면에 파일명X -> 물리적파일 삭제
+			// 원래 X -> 바꿔첨부: 원래 첨부된 물리적 파일 삭제
+			if( notice.getFilename() !=null ) {
+				if( vo.getFilename().isEmpty() || !file.isEmpty() ) {
+					common.fileDelete(notice.getFilepath(), request);
+				}
+			}
+		}
+		
 		// 응답화면 연결: 정보화면
 		StringBuffer redirect = new StringBuffer("redirect:info");
 		redirect.append("?id=").append( vo.getId() )
