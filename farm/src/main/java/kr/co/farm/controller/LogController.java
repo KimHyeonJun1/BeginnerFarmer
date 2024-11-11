@@ -42,7 +42,7 @@ public class LogController {
 	    session.removeAttribute("plantid_log");
 	}
 	
-	
+	//급수관리 페이지 화면 요청
 	@RequestMapping("/water_management")
 	public String LogWaterManagement(Authentication user, HttpSession session, Model model,  PageVO page) {
 		if(user == null) {

@@ -24,6 +24,12 @@ public class MemberController {
 			vo = password.matches(userpw, vo.getUserpw() ) ? vo:null ;
 		}
 		return new Gson().toJson(vo);
+//		if(vo != null) {
+//			vo = password.matches(userpw, vo.getUserpw() ) ? vo:null ;
+//		}
+//		return new Gson().toJson(vo);
+		
+
 	}
 	
 	@ResponseBody @RequestMapping("/update")
