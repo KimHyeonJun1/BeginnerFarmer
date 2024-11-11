@@ -84,9 +84,9 @@ function isNotEmpty() {
 			 var p = $('.note-editable p')
 			 var content = ''
 			 for(var i=0; i<p.length; i++){
-				var span = $(p[i]).children()
-				for(var j=0; j<span.length; j++){
-					content += $(span[j]).html()
+				var tag = $(p[i]).children()
+				for(var j=0; j<tag.length; j++){
+					content += $(tag[j]).is("img") ? $(tag[j]) :  $(tag[j]).html()
 				}
 			 }
 			 content = content.replace(/<br>/g, '').replace(/\s/g, '')
@@ -104,9 +104,10 @@ function isNotEmpty() {
 
 //--------------------------------------------------------------
 
-// 요청한 정보를 info에 담아놓기
+// 게시판에서 요청한 정보를 info에 담아놓기
 function addToForm(info) {
-    return `<input type="hidden" name="id" value="${info.id}">
+    return `<input type="hidden" name="board_id" value="${info.id}">
+    		<input type="hidden" name="board_type_id" value="${info.board_type_id}">
 	        <input type="hidden" name="pageNo" value="${info.pageNo}">
 	        <input type="hidden" name="search" value="${info.search}">
 	        <input type="hidden" name="keyword" value="${info.keyword}">

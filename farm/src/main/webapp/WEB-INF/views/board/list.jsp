@@ -23,8 +23,8 @@
 			<input type="hidden" name="board_type_id" value="${board_type_id}">
 			<div class="boardTypeButtons d-flex gap-3">
 			    <c:forEach items="${boardTypes}" var="bt">
-			        <a onclick="boardType(${bt.board_type_id})"
-			           class="btn btn-success text-white"> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
+			        <a href="javascript:void(0);" onclick="boardType(${bt.board_type_id}); activateButton(this);"
+			           class="btn btn-outline-success "> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
 			            ${bt.board_type_name}
 			        </a>
 			    </c:forEach>
@@ -61,16 +61,6 @@
 <c:if test="${ empty page.list }">
 	<tr><td colspan="6" class="text-center">게시판 글이 없습니다.</td></tr>
 </c:if>
-
-<!-- <div class="boardList"> -->
-<%--     <c:forEach items="${boardType}" var="board"> --%>
-<!--         <div class="boardItem"> -->
-<%--             <h4>${board.title}</h4> --%>
-<%--             <p>${board.content}</p> --%>
-<!--             게시글 내용 표시 -->
-<!--         </div> -->
-<%--     </c:forEach> --%>
-<!-- </div> -->
 
 <c:forEach items="${ page.list }" var="vo">
 <tr>
@@ -115,6 +105,7 @@ function boardType(board_type_id){
 function info( board_id ){
 	// form태그에 search, keyword, listSize
 	$("form").append(`<input type="hidden" name="board_id" value="\${board_id}">`)
+			 .append(`<input type="hidden" name="board_type_id" value="${board_type_id}">`)
 			 .append(`<input type="hidden" name="pageNo" value="${page.pageNo}">`)
 			 .attr("action", "info")
 			 .submit();
@@ -125,6 +116,31 @@ $("[name=listSize]").on("change", function(){
 })
 $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
 
+// 액티브 처리 미완료
+// function activateButton(clickedButton) {
+//     // 모든 boardTypeButtons 내의 버튼에서 btn-success를 제거하고 btn-outline-success 추가
+//     $('.boardTypeButtons .btn').removeClass('btn-success').addClass('btn-outline-success');
+    
+//     // 클릭된 버튼에만 btn-success 추가하여 활성화 표시
+//     $(clickedButton).removeClass('btn-outline-success').addClass('btn-success');
+// }
+
+// function boardType(boardTypeId) {
+//     // 선택된 board_type_id를 hidden input에 설정
+//     $('input[name="board_type_id"]').val(boardTypeId);
+//     console.log("Selected board_type_id:", boardTypeId);
+//     $.ajax({
+//         url: '/farm/board/list',            // 서버의 엔드포인트
+//         type: 'GET',                     // 요청 방식
+//         data: { board_type_id: boardTypeId }, // 보낼 데이터
+//         success: function(response) {
+//             $('#list').html(response);  // 응답 데이터를 목록에 표시
+//         },
+//         error: function(xhr, status, error) {
+//             console.error("Error fetching board list:", error);
+//         }
+//     });
+// }
 </script>
 
 </html>
