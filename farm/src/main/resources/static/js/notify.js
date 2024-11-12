@@ -28,6 +28,7 @@ $(function(){
 			$("#notify-count").removeClass("notify-on").empty()
 			$(".comment-fade").remove()
 		}else{
+			console.log( notify )
 			$("#notify-count").addClass("notify-on").text( notify.comments )
 			
 			//현재 사용자 접속한 화면이 방명록 목록인 경우 실시간으로 해당 글에 달린 미확인 댓글 존재표시하기
@@ -113,9 +114,11 @@ $("#notify").on({
 })
 //메세지 송신처리: 로그인유저의 미확인 댓글수를 조회하도록 사용자id를 보내기
 function publishNotify( info ){
+	
     stompClient.publish({
 		destination: context + "/app/notify",
 		body: JSON.stringify( info==undefined ? { userid: authID} : info )
 	});
+	
 }
 

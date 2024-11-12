@@ -7,12 +7,14 @@
 select count(case when notify=0 then 0 end) notifycnt
 from board_comment
 where board_id = #{board_id}
+and writer != #{userid}
 </select>
 
 <!-- 미확인 댓글건수 조회 -->
 <select id="countOfUncheckedCommentOfUser" resultType="lowerMap">
-select count(*) comments from board_comment 
+select count(*) comments from board_comment
 where board_id in (select board_id from board where board_writer = #{userid} )
+and writer != #{userid}
 and notify = 0
 </select>
 
@@ -38,6 +40,7 @@ and board_id in ( select board_id from board where board_writer = #{userid} )
 select c.*, name
 from board_comment c inner join member on writer = userid 
 where notify = 0 and board_id in ( select board_id from board where board_writer = #{userid} )
+and c.writer != #{userid}
 order by writedate desc
 </select>
 
