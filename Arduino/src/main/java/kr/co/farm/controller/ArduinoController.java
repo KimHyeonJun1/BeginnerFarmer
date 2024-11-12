@@ -19,7 +19,7 @@ public class ArduinoController {
 		PlantLogVO vo = mapper.getOneRelay(f01);
 		
 		System.out.println(f01 );
-		return vo.getRelay1()+vo.getRelay2()+vo.getRelay3()+vo.getRelay4();
+		return vo.getLight() + vo.getRelay1()+vo.getRelay2()+vo.getRelay3()+vo.getRelay4();
 		
 	}
 	 @RequestMapping("/arduino")

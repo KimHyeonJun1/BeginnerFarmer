@@ -355,17 +355,24 @@ function lineChart(info){
 				
   $(document).ready(function() {
 	    $("#temp-on, #temp-off").on("click", function() {
+	    	 var buttonId = $(this).attr("id");
+	         var message = '';
+	         // 각 버튼에 따른 메시지 설정
+	         if (buttonId == "temp-on") {
+	             message = "창문 개방";
+	         } else if (buttonId == "temp-off") {
+	             message = "창문 개폐";
+	         }
 	        $.ajax({
 	            url: '/farm/relay/motorAndRelay2Update',
 	            type: 'POST',
 	            data: {id:$(this).attr("id")},
 	            success: function() {
-	            	alert("창문 개방");
-	            	console.log("물주기 기록 및 Relay 상태 업데이트 완료.");
+	            	alert(message);
+	            	console.log("동작 성공");
 	            },
 	            error: function(xhr, status, error) {
-	            	alert("창문 개폐");
-	            	console.error("물주기 및 Relay 상태 업데이트 오류:", error);
+	            	console.error("동작 오류:", error);
 	            }
 	        });
 	    });
