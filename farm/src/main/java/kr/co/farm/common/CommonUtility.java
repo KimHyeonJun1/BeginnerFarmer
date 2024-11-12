@@ -1,22 +1,29 @@
 package kr.co.farm.common;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.File;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +46,53 @@ public class CommonUtility {
 		//기본값을 지정해야하는 경우
 		public String hasKey(JSONObject json, String key, String defaultValue) {
 			return json.has(key) ? json.getString(key) : defaultValue;
+		}
+		
+		// 첨부된 파일 삭제하기-물리적삭제
+		public void fileDelete(String fileInfo, HttpServletRequest request) {
+			if( fileInfo != null) {
+				// url경로형태 -> 실제파일경로형태
+				File file = new File( toRealFilePath(fileInfo, request));
+				if( file.exists() ) file.delete();
+			}
+		}
+		
+		// 파일 존재유무 확인
+		public void fileExist(String filepath, Model model, HttpServletRequest request) {
+			if( filepath != null ) {
+				// 물리적인 파일의 존재유무 확인
+				filepath = toRealFilePath(filepath, request);
+				model.addAttribute("file", new File(filepath).exists());
+			}
+		}
+		
+		public void fileExist( List<FileVO> files, Model model, HttpServletRequest request ) {
+			if( files != null ) {
+				HashMap<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+				for(FileVO f : files) {
+					String filepath = toRealFilePath(f.getFilepath(), request);
+					map.put(f.getId(), new File(filepath).exists());
+				}
+				model.addAttribute("files", map);
+			}
+		}
+		
+		// 파일 다운로드
+		public void fileDownload(String filepath, String filename, 
+								HttpServletRequest request,
+								HttpServletResponse response) throws Exception {
+			// url경로: 
+			// 물리적 실제경로
+			filepath = toRealFilePath(filepath, request);
+			
+			// 클라이언트컴에 쓰기작업할 파일의 타입
+			String mime = request.getServletContext().getMimeType(filename);
+			response.setContentType(mime);
+			
+			// 파일명에 있는 한글 처리: abc def
+			filename = URLEncoder.encode(filename, "utf-8").replaceAll("\\+", "%20");
+			response.setHeader("content-disposition", "attachment; filename=" + filename);
+			FileCopyUtils.copy(new FileInputStream(filepath), response.getOutputStream());
 		}
 		
 		//다중 파일 업로드
@@ -90,7 +144,10 @@ public class CommonUtility {
 			return filepath.replace(uploadPath, appURL(request, "/upload/"));
 		}
 
-			
+		// url형태 -> 실제 물리적형태로 바꾸기
+		public String toRealFilePath(String filepath, HttpServletRequest request) {
+			return filepath.replace( appURL(request, "/upload/"), uploadPath);
+		}	
 	
 		//회원가입축하 메시지 보내기
 		public void emailForJoin(MemberVO vo) {

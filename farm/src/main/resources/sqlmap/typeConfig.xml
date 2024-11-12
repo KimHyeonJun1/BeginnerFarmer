@@ -14,6 +14,7 @@
 	<typeAlias type="kr.co.farm.common.CommentVO" alias="comment"/>
 	<typeAlias type="kr.co.farm.common.LowerKeyMap" alias="LowerMap"/>
 	<typeAlias type="kr.co.farm.relay.RelayVO" alias="relay"/>
+	<typeAlias type="kr.co.farm.notice.NoticeVO" alias="notice"/>
 <!-- 	<typeAlias type="kr.co.smart.remember.RememberVO" alias="remember"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.FileVO" alias="file"/> -->
 <!-- 	<typeAlias type="kr.co.smart.common.CommentVO" alias="comment"/> -->

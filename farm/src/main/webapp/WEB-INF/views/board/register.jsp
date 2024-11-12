@@ -30,7 +30,7 @@
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea id="summernote" name="board_content" title="내용" class="check-empty form-control"></textarea>
+			<textarea id="summernote" name="board_content" title="내용" class="form-control"></textarea>
 		</td>		
 	</tr>
 	</table>
