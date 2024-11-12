@@ -82,7 +82,7 @@ public class BoardController {
 	}
 	
 	// 게시판 삭제처리
-	@DeleteMapping("/delete")
+	@PostMapping("/delete")
 	public String delete(int board_id) {
 		mapper.deleteBoard(board_id);
 		StringBuffer redirect = new StringBuffer("redirect:list");
@@ -100,11 +100,17 @@ public class BoardController {
 	
 	// 게시판 수정화면 요청
 	@RequestMapping("/modify")
-	public String modify(int board_id, Model model) {
+	public String modify(int board_id, Model model, int board_type_id, PageVO page) {
 		// 해당 게시판 정보를 DB에서 조회하고 수정화면 요청을 위해 Model 객체에 담기
-		model.addAttribute("vo", mapper.getOneBoard(board_id));
+		
+		BoardVO vo = mapper.getOneBoard(board_id);
+		model.addAttribute("vo", vo);
+		model.addAttribute("board_type_id", board_type_id);
+		
 		// 게시판 종류 정보를 DB에서 조회하여 Model 객체에 담기 
 		model.addAttribute("boardTypes", mapper.getBoardTypes());
+		model.addAttribute("page", page);
+		
 		return "board/modify";
 	}
 	

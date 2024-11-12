@@ -44,6 +44,8 @@ public interface LogMapper   {
 //	사용자가 선택한 작물정보조회
 	 LogVO getOneLog (int plnatid_log);
 	   
-
+////	 급수관리정보 추가
+//	 int registerWaterManage(String userid_log, int plantid_log);
+	 
 	   
 }

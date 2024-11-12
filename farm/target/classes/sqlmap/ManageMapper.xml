@@ -13,13 +13,27 @@
 <!--     WHERE up.userid_log = #{userid_log} -->
 <!-- </select> -->
 
+<!-- <select id="getPlantInfo" resultType="manage"> -->
+<!--     SELECT p.plant_id AS plantid_log, p.plant_name, TRUNC(SYSDATE) - TRUNC(up.register_date)+1 AS today -->
+<!--     FROM userplant up -->
+<!--     JOIN plant p ON up.plantid_log = p.plant_id -->
+<!--     WHERE up.userid_log = #{userid_log} AND up.plantid_log = #{plantid_log} -->
+<!-- </select> -->
 <select id="getPlantInfo" resultType="manage">
-    SELECT p.plant_id AS plantid_log, p.plant_name, TRUNC(SYSDATE) - TRUNC(up.register_date)+1 AS today
-    FROM userplant up
-    JOIN plant p ON up.plantid_log = p.plant_id
-    WHERE up.userid_log = #{userid_log} AND up.plantid_log = #{plantid_log}
+    SELECT 
+        p.plant_id AS plantid_log, 
+        p.plant_name, 
+        TRUNC(SYSDATE) - TRUNC(pd.time_log) + 1 AS today
+    FROM 
+        userplant up
+    JOIN 
+        plant p ON up.plantid_log = p.plant_id
+    JOIN 
+        plants_data pd ON pd.plant_id = p.plant_id
+    WHERE 
+        up.userid_log = #{userid_log} 
+        AND up.plantid_log = #{plantid_log}
 </select>
-
 
 
 <!-- userplant에서 유저아이디 등록되어 있는 갯수 조회 -->

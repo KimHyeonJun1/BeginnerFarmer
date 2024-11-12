@@ -42,6 +42,39 @@ public class LogController {
 	    session.removeAttribute("plantid_log");
 	}
 	
+	
+//	// 급수 기록 저장을 위한 메서드
+//	@PostMapping("/water_management/save")
+//	@ResponseBody
+//	public String saveWaterLog(Authentication user, HttpSession session) {
+//	    if (user == null) {
+//	        return "로그인 필요";
+//	    }
+//
+//	    String userid_log = user.getName();
+//	    Integer plantid_log = (Integer) session.getAttribute("plantid_log");
+//
+//	    if (plantid_log == null) {
+//	        return "작물 선택 필요";
+//	    }
+//
+//	    // water_manage 테이블에 급수 기록 추가
+//	    int result = mapper.registerWaterManage(userid_log, plantid_log);
+//	    
+//	    if (result > 0) {
+//	        return "급수 기록 성공";
+//	    } else {
+//	        return "급수 기록 실패";
+//	    }
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
 	//급수관리 페이지 화면 요청
 	@RequestMapping("/water_management")
 	public String LogWaterManagement(Authentication user, HttpSession session, Model model,  PageVO page) {
@@ -77,11 +110,10 @@ public class LogController {
 		ManageVO selectedPlant = manageMapper.getPlantInfo(userid_log, plantid_log); 
 		model.addAttribute("vo", selectedPlant);
 		
+		
 		session.setAttribute("category", "wa");
 		return "log/water_management";
 	}
-	
-	
 	
 	// 온도/습도/조도 화면
 	@RequestMapping("/temperature")

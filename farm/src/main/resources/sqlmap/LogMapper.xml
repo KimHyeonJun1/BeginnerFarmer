@@ -52,12 +52,13 @@ FROM (
            soilmoisture
     FROM water_manage 
     inner join plant using (plant_id)
-<!--    where userid = #{userid} and plant_id = #{plant_id}) -->
-<!--     FROM water_manage inner join plant using (plant_id) -->
-    WHERE userid = #{userid})
+    WHERE userid = #{userid} and plant_id = #{plant_id})
 WHERE no BETWEEN #{page.beginList} AND #{page.endList}  <!-- 페이지 범위에 따라 결과 제한 -->
 ORDER BY no desc
 </select>
+
+<!--    where userid = #{userid} and plant_id = #{plant_id}) -->
+<!--     FROM water_manage inner join plant using (plant_id) -->
 
 
 </mapper>

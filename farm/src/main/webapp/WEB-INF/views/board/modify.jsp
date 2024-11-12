@@ -9,12 +9,12 @@
 <body>
 <h3 class="my-5">게시판 등록</h3>
 
-<form method="post" action="register" enctype="multipart/form-data" >
+<form method="post" action="info" enctype="multipart/form-data" >
 	<table class="table tb-row mt-5">
 	<tr>
 		<th>게시판</th>
 		<td>
-       		<select class="form-select" name="board_type_id" title="게시판종류" >
+       		<select class="form-select" name="boardType" title="게시판종류" >
 	            <c:forEach items="${boardTypes}" var="bt">
 	            	<option <c:if test= "${ vo.board_type_id eq bt.board_type_id }">selected</c:if>
 	            	 		value="${bt.board_type_id}" >${bt.board_type_name}</option>
@@ -31,7 +31,7 @@
 	<tr>
 		<th>내용</th>
 		<td>
-			<textarea id="summernote" name="board_content" title="내용" class="check-empty form-control">
+			<textarea id="summernote" name="board_content" title="내용" class="form-control">
 			${ vo.board_content }</textarea>
 		</td>		
 	</tr>
@@ -45,14 +45,23 @@
 
 <script>
 
+var info = { 
+		 id:			"${vo.board_id}",
+		 board_type_id:	 ${board_type_id},  // 숫자는 "" 빼도 됨
+		 pageNo:		"${page.pageNo}",
+		 search:		"${page.search}",
+		 keyword:		"${page.keyword}",
+		 listSize:		"${page.listSize}"
+		}
+
 $("#btn-save").on("click", function() {
 	if( isNotEmpty() ) {
 		//썸머노트 내용 가져오기
 		let summernote = new Object();
 		summernote.board_title = $("[name=board_title]").val();
 		summernote.board_content = $("[name=board_content]").val();
-		summernote.board_type_id = $("[name=board_type_id]").val();
-		summernote.board_id = ${vo.board_id} ;
+		summernote.board_type_id = $("[name=boardType]").val();
+		summernote.board_id = ${vo.board_id};
 	
 		$.ajax({
 			url : "<c:url value='modify'/>",
@@ -61,7 +70,9 @@ $("#btn-save").on("click", function() {
 	        data: JSON.stringify(summernote),
 	        success : function (data){
 	           	if(data){
-	               	location.href="<c:url value='info?board_id=${vo.board_id}&board_type_id=${ vo.board_type_id}'/>";
+	           		$("form")
+	           		.append(addToForm(info))
+	           		.submit();
 	           	}else{
 	               	alert("저장 오류 발생");
 	           	}
@@ -73,7 +84,9 @@ $("#btn-save").on("click", function() {
 
 
 $("#btn-cancel").on("click",function(){
-	location = "info?board_id=${vo.board_id}"
+	$("form")
+	.append(addToForm(info))
+	.submit();
 })
 
 //summernote 
