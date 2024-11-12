@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.farm.relay.RelayMapper">
+
+<!-- 급수관리 추가 -->
+<insert id="registerWaterManage">
+INSERT INTO water_manage (soilmoisture, plant_id, userid)
+SELECT moisture, #{plantid_log}, #{userid_log}
+FROM plants_data
+WHERE plant_id = #{plantid_log}
+</insert>
+
+<!-- plants_data 테이블의 relay1 on,off제어 -->
+<update id="updateRelay1Status">
+update plants_data
+set relay1 = #{relay1}
+where mac_address = #{mac_address}
+</update>
+
+
+<!-- plants_data 테이블의 relay2 on,off제어 -->
+<update id="updateRelay2Status">
+update plants_data
+set relay2 = #{relay2}
+where mac_address = #{mac_address}
+</update>
+
+
+
+
+<!-- 맥어드레스조회해오기 -->
+<select id="getMacAddress" resultType="String">
+SELECT mac_address
+FROM userplant  
+WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log}
+</select>
+
+
+
+<!-- plants_data 테이블의 light컬럼 제어 -->
+<update id="updateLightStatus">
+update plants_data
+set light = #{light}
+where mac_address = #{mac_address}
+</update>
+
+</mapper>

@@ -3,16 +3,30 @@
 <mapper namespace="kr.co.farm.arduino.ArduinoMapper">
 
 
-<insert id="arduinoSave" >
-insert into plants_log(mac_address, temperature, humid, bright, moisture, userid, plant_id )
-values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid_log from userplant where mac_address = #{mac_address}),
- (select plantid_log from userplant where mac_address = #{mac_address}) ) 
+<insert id="arduinoSave">
+    insert into plants_log(mac_address, temperature, humid, bright, moisture, userid, plant_id)
+    values(
+        #{mac_address}, 
+        #{temperature}, 
+        #{humid}, 
+         ROUND(#{bright} * 100 / 1024), 
+        ROUND(#{moisture} * 100 / 1024), 
+        (select userid_log from userplant where mac_address = #{mac_address}),
+        (select plantid_log from userplant where mac_address = #{mac_address})
+    )
 </insert>
+
+<!-- <insert id="arduinoSave" > -->
+<!-- insert into plants_log(mac_address, temperature, humid, bright, moisture, userid, plant_id ) -->
+<!-- values( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture},  (select userid_log from userplant where mac_address = #{mac_address}), -->
+<!--  (select plantid_log from userplant where mac_address = #{mac_address}) )  -->
+<!-- </insert> -->
 <!--  (select plantid_log from userplant where mac_address = #{mac_address}) )  -->
 
 <update id="arduinoUpdate" >
 {
-	call pr_plants_data( #{mac_address},  #{temperature}, #{humid}, #{bright}, #{moisture} )
+	call pr_plants_data( #{mac_address},  #{temperature}, #{humid},   ROUND(#{bright} * 100 / 1024), 
+        ROUND(#{moisture} * 100 / 1024) )
 }
 <!--  
 insert into plants_data(mac_address, temperature, humid, bright, moisture, userid,plant_id   )

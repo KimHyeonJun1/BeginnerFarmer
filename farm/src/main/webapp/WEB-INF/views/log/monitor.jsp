@@ -20,6 +20,8 @@ padding: 100px;
 border-width: 5px;
 justfiy-content: center;
 }
+
+
 </style>
 
 <body>
@@ -41,8 +43,9 @@ justfiy-content: center;
      </div>
 <div class ="box d-flex">
 		<div class="cctv justify-content-center ">
-<!-- 			카메라부분 -->
+
 		</div>
+	 <img  src="http://222.102.94.15:88/stream"  width="600" height="448" >
 	</div>
 	<div class="box d-flex mt-5 justify-content-center">
 		<div class="p-2 fs-5" >키운지 ${vo.today} 일 차에요!</div>

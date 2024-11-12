@@ -108,26 +108,26 @@ display: grid;
 			<div class="d-flex">
 				<div class="box1 gap-2">현재온도 ${temp.temperature}°C<i class="fa-solid fa-temperature-half fs-4" style="color:#de1717;"></i></div>
 				<div class="box1 gap-2">적정온도 ${vo.standard_temp}°C<i class="fa-solid fa-temperature-half fs-4" style="color:#de1717;"></i></div>
-				<button class="btn box1 gap-2">온습도 낮추기  <img src="<c:url value='/img/switch-on.png'/>" alt="on" ></button>
+				<button class="btn box1 gap-2" id="temp-on">온습도 낮추기  <img src="<c:url value='/img/switch-on.png'/>" alt="on" ></button>
 			</div>
 			<div class="d-flex">
 				<div class="box1 gap-2">현재습도 ${temp.humid}%<i class="fa-solid fa-droplet fs-4" style="color:#74C0FC;"></i> </div>
 				<div class="box1 gap-2">적정습도 ${vo.standard_hum}%<i class="fa-solid fa-droplet fs-4" style="color:#74C0FC;"></i></div>
-				<button class="btn box1 gap-2">온습도 낮추기  <img src="<c:url value='/img/switch-off.png'/>" alt="off" ></button>
+				<button class="btn box1 gap-2" id="temp-off">온습도 낮추기  <img src="<c:url value='/img/switch-off.png'/>" alt="off" ></button>
 			</div>		
 			<div class="box2">
 				<div class="d-flex gap-5">
-				<button class="btn">OFF</button>
+				<button class="btn" id="light-off">OFF</button>
 				
-				<button class="btn">
+				<button class="btn" id="low-01">
 <!-- 				<i class="fa-solid fa-sun fs-2" style="color: #FFD43B;"></i> -->
 				<i class="fa-regular fa-lightbulb fs-2" style="color: #FFD43B;"></i>
 				</button>
-				<button class="btn">
+				<button class="btn" id="low-02">
 <!-- 				<i class="fa-solid fa-sun fs-2" style="color: #FFD43B;"></i> -->
 				<i class="fa-regular fa-lightbulb fs-2" style="color: #FFA500;"></i>
 				</button>
-				<button class="btn">
+				<button class="btn" id="low-03">
 <!-- 				<i class="fa-solid fa-sun fs-2" style="color: #FFD43B;"></i> -->
 				<i class="fa-regular fa-lightbulb fs-2" style="color: #d94844;"></i>
 				</button>
@@ -319,6 +319,57 @@ function lineChart(info){
 	        });
 	}); 
   
+  
+  $(document).ready(function() {
+	    $("#light-off, #low-01, #low-02, #low-03").on("click", function() {
+	    	 var buttonId = $(this).attr("id");
+	         var message = '';
+	         
+	         // 각 버튼에 따른 메시지 설정
+	         if (buttonId == "light-off") {
+	             message = "센서 끄기 성공";
+	         } else if (buttonId == "low-01") {
+	             message = "센서1단계 켰습니다";
+	         } else if (buttonId == "low-02") {
+	             message = "센서2단계 켰습니다";
+	         } else if (buttonId == "low-03") {
+	             message = "센서3단계 켰습니다";
+	         }
+	    	
+	    	$.ajax({
+	            url: '/farm/relay/lightStatus',
+	            type: 'POST',
+	            data: {id:$(this).attr("id")},
+	            success: function() {
+	            	alert(message);
+	            	console.log("LED 센서 제어 성공");
+	            },
+	            error: function(xhr, status, error) {
+	            	alert("에러");
+	            	console.error("LED 센서 제어 실패", error);
+	            }
+	        });
+	    });
+	});
+	    
+				
+  $(document).ready(function() {
+	    $("#temp-on, #temp-off").on("click", function() {
+	        $.ajax({
+	            url: '/farm/relay/motorAndRelay2Update',
+	            type: 'POST',
+	            data: {id:$(this).attr("id")},
+	            success: function() {
+	            	alert("창문 개방");
+	            	console.log("물주기 기록 및 Relay 상태 업데이트 완료.");
+	            },
+	            error: function(xhr, status, error) {
+	            	alert("창문 개폐");
+	            	console.error("물주기 및 Relay 상태 업데이트 오류:", error);
+	            }
+	        });
+	    });
+	}); 
   
 </script>
 
