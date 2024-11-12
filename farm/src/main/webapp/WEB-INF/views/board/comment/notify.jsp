@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<h6 class="px-3 py-2">방명록 댓글 알림</h6>
+<h6 class="px-3 py-2">게시판 댓글 알림</h6>
 <div class="bg-light navbar-nav-scroll overflow-auto h-max520">
 
 	<c:forEach items="${list}" var="vo">

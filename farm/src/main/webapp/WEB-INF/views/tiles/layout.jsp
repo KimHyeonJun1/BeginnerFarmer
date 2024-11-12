@@ -203,7 +203,7 @@
 					<a id="notify" class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">	
 						<span>
 							<i class="fs-3 fa-regular fa-bell mb-2"></i></span>
-						<span id="notify-count" class="notify-on"></span> 
+						<span id="notify-count" ></span> 
 					</a>
 					
 					<div id="dropdown-list" class="w-px300 dropdown-menu dropdown-menu-end"></div>

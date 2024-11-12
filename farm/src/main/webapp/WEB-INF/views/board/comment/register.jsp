@@ -64,10 +64,12 @@ $("#btn-register").on("click", function(){
 		data: { parent_id: ${vo.board_id}, content: $("#comment-input textarea").val() }
 	}).done(function( response ){
 		if( response ) { 
-			
-			//댓글등록시 미확인 댓글이 발생했음을 알리기
-			var info = { userid : "${vo.board_writer}", board_id : ${vo.board_id} }
-			publishNotify( info )
+			if("${vo.board_writer}" != "${auth.userid}"){
+				//댓글등록시 미확인 댓글이 발생했음을 알리기
+				var info = { userid : "${vo.board_writer}", board_id : ${vo.board_id} }
+				publishNotify( info )
+				
+			}
 			
 			initComment()
 			commentList(1)

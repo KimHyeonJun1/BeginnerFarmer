@@ -3,6 +3,16 @@
 <mapper namespace="kr.co.farm.plant.PlantMapper">
 
 
+<select id="getListOfWaterByUser" resultType="water">
+SELECT *
+FROM (
+	SELECT row_number() over(order by water_numb) no, 
+	       w.*
+	FROM water_manage w
+	WHERE userid = #{userid} and plant_id = #{plant_id}
+) ORDER BY no desc
+</select>
+
 <select id="getOneData" resultType="plant">
 select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
 </select>
