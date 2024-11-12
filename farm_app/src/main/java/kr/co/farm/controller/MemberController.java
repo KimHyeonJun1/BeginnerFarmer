@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
@@ -11,13 +12,13 @@ import kr.co.farm.member.MemberMapper;
 import kr.co.farm.member.MemberVO;
 import lombok.RequiredArgsConstructor;
 
-@Controller @RequiredArgsConstructor	@RequestMapping("/member")
+@RestController @RequiredArgsConstructor	@RequestMapping("/member")
 public class MemberController {
 	
 	private final MemberMapper mapper;
 	private final PasswordEncoder password;
 	
-	@ResponseBody @RequestMapping("/login")
+	@RequestMapping("/login")
 	public String login(String userid, String userpw) {
 		MemberVO vo = mapper.getOneMember(userid);
 		if(vo != null) {
