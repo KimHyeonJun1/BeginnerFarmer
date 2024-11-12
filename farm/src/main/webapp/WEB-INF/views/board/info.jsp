@@ -47,6 +47,7 @@
 <script>
 var info = { 
 			 id:			"${vo.board_id}",
+			 board_type_id:	 ${board_type_id},  // 숫자는 "" 빼도 됨
 			 pageNo:		"${page.pageNo}",
 			 search:		"${page.search}",
 			 keyword:		"${page.keyword}",
