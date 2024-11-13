@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import kr.co.farm.plant.GuideVO;
 import kr.co.farm.plant.PlantMapper;
 import kr.co.farm.plant.PlantVO;
 import kr.co.farm.plant.WaterVO;
@@ -19,14 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class PlantController {
 	private final PlantMapper mapper;
-	
-	//온/습도
-	@RequestMapping("/data")
-	public String data (String userid, String plantid) {
-		PlantVO vo = mapper.getOneData(userid, plantid);
-		return new Gson().toJson(vo);
-	}
-	
+
 	//조명 제어
 //	@RequestMapping("/right")
 //	public String right () {
@@ -39,6 +33,20 @@ public class PlantController {
 //		
 //		return new Gson().toJson(vo);
 //	}
+	
+	//온/습도
+	@RequestMapping("/data")
+	public String data (String userid, String plantid) {
+		PlantVO plantVo = mapper.getOneData(userid, plantid); //현재온습도
+		GuideVO guideVo = mapper.getOneGuide(userid, plantid); //적정온습도
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("plantVo", plantVo); 
+		response.put("guideVo", guideVo);  
+		
+		return new Gson().toJson(response);
+	}
+	
 	
 	//급수관리
 	@RequestMapping("/moisture")

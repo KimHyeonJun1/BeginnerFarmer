@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.plant.PlantMapper">
 
+<select id="getOneGuide" resultType="guide">
+SELECT p.*
+FROM plant p
+JOIN plants_data pd ON p.plant_id = pd.plant_id
+WHERE pd.userid = #{userid} AND pd.plant_id = #{plant_id}
+</select>
+
+<select id="getOneData" resultType="plant">
+select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
+</select>
 
 <select id="getListOfWaterByUser" resultType="water">
 SELECT *
@@ -11,10 +21,6 @@ FROM (
 	FROM water_manage w
 	WHERE userid = #{userid} and plant_id = #{plant_id}
 ) ORDER BY no desc
-</select>
-
-<select id="getOneData" resultType="plant">
-select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
 </select>
 
 <select id="getOnePlant" resultType="plant">

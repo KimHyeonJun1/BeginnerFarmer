@@ -5,6 +5,7 @@
 	<typeAlias type="kr.co.farm.member.MemberVO" alias="member"/>
 	<typeAlias type="kr.co.farm.plant.PlantVO" alias="plant"/>
 	<typeAlias type="kr.co.farm.plant.WaterVO" alias="water"/>
+	<typeAlias type="kr.co.farm.plant.GuideVO" alias="guide"/>
 
 </typeAliases>
 
