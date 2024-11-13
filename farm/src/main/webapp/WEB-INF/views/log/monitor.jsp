@@ -45,7 +45,9 @@ justfiy-content: center;
 		<div class="cctv justify-content-center ">
 
 		</div>
-	 <img  src="http://222.102.94.15:88/stream"  width="600" height="448" >
+<!-- 	 <img  src="http://192.168.0.33:88/stream"  width="600" height="448" > -->
+<!-- 	 <img  src="http://192.168.0.34:88/stream"  width="600" height="448" > -->
+	  <img src="${mac_address == '8C:AA:B5:F0:BC:DD' ? 'http://192.168.0.33:88/stream' : 'http://192.168.0.34:88/stream'}" width="600" height="448">
 	</div>
 	<div class="box d-flex mt-5 justify-content-center">
 		<div class="p-2 fs-5" >키운지 ${vo.today} 일 차에요!</div>

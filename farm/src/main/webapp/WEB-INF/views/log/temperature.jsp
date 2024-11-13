@@ -76,6 +76,14 @@ display: grid;
     align-items: center; /* 수평 중앙 정렬 */
  } 
  
+.btn {
+    transition: all 0.2s ease; /* 부드러운 크기 및 색상 전환 */
+}
+
+.btn.active {
+    transform: scale(1.1); /* 크기를 약간 키움 */
+    background-color: #cccccc; /* 배경색을 진하게 */
+}
 </style>
 <body>
 <h3 class="my-2 mb-4">온도/습도/조도</h3>
@@ -328,14 +336,29 @@ function lineChart(info){
 	         // 각 버튼에 따른 메시지 설정
 	         if (buttonId == "light-off") {
 	             message = "센서 끄기 성공";
+	             $(".btn").removeClass("active");
 	         } else if (buttonId == "low-01") {
 	             message = "센서1단계 켰습니다";
+	             $(".btn").removeClass("active");
+	             $(this).addClass("active");
 	         } else if (buttonId == "low-02") {
 	             message = "센서2단계 켰습니다";
+	             $(".btn").removeClass("active");
+	             $(this).addClass("active");
 	         } else if (buttonId == "low-03") {
 	             message = "센서3단계 켰습니다";
+	             $(".btn").removeClass("active");
+	             $(this).addClass("active");
 	         }
 	    	
+
+	         // 이전에 클릭된 버튼의 스타일을 원래대로 돌리기
+// 	         $(".btn").removeClass("active");
+
+	         // 현재 클릭된 버튼에 활성화 스타일 적용
+// 	         $(this).addClass("active");
+	         
+	         
 	    	$.ajax({
 	            url: '/farm/relay/lightStatus',
 	            type: 'POST',

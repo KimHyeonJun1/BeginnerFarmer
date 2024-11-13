@@ -47,5 +47,6 @@ public interface LogMapper   {
 ////	 급수관리정보 추가
 //	 int registerWaterManage(String userid_log, int plantid_log);
 	 
-	   
+	// plantid_log에 해당하는 mac_address를 조회하는 메서드 추가
+	 String getMacAddress(int plantid_log);  
 }

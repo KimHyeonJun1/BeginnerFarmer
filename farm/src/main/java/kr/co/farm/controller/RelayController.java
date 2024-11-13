@@ -20,53 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class RelayController {
 	private final RelayMapper mapper;
 	
-	// 급수 기록 저장을 위한 메서드
-//		@PostMapping("/water_management/save")
-//		@ResponseBody
-//		public String saveWaterLog(Authentication user, HttpSession session) {
-//		    if (user == null) {
-//		        return "로그인 필요";
-//		    }
-//
-//		    String userid_log = user.getName();
-//		    Integer plantid_log = (Integer) session.getAttribute("plantid_log");
-//
-//		    if (plantid_log == null) {
-//		        return "작물 선택 필요";
-//		    }
-//
-//		    // water_manage 테이블에 급수 기록 추가
-//		    int result = mapper.registerWaterManage(userid_log, plantid_log);
-//		    
-//		    if (result > 0) {
-//		        return "급수 기록 성공";
-//		    } else {
-//		        return "급수 기록 실패";
-//		    }
-//		}
-//	
-//		@PostMapping("/updateRelay1Status")
-//		@ResponseBody
-//		public String updateRelayStatus(Authentication user, HttpSession session) {
-//		    String userid_log = user.getName();
-//		    Integer plantid_log = (Integer) session.getAttribute("plantid_log");
-//		    
-//		    RelayVO vo = new RelayVO();
-//		    vo.getMac_address();
-//		    
-//		    // relay1을 "ONOOO"로 설정
-//		    mapper.updateRelay1Status(vo.getMac_address(), "ONOOO");
-//
-//		    // 5초 후에 relay1을 "OFFOO"로 변경하는 작업을 수행
-//		    new Timer().schedule(new TimerTask() {
-//		        @Override
-//		        public void run() {
-//		        	mapper.updateRelay1Status(vo.getMac_address(), "OFFOO");
-//		        }
-//		    }, 5000); // 5초 후 실행
-//
-//		    return "Relay status updated";
-//		}
+	
 		
 	@PostMapping("/waterAndRelay1Update")
 	@ResponseBody
