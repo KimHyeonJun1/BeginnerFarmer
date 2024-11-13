@@ -26,8 +26,6 @@ where mac_address = #{mac_address}
 </update>
 
 
-
-
 <!-- 맥어드레스조회해오기 -->
 <select id="getMacAddress" resultType="String">
 SELECT mac_address

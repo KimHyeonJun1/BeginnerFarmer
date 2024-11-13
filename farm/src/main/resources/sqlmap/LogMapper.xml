@@ -57,8 +57,11 @@ WHERE no BETWEEN #{page.beginList} AND #{page.endList}  <!-- 페이지 범위에
 ORDER BY no desc
 </select>
 
-<!--    where userid = #{userid} and plant_id = #{plant_id}) -->
-<!--     FROM water_manage inner join plant using (plant_id) -->
-
+    <!-- plantid_log에 해당하는 mac_address 조회 쿼리 -->
+    <select id="getMacAddress" parameterType="int" resultType="String">
+        SELECT mac_address
+        FROM userplant
+        WHERE plantid_log = #{plantid_log}
+    </select>
 
 </mapper>
