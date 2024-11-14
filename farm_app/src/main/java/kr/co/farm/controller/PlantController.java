@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import kr.co.farm.plant.GuideVO;
+import kr.co.farm.plant.ManageVO;
 import kr.co.farm.plant.PlantMapper;
 import kr.co.farm.plant.PlantVO;
 import kr.co.farm.plant.WaterVO;
@@ -33,6 +34,13 @@ public class PlantController {
 //		
 //		return new Gson().toJson(vo);
 //	}
+	
+	//작물배열 가져오기
+	@RequestMapping("/userplant")
+	public String userplant (String userid){
+		List<ManageVO> plantList = mapper.getListOfUserPlant(userid);
+		return new Gson().toJson(plantList);
+	}
 	
 	//온/습도
 	@RequestMapping("/data")
