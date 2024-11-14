@@ -2,20 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.plant.PlantMapper">
 
+<!-- plants_data 테이블의 light컬럼 제어 -->
+<update id="updateLightStatus">
+update plants_data
+set light = #{light}
+where mac_address = #{mac_address}
+</update>
+
+<!-- 급수관리 추가 -->
+<insert id="registerWaterManage">
+INSERT INTO water_manage (soilmoisture, plant_id, userid)
+SELECT moisture, #{plantid_log}, #{userid_log}
+FROM plants_data
+WHERE plant_id = #{plantid_log}
+</insert>
+
+<!-- plants_data 테이블의 relay1 on,off제어 -->
+<update id="updateRelay1Status">
+update plants_data
+set relay1 = #{relay1}
+where mac_address = #{mac_address}
+</update>
+
+<!-- 맥어드레스조회해오기 -->
+<select id="getMacAddress" resultType="String">
+SELECT mac_address
+FROM userplant  
+WHERE userid_log = #{userid_log} AND plantid_log = #{plantid_log}
+</select>
+
+<!-- 사용자의 등록 된 작물 선택을 위한 조회 -->
 <select id="getListOfUserPlant" resultType="manage">
 select p.plant_id, plant_name, d.mac_address
 from userplant us
 join plant p ON us.plantid_log = p.plant_id
 left outer join plants_data d ON us.userid_log = d.userid and us.plantid_log = d.plant_id
 where userid_log = #{userid}
-
-<!-- SELECT us.*, p.*, pd.mac_address AS pd_mac_address -->
-<!-- FROM userplant us -->
-<!-- JOIN plant p ON us.plantid_log = p.plant_id -->
-<!-- LEFT JOIN plants_data pd ON us.mac_address = pd.mac_address -->
-<!-- WHERE us.userid_log = #{userid} -->
 </select>
 
+<!-- 온습도 정보 -->
 <select id="getOneGuide" resultType="guide">
 SELECT p.*
 FROM plant p
@@ -23,10 +48,12 @@ JOIN plants_data pd ON p.plant_id = pd.plant_id
 WHERE pd.userid = #{userid} AND pd.plant_id = #{plant_id}
 </select>
 
+<!-- 온습도 정보 -->
 <select id="getOneData" resultType="plant">
 select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
 </select>
 
+<!-- 급수관리 리스트 -->
 <select id="getListOfWaterByUser" resultType="water">
 SELECT *
 FROM (

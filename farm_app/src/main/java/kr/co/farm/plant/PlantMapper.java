@@ -8,6 +8,16 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PlantMapper {
 	
+	// light 값 변경하기
+	int updateLightStatus(String mac_address, String light);
+	
+	//물주기 릴레이 값 변경하기
+	int updateRelay1Status(String mac_address, String relay1 );
+	// mac_address 조회하기
+	String getMacAddress(String userid_log, int plantid_log);
+	//	급수관리정보 추가
+	 int registerWaterManage(String userid_log, int plantid_log);
+	
 	//작물선택
 	List<ManageVO> getListOfUserPlant(String userid);
 	

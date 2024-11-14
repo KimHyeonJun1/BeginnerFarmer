@@ -4,7 +4,14 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +24,7 @@ import kr.co.farm.plant.GuideVO;
 import kr.co.farm.plant.ManageVO;
 import kr.co.farm.plant.PlantMapper;
 import kr.co.farm.plant.PlantVO;
+import kr.co.farm.plant.RelayVO;
 import kr.co.farm.plant.WaterVO;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +34,63 @@ import lombok.RequiredArgsConstructor;
 public class PlantController {
 	private final PlantMapper mapper;
 	private final MemberMapper Membermapper;
+	
+	@RequestMapping("/lightStatus")
+	@ResponseBody
+	public Object lightStatus(String userid_log, String plantid_log) {
+	    
+	 // mac_address를 데이터베이스에서 가져옴
+	    PlantVO  plant = mapper.getOneData(userid_log, plantid_log);
+	    
+	    return  new Gson().toJson(plant);
+	    
+	}
+	@RequestMapping("/lightStatusUpdate")
+	@ResponseBody
+	public Object lightStatusUpdate(String userid_log, int plantid_log, String signal) {
+		
+		// mac_address를 데이터베이스에서 가져옴
+		String mac_address = mapper.getMacAddress(userid_log, plantid_log);
+		
+		RelayVO vo = new RelayVO();
+		vo.getMac_address();
+		
+		int on = mapper.updateLightStatus(mac_address,signal.equals("ON")? "LOW02": "OFFOO");
+//	    int off = mapper.updateLightStatus(mac_address, "OFFOO");
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("signal", signal);
+		map.put("status", on==1 ? "성공"	:"실패");
+		return  new Gson().toJson(map);
+		
+	}
 
+	
+	@RequestMapping("/waterAndRelay1Update")
+	@ResponseBody
+	public boolean waterAndRelayUpdate(String userid_log, int plantid_log) {
+
+	    // 물주기 기록을 저장
+	    mapper.registerWaterManage(userid_log, plantid_log);
+	    
+	    // mac_address를 데이터베이스에서 가져옴
+	    String mac_address = mapper.getMacAddress(userid_log, plantid_log);
+	    
+	    // relay1을 "ONOOO"로 설정
+	    RelayVO vo = new RelayVO();
+	    vo.getMac_address();
+	    int update = mapper.updateRelay1Status(mac_address, "ONOOO");
+
+	    // 5초 후 relay1을 "OFFOO"로 설정
+	    new Timer().schedule(new TimerTask() {
+	        @Override
+	        public void run() {
+	            mapper.updateRelay1Status(mac_address, "OFFOO");
+	        }
+	    }, 5000);
+	    return update == 1 ? true:false ;
+	}
+	
+	
 	//작물배열 가져오기
 	@RequestMapping("/userplant")
 	public String userplant (String userid){
@@ -67,7 +131,7 @@ public class PlantController {
 	}
 	
 	
-	//급수관리
+	//급수관리 , 물주기 버튼
 	@RequestMapping("/moisture")
 	public String moisture(String userid, String plantid) {
 	    PlantVO plantVo = mapper.getOnePlant(userid, plantid); // Moisture 정보
