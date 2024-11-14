@@ -22,6 +22,16 @@ import lombok.RequiredArgsConstructor;
 public class PlantController {
 	private final PlantMapper mapper;
 
+	//작물배열 가져오기
+	@RequestMapping("/userplant")
+	public String userplant (String userid){
+		List<ManageVO> plantList = mapper.getListOfUserPlant(userid);
+		return new Gson().toJson(plantList);
+	}
+	
+
+	
+	
 	//조명 제어
 //	@RequestMapping("/right")
 //	public String right () {
@@ -35,13 +45,9 @@ public class PlantController {
 //		return new Gson().toJson(vo);
 //	}
 	
-	//작물배열 가져오기
-	@RequestMapping("/userplant")
-	public String userplant (String userid){
-		List<ManageVO> plantList = mapper.getListOfUserPlant(userid);
-		return new Gson().toJson(plantList);
-	}
+
 	
+
 	//온/습도
 	@RequestMapping("/data")
 	public String data (String userid, String plantid) {

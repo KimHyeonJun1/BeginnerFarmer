@@ -18,6 +18,9 @@ public class MemberController {
 	private final MemberMapper mapper;
 	private final PasswordEncoder password;
 	
+	
+	
+	
 	@RequestMapping("/login")
 	public String login(String userid, String userpw) {
 		MemberVO vo = mapper.getOneMember(userid);
