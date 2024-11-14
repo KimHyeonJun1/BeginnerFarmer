@@ -18,6 +18,9 @@ public class MemberController {
 	private final MemberMapper mapper;
 	private final PasswordEncoder password;
 	
+	
+	
+	
 	@RequestMapping("/login")
 	public String login(String userid, String userpw) {
 		MemberVO vo = mapper.getOneMember(userid);
@@ -36,7 +39,7 @@ public class MemberController {
 	@ResponseBody @RequestMapping("/update")
 	public String update(String vo) {
 		MemberVO member = new Gson().fromJson(vo, MemberVO.class);
-		mapper.updateMember(member);
+//		mapper.updateMember(member);
 		member = mapper.getOneMember(member.getUserid());
 		return new Gson().toJson(member);
 	}

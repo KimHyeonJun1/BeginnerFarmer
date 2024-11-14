@@ -6,7 +6,9 @@
 	<typeAlias type="kr.co.farm.plant.PlantVO" alias="plant"/>
 	<typeAlias type="kr.co.farm.plant.WaterVO" alias="water"/>
 	<typeAlias type="kr.co.farm.plant.GuideVO" alias="guide"/>
+	<typeAlias type="kr.co.farm.plant.ManageVO" alias="manage"/>
 
+	<typeAlias type="kr.co.farm.notice.NoticeVO" alias="notice"/>
 </typeAliases>
 
 </configuration>

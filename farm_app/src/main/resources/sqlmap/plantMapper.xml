@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.farm.plant.PlantMapper">
 
+<select id="getListOfUserPlant" resultType="manage">
+select p.plant_id, plant_name, d.mac_address
+from userplant us
+join plant p ON us.plantid_log = p.plant_id
+left outer join plants_data d ON us.userid_log = d.userid and us.plantid_log = d.plant_id
+where userid_log = #{userid}
+
+<!-- SELECT us.*, p.*, pd.mac_address AS pd_mac_address -->
+<!-- FROM userplant us -->
+<!-- JOIN plant p ON us.plantid_log = p.plant_id -->
+<!-- LEFT JOIN plants_data pd ON us.mac_address = pd.mac_address -->
+<!-- WHERE us.userid_log = #{userid} -->
+</select>
+
 <select id="getOneGuide" resultType="guide">
 SELECT p.*
 FROM plant p
@@ -26,5 +40,16 @@ FROM (
 <select id="getOnePlant" resultType="plant">
 select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
 </select>
+
+
+<!-- 로그인한 유저의 플랜테이블 정보 조회 -->
+<select id="getPlantStandardInfo" resultType="guide">
+SELECT p.plant_name,  TRUNC(SYSDATE) - TRUNC(u.plant_date) + 1 today
+FROM plant p
+JOIN userplant u ON p.plant_id = u.plantid_log
+WHERE u.userid_log = #{userid} AND u.plantid_log = #{plant_id}
+</select>
+
+
 
 </mapper>

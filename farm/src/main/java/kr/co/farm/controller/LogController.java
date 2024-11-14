@@ -205,7 +205,7 @@ public class LogController {
 	    // plantid_log에 해당하는 mac_address 값을 가져옴
         String macAddress = mapper.getMacAddress(plantid_log);
         model.addAttribute("mac_address", macAddress); // mac_address 값을 모델에 추가
-	    
+//	    
 		session.setAttribute("category", "mo");		
 		return "log/monitor";
 				}	

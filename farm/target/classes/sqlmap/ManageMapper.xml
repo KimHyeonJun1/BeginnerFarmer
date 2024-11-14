@@ -23,14 +23,12 @@
     SELECT 
         p.plant_id AS plantid_log, 
         p.plant_name, 
-        TRUNC(SYSDATE) - TRUNC(pd.time_log) + 1 AS today
+        TRUNC(SYSDATE) - TRUNC(up.plant_date) + 1 AS today
     FROM 
         userplant up
     JOIN 
         plant p ON up.plantid_log = p.plant_id
-    JOIN 
-        plants_data pd ON pd.plant_id = p.plant_id
-    WHERE 
+     WHERE 
         up.userid_log = #{userid_log} 
         AND up.plantid_log = #{plantid_log}
 </select>
@@ -102,22 +100,22 @@ select * from member where role = upper('user')
 
 <!-- 관리자 디바이스 등록 -->
 <update id="registerDevice">
-update userplant set userid_log = #{userid} 
+update userplant set userid_log = #{userid}, register_date = sysdate 
 where mac_address = #{mac_address}
 </update>
 <!-- 관리자 디바이스 연결해제 -->
 <update id="updateDeviceDisconn">
-update userplant set userid_log = null, plantid_log = null where mac_address = #{mac_address}
+update userplant set userid_log = null, plantid_log = null, register_date = null, plant_date = null where mac_address = #{mac_address}
 </update>
 
 <!-- 사용자 디바이스 연결해제 -->
 <update id="updateUserDeviceDisconn">
-update userplant set plantid_log = null where mac_address = #{mac_address} 
+update userplant set plantid_log = null, plant_date = null where mac_address = #{mac_address} 
 </update>
 
 <!-- 사용자가 디바이스와 작물 연결등록 -->
 <update id="registerUserPlant">
-update userplant set plantid_log = #{plant_id} where mac_address = #{mac_address}
+update userplant set plantid_log = #{plant_id},  plant_date = sysdate where mac_address = #{mac_address}
  
 </update>
 
