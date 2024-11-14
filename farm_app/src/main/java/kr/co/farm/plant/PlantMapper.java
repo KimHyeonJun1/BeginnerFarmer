@@ -1,5 +1,6 @@
 package kr.co.farm.plant;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,5 +17,5 @@ public interface PlantMapper {
 	PlantVO getOneData(String userid, String plant_id);   
 	GuideVO getOneGuide(String userid, String plant_id);    
 	
-	
+	GuideVO getPlantStandardInfo(String userid, String plant_id, Date plant_date);
 }
