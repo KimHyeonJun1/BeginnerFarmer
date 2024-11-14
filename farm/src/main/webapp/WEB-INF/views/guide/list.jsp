@@ -6,8 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>작물가이드</title>
+<style>
+figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.plant-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율을 유지하면서 요소에 맞게 조정 */
+}
+</style>
 </head>
 <body>
+<h3 class="my-5">작물가이드</h3>
 <div class="container text-center mt-5">
   <div class="row">
     <c:forEach items="${ list }" var="vo">
