@@ -23,8 +23,8 @@
 			<input type="hidden" name="board_type_id" value="${board_type_id}">
 			<div class="boardTypeButtons d-flex gap-3">
 			    <c:forEach items="${boardTypes}" var="bt">
-			        <a href="javascript:void(0);" onclick="boardType(${bt.board_type_id}); activateButton(this);"
-			           class="btn btn-outline-success "> <!-- listType 요청에 board_type_id 파라미터를 포함하여 링크 생성 -->
+			        <a onclick="boardType(${bt.board_type_id}); activeButton(this);"
+			           class="btn ${bt.board_type_id == board_type_id ? 'btn-success' : 'btn-outline-success'}">
 			            ${bt.board_type_name}
 			        </a>
 			    </c:forEach>
@@ -116,31 +116,13 @@ $("[name=listSize]").on("change", function(){
 })
 $("[name=listSize]").val( ${page.listSize} ).prop("selected", true)
 
-// 액티브 처리 미완료
-// function activateButton(clickedButton) {
-//     // 모든 boardTypeButtons 내의 버튼에서 btn-success를 제거하고 btn-outline-success 추가
-//     $('.boardTypeButtons .btn').removeClass('btn-success').addClass('btn-outline-success');
-    
-//     // 클릭된 버튼에만 btn-success 추가하여 활성화 표시
-//     $(clickedButton).removeClass('btn-outline-success').addClass('btn-success');
-// }
-
-// function boardType(boardTypeId) {
-//     // 선택된 board_type_id를 hidden input에 설정
-//     $('input[name="board_type_id"]').val(boardTypeId);
-//     console.log("Selected board_type_id:", boardTypeId);
-//     $.ajax({
-//         url: '/farm/board/list',            // 서버의 엔드포인트
-//         type: 'GET',                     // 요청 방식
-//         data: { board_type_id: boardTypeId }, // 보낼 데이터
-//         success: function(response) {
-//             $('#list').html(response);  // 응답 데이터를 목록에 표시
-//         },
-//         error: function(xhr, status, error) {
-//             console.error("Error fetching board list:", error);
-//         }
-//     });
-// }
+// 버튼 활성화 처리 함수
+function activeButton(button) {
+    // 모든 버튼을 비활성화 (btn-outline-success)로 변경
+    $(".boardTypeButtons .btn").removeClass("btn-success").addClass("btn-outline-success");
+    // 클릭된 버튼만 활성화 (btn-success)로 변경
+    $(button).removeClass("btn-outline-success").addClass("btn-success");
+}
 </script>
 
 </html>
