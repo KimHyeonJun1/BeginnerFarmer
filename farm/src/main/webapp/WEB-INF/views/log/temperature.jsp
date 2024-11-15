@@ -86,7 +86,7 @@ display: grid;
 }
 </style>
 <body>
-<h3 class="my-2 mb-4">온도/습도/조도</h3>
+<h3 class="my-2 mb-4">온도/습도</h3>
 <div class="container">
 		<div class="item z-3">
 		<form method="post" action="temperature">
@@ -104,11 +104,21 @@ display: grid;
 		
 		<div class="item text-center"><h4 class="mb-3">현재 상태</h4>
 			<div class="d-flex">
+		<c:if test="${not empty temp}">
 			<div class="speech-bubble">
    				 <c:if test="${not empty conditionMessage}">
       				  <h5 class="mt-2 result-message">${conditionMessage}</h5>
    				 </c:if>
 			</div>
+		</c:if>
+		<c:if test="${ empty temp}">
+			<div class="speech-bubble">
+   				
+      				  <h5 class="mt-2 result-message">정보가 없습니다.</h5>
+   			
+			</div>
+		</c:if>	
+		
 			</div>
 			
 		</div>

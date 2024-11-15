@@ -20,7 +20,7 @@
 	<c:when test="${category eq 'no'}"> <c:set var="title" value="- 공지사항"/>  </c:when>
 	<c:when test="${category eq 'ma'}"> <c:set var="title" value="- 작물관리"/>  </c:when>
 	<c:when test="${category eq 'mo'}"> <c:set var="title" value="- 실시간모니터링"/>  </c:when>
-	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도/조도"/>  </c:when>
+	<c:when test="${category eq 'te'}"> <c:set var="title" value="- 온도/습도"/>  </c:when>
 	<c:when test="${category eq 'wa'}"> <c:set var="title" value="- 급수관리"/>  </c:when>
 	<c:when test="${category eq 'di'}"> <c:set var="title" value="- 관찰일지"/>  </c:when>
 	<c:when test="${category eq 'my' }"><c:set var="title" value="- 내정보"/> </c:when>
@@ -139,7 +139,7 @@
             <ul>
                 <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
 				<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
-				<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+				<li><a href="<c:url value='/log/temperature'/>">온도/습도</a></li>
 				<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
 				<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
             </ul>
@@ -153,7 +153,7 @@
 		            <ul>
 		                <li><a href="<c:url value='/manage/list'/>">작물관리</a></li>
 						<li><a href="<c:url value='/log/monitor'/>">실시간모니터링</a></li>
-						<li><a href="<c:url value='/log/temperature'/>">온도/습도/조도</a></li>
+						<li><a href="<c:url value='/log/temperature'/>">온도/습도</a></li>
 						<li><a href="<c:url value='/log/water_management'/>">급수관리</a></li>
 						<li><a href="<c:url value='/diary/list'/>">관찰일지</a></li>
 		            </ul>
@@ -289,7 +289,7 @@
                 <div class="list-group list-group-flush ms-3">
                     <a class="${ category eq 'ma' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/manage/list'/>">작물관리</a>
                     <a class="${ category eq 'mo' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/monitor'/>">실시간모니터링</a>
-                    <a class="${ category eq 'te' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도/조도</a>
+                    <a class="${ category eq 'te' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/temperature'/>">온도/습도</a>
                     <a class="${ category eq 'wa' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/log/water_management'/>">급수관리</a>
                     <a class="${ category eq 'di' ? 'active' : ''} list-group-item list-group-item-action" href="<c:url value='/diary/list'/>">관찰일지</a>
                 </div>
