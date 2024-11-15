@@ -11,7 +11,13 @@
 <h3 class="my-5">주간농사정보</h3>
 
 <div class="d-flex mb-2 justify-content-between">
-	<div class="col-auto d-flex gap-2"></div>
+<!-- <form name="searchApiForm"> -->
+<!-- 	<input type="hidden" name="pageNo"> -->
+<%-- 	<input type="text" name="searchword" value="<%=request.getParameter("searchword")==null?"":request.getParameter("searchword")%>"> --%>
+<!-- 	<input type="button" name="search" value="검색" onclick="return fncSearch();"/> -->
+<!-- 	<button class="btn btn-success" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button> -->
+<!-- </form> -->
+<div class="col-auto d-flex gap-2"><span class="fs-5 text-success">※ 제목이나 첨부파일 클릭시 파일이 다운로드됩니다. ※</span></div>
 	<div class="col-auto">
 		<select id="listSize" class="form-select">
 			<c:forEach var="i" begin="1" end="5">
@@ -25,14 +31,13 @@
 	<colgroup>
 		<col width="100px">
 		<col width="">
-		<col width="150px">
 		<col width="200px">
 		<col width="150px">
 		<col width="150px">
 	</colgroup>
 	<thead>
 		<tr>
-			<th>번호</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th><th>첨부</th>
+			<th>번호</th><th>제목</th><th>등록일</th><th>조회수</th><th>첨부</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -45,7 +50,7 @@
 		<tr>
 			<td>${ No }</td>
 			<td><a href="${item.downUrl}">${ item.subject }</a></td>
-			<td>${ item.writerNm }</td>
+<%-- 			<td>${ item.writerNm }</td> --%>
 			<td>${ item.regDt }</td>
 			<td>${ item.hitCt }</td>
 			<td><a href="${item.downUrl}"><i class="fa-regular fa-file"></i></a></td>
@@ -73,6 +78,22 @@ $(function(){
         }
     });
 })
+
+//검색
+// function fncSearch(){
+// 	with(document.searchApiForm){
+// 		if(searchword.value.replace(/\s/g,"") == ""){
+// 	        alert("검색어를 입력해 주세요");
+// 	        searchword.focus();
+// 	        return false;
+// 	    }else{
+// 			method="get";
+// 			action = "list.jsp";
+// 			target = "_self";
+// 			submit();
+// 		}
+// 	}
+// }
 
 // 	$.ajax({
 // 		url: "weekInfo"

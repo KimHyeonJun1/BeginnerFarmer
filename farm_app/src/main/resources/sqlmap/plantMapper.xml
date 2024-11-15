@@ -71,7 +71,7 @@ select * from plants_data where userid = #{userid} and plant_id = #{plant_id}
 
 <!-- 로그인한 유저의 플랜테이블 정보 조회 -->
 <select id="getPlantStandardInfo" resultType="guide">
-SELECT p.plant_name,  TRUNC(SYSDATE) - TRUNC(u.plant_date) + 1 today
+SELECT p.plant_name, p.food, p.image_path, TRUNC(SYSDATE) - TRUNC(u.plant_date) + 1 today
 FROM plant p
 JOIN userplant u ON p.plant_id = u.plantid_log
 WHERE u.userid_log = #{userid} AND u.plantid_log = #{plant_id}

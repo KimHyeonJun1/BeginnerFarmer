@@ -51,7 +51,7 @@ public class SecurityConfig {
 		
 		http.authorizeRequests()
 //			.antMatchers("/**").permitAll() //모든 요청에 대한 접근 허용
-			.antMatchers("/guide/**", "/weekInfo/**", "/video/**").permitAll()
+			.antMatchers("/guide/**", "/weekInfo/**", "/video/**", "/member/register").permitAll()
 			.antMatchers("/board/list", "/board/info","/notice/list", "/notice/info").permitAll()
 			.antMatchers("/notice/register").hasAnyAuthority("ADMIN")
 			.antMatchers("/**/register").hasAnyAuthority("USER")
