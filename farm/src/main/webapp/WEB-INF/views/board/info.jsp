@@ -17,15 +17,15 @@
 	<col width="200px">
 </colgroup>
 <tr>
-	<th>제목</th><td>${ vo.board_title }</td>
-	<th>작성일자</th><td>${ vo.board_writedate }</td>
+	<th class="text-center">제목</th><td>${ vo.board_title }</td>
+	<th class="text-center">작성일자</th><td>${ vo.board_writedate }</td>
 </tr>
 <tr>
-	<th>작성자</th><td>${ vo.board_writer }</td>
-	<th>조회수</th><td>${ vo.board_readcnt }</td>
+	<th class="text-center">작성자</th><td>${ vo.name }</td>
+	<th class="text-center">조회수</th><td>${ vo.board_readcnt }</td>
 </tr>
 <tr>
-	<th>내용</th><td colspan="3">${ vo.board_content }</td>	
+	<th class="text-center">내용</th><td colspan="3">${ vo.board_content }</td>	
 </tr>	
 </table>
 

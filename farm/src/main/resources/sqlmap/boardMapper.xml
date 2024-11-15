@@ -58,8 +58,8 @@ where board_id = #{board_id}
 
 <!-- 게시판 정보조회 -->
 <select id="getOneBoard" resultType="board">
-select b.*, bt.board_type_name as type_name
-from board b join board_type bt on b.board_type_id = bt.board_type_id
+select b.*, bt.board_type_name as type_name, m.name as name
+from board b join board_type bt on b.board_type_id = bt.board_type_id join member m on b.board_writer = m.userid
 where b.board_id = #{board_id}
 </select>
 

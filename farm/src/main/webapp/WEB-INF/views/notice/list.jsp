@@ -35,18 +35,21 @@
 	<col width="100px">
 	<col width="120px">
 </colgroup>
-<tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th><th>첨부파일</th></tr>
+<tr>
+	<th class="text-center">번호</th><th>제목</th><th class="text-center">작성자</th><th class="text-center">작성일자</th>
+	<th class="text-center">조회수</th><th class="text-center">첨부파일</th>
+</tr>
 <c:if test="${ empty page.list }">
 <tr><td colspan="6" class="text-center">공지글이 없습니다</td></tr>
 </c:if>
 <c:forEach items="${ page.list }" var="vo">
 <tr>	
-	<td>${ vo.no }</td>
+	<td class="text-center">${ vo.no }</td>
 	<td><a class="text-link" href="info?id=${ vo.id }&pageNo=${page.pageNo}&search=${page.search}&keyword=${page.keyword}">${ vo.title }</a></td>
-	<td>${ vo.name }</td>
-	<td>${ vo.writedate }</td>
-	<td>${ vo.readcnt }</td>
-	<td><c:if test="${ !empty vo.filename }"><i class="fa-solid fa-paperclip"></i></c:if></td>
+	<td class="text-center">${ vo.name }</td>
+	<td class="text-center">${ vo.writedate }</td>
+	<td class="text-center">${ vo.readcnt }</td>
+	<td class="text-center"><c:if test="${ !empty vo.filename }"><i class="fa-solid fa-paperclip"></i></c:if></td>
 </tr>
 </c:forEach>
 </table>
