@@ -1,6 +1,10 @@
 spring:
   application:
     name: farm_app
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp		
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: ${oracle.url}

@@ -31,7 +31,7 @@ public class MemberController {
 	
 	//내 정보 변경저장 처리 요청
 		@PutMapping("/user/myPage/modify")
-		public String myPage(MemberVO vo, boolean img, MultipartFile file 
+		public String myPage(MemberVO vo, boolean img, MultipartFile file, @AuthenticationPrincipal LoginUser auth 
 							, HttpSession session, HttpServletRequest request) {
 			//원래 프로필정보를 조회해오기
 			MemberVO user = mapper.getOneMember(vo.getUserid() );
@@ -54,6 +54,7 @@ public class MemberController {
 			//화면에서 입력한 정보로 DB에 변경 저장
 			//변경된 정보가 화면에 반영되도록 세션정보를 변경하기
 			if( mapper.updateMember(vo) == 1 ) {
+				auth.setUser(vo);
 					//물리적파일삭제
 					//원래O -> 화면imgX -> 물리적파일 삭제
 					//원래O -> 바꿔첨부  -> DB 저장할 vo 의 profile에 담기 + 물리적파일 삭제

@@ -7,11 +7,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +30,8 @@ public class PlantController {
 	private final PlantMapper mapper;
 	private final MemberMapper Membermapper;
 	
+
+
 	@RequestMapping("/lightStatus")
 	@ResponseBody
 	public Object lightStatus(String userid_log, String plantid_log) {
@@ -67,7 +64,7 @@ public class PlantController {
 	
 	@RequestMapping("/waterAndRelay1Update")
 	@ResponseBody
-	public boolean waterAndRelayUpdate(String userid_log, int plantid_log) {
+	public Object waterAndRelayUpdate(String userid_log, int plantid_log) {
 
 	    // 물주기 기록을 저장
 	    mapper.registerWaterManage(userid_log, plantid_log);
@@ -87,7 +84,12 @@ public class PlantController {
 	            mapper.updateRelay1Status(mac_address, "OFFOO");
 	        }
 	    }, 5000);
-	    return update == 1 ? true:false ;
+	    
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("waterList", mapper.getListOfWaterByUser(userid_log, String.valueOf(plantid_log))); // 급수 관리 데이터 리스트
+	    response.put("process", update == 1 ? true:false );  
+	    return new Gson().toJson(response);
 	}
 	
 	

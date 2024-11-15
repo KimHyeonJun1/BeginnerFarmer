@@ -61,12 +61,15 @@
         <c:forEach items="${diaryList}" var="vo">
             <tr>
                 <td>${vo.no}</td>
+			<div class="justify-content-center">
                 <td>${vo.plant_name}</td>
+			</div>
                 <td><a class="text-link" href="info?id=${vo.diary_id}">${vo.diary_title}</a></td>
                 <td>${vo.diary_writedate}</td>
             </tr>
         </c:forEach>
     </table>
+
 
     <jsp:include page="/WEB-INF/views/include/page.jsp"></jsp:include>
 
