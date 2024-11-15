@@ -42,16 +42,16 @@
 
     <table class="table tb-list">
         <colgroup>
-            <col width="80px">
             <col width="100px">
+            <col width="150px">
             <col width="">
-            <col width="160px">
+            <col width="150px">
         </colgroup>
         <tr>
-            <th>번호</th>
-            <th>작물</th>
+            <th class="text-center">번호</th>
+            <th class="text-center">작물</th>
             <th>제목</th>
-            <th>작성일자</th>
+            <th class="text-center">작성일자</th>
         </tr>
 
         <c:if test="${empty diaryList}">
@@ -60,12 +60,10 @@
 
         <c:forEach items="${diaryList}" var="vo">
             <tr>
-                <td>${vo.no}</td>
-			<div class="justify-content-center">
-                <td>${vo.plant_name}</td>
-			</div>
+                <td class="text-center">${vo.no}</td>
+                <td class="text-center">${vo.plant_name}</td>
                 <td><a class="text-link" href="info?id=${vo.diary_id}">${vo.diary_title}</a></td>
-                <td>${vo.diary_writedate}</td>
+                <td class="text-center">${vo.diary_writedate}</td>
             </tr>
         </c:forEach>
     </table>

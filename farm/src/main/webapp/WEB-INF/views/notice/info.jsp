@@ -18,16 +18,16 @@
 	<col width="200px">
 </colgroup>
 <tr>
-	<th>제목</th><td>${ vo.title }</td>
-	<th>작성일자</th><td>${ vo.writedate }</td>
+	<th class="text-center">제목</th><td>${ vo.title }</td>
+	<th class="text-center">작성일자</th><td>${ vo.writedate }</td>
 </tr>
-<tr><th>작성자</th><td>${ vo.name }</td>
-	<th>조회수</th><td>${ vo.readcnt }</td>
+<tr><th class="text-center">작성자</th><td>${ vo.name }</td>
+	<th class="text-center">조회수</th><td>${ vo.readcnt }</td>
 </tr>
 <tr>
-	<th>내용</th><td colspan="3">${ fn: replace(vo.content, crlf, "<br>") }</td>
+	<th class="text-center">내용</th><td colspan="3">${ fn: replace(vo.content, crlf, "<br>") }</td>
 </tr>
-<tr><th>첨부파일</th>
+<tr><th class="text-center">첨부파일</th>
 	<td colspan="5">
 		<c:if test="${ ! empty vo.filename }">
 			<div class="d-flex">

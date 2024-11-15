@@ -189,9 +189,10 @@ function setFileInfo( tag ){
 
 // 파일크기 제한하기
 function fileSizeOver(file, tag){
+	console.log(file.size)
 	// 1K=1024b, 1M=1024*1024b, 1G=1024*1024*1024b
-	if( file.size > 1024*1024*10 ){ // 10M
-		alert("10MB를 넘는 파일은 첨부할 수 없습니다")
+	if( file.size > 1024*1024*100 ){ // 100M
+		alert("100MB를 넘는 파일은 첨부할 수 없습니다")
 		setFileInfo( tag )
 		return true;
 	} else {

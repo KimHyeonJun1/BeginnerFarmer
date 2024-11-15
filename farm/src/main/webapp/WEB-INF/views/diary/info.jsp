@@ -12,19 +12,19 @@
 <h3 class="my-t">관찰일지 상세 정보</h3>
 <table class="table tb-row">
 <colgroup>
-	<col width ="50x">
-	<col width ="200px">
+	<col width ="100px">
+	<col width ="">
 </colgroup>
 	<tr>
-		<th>작물</th>
+		<th class="text-center">작물</th>
 		<td>${diary.plant_name}</td>
 	</tr>
     <tr>
-        <th>제목</th>
+        <th class="text-center">제목</th>
         <td>${diary.diary_title}</td> <!-- DB에서 가져온 제목 -->
     </tr>
     <tr>
-        <th>내용</th>
+        <th class="text-center">내용</th>
         <td>
             <div id="summernote" class="form-control " >${diary.diary_content}</div> <!-- DB에서 가져온 내용 -->
         </td>
