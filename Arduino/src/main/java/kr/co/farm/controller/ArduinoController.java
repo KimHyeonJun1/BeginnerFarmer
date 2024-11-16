@@ -23,8 +23,8 @@ public class ArduinoController {
 		
 	}
 	 @RequestMapping("/arduino")
-	public void plantSignal(String f01, String f03, String f04, String f05, String f06) {
-		System.out.println("맥어드레스 " +f01 + " 온도 " + f03 + " 대기습도 " + f04 + " 조도 " + f05  + " 토양습도 " + f06);
+	public void plantSignal(String f01, String f03, String f04,  String f05) {
+		System.out.println("맥어드레스 " +f01 + " 온도 " + f03 + " 대기습도 " + f04 + " 토양습도 " + f05);
 		if(f01 == null) {
 			return ;
 		}
@@ -32,8 +32,7 @@ public class ArduinoController {
 		vo.setMac_address(f01);
 		vo.setTemperature(Double.parseDouble(f03));
 		vo.setHumid(Double.parseDouble(f04));
-		vo.setBright(Integer.parseInt(f05));
-		vo.setMoisture(Integer.parseInt(f06));
+		vo.setMoisture(Integer.parseInt(f05));
 		
 		mapper.arduinoSave(vo);
 		mapper.arduinoUpdate(vo);
