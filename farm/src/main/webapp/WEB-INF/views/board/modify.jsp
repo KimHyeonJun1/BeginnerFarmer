@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3 class="my-5">게시판 등록</h3>
+<h3 class="my-5">게시판 수정</h3>
 
 <form method="post" action="info" enctype="multipart/form-data" >
 	<table class="table tb-row mt-5">

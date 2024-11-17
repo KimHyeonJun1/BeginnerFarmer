@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3 class="my-2">제품등록</h3>
+<h3 class="my-2">제품관리</h3>
 
 <div class="box">
 

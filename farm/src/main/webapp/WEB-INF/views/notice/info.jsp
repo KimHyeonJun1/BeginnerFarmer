@@ -54,8 +54,8 @@
 		<sec:authentication property="principal.user" var="auth"/> 
 		<!-- 로그인한 사용자가 쓴 글에 대해서만 수정/삭제 가능 -->
 		<c:if test="${ auth.userid == vo.writer }">
-			<button class="btn btn-primary" id="btn-modify">정보수정</button>
-			<button class="btn btn-danger" id="btn-delete">정보삭제</button>
+			<button class="btn btn-primary" id="btn-modify">공지수정</button>
+			<button class="btn btn-danger" id="btn-delete">공지삭제</button>
 		</c:if>
 	</sec:authorize>
 </div>
