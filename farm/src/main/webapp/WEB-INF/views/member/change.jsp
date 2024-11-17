@@ -31,7 +31,7 @@
 	</div>
 	</td>
 </tr>
-<tr><th>세 비밀번호 확인</th>
+<tr><th>새 비밀번호 확인</th>
 	<td><div class="row input-check">
 		<div class="col-auto">
 			<input type="password" name="userpw_ck" class="form-control check-item">
