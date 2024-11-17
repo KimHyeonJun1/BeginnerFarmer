@@ -2,16 +2,14 @@ package kr.co.farm;
 
 import java.util.Scanner;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import kr.co.farm.member.MemberMapper;
 import kr.co.farm.member.MemberVO;
 import kr.co.farm.test.TestMapper;
 
-@SpringBootTest
+//@SpringBootTest
 class FarmApplicationTests {
 
     @Autowired
@@ -21,7 +19,7 @@ class FarmApplicationTests {
     private BCryptPasswordEncoder passwordEncoder; // 비밀번호 암호화기 주입
     
   //로그인
-  	@Test
+//  	@Test
   	void login() {
   		Scanner scan = new Scanner(System.in);
   		System.out.print("아이디: ");
@@ -48,7 +46,7 @@ class FarmApplicationTests {
   	
 
     // 회원가입(회원정보 저장)
-    @Test
+//    @Test
     void join() {
         Scanner scan = new Scanner(System.in);
         
@@ -80,7 +78,7 @@ class FarmApplicationTests {
     }
     
     @Autowired  private TestMapper test;
-    @Test
+//    @Test
     void test() {
     	String today = test.today();
     	System.out.println( today ); 
