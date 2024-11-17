@@ -22,7 +22,7 @@
 <body>
    
    
-   <div class="row justify-content-center">
+   <div class="row justify-content-center " >
          <div class="card shadow-lg border-0 rounded-lg mt-5">
             <div class="card-header">
                <h3 class="text-center font-weight-light my-4">
@@ -30,7 +30,7 @@
                </h3>
             </div>
             <div class="card-body p-5">
-               <form method="post" action="farmLogin">
+               <form method="post" action="farmLogin" autocomplete="off">
                   <div class="form-floating mb-3">
                      <input class="form-control" name="userid" type="text"
                         placeholder="아이디"> <label>아이디</label>

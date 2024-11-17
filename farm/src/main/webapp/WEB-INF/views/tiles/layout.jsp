@@ -349,10 +349,10 @@
         </div>
 
         <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-          <a href="https://www.twitter.com"><i class="bi bi-twitter-x"></i></a>
-          <a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
-          <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>
-          <a href="https://www.naver.com"><i class="bi bi-linkedin"></i></a>
+          <a target="_blank" href="https://www.twitter.com"><i class="bi bi-twitter-x"></i></a>
+          <a target="_blank" href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
+          <a target="_blank" href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>
+          <a target="_blank" href="https://www.naver.com"><i class="bi bi-linkedin"></i></a>
         </div>
 
       </div>

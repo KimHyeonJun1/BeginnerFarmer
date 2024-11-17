@@ -18,7 +18,7 @@
 <!-- 						<h3 class="my-4">회원가입</h3> -->
 
 					<div class="mb-2 text-danger fw-bold">* 는 필수입력항목입니다</div>
-					<form method="post" action="register" enctype=multipart/form-data>
+					<form method="post" action="register" enctype="multipart/form-data" autocomplete="off">
 <!-- 					파일업로드하기 위한 설정 
 						1. form 태그의 method: post
 						2. form 태그로 파일전송하도록 지정 : enctype=multipart/form-data

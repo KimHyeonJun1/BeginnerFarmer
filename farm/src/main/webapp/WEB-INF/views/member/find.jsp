@@ -18,7 +18,7 @@
                </h3>
             </div>
             <div class="card-body p-5">
-               <form method="post" action="tempPassword">
+               <form method="post" action="tempPassword" autocomplete="off">
                   <div class="form-floating mb-3">
                      <input class="form-control" name="userid" type="text"
                         placeholder="아이디"> <label>아이디</label>
