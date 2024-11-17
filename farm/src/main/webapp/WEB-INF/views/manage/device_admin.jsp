@@ -120,7 +120,18 @@ $("#btn-no").on("click", function(){
 	 			
 		
 	}
-	
+	// 서버에 해제 상태를 알리는 Ajax 요청
+    $.ajax({
+        type: "POST",
+        url: "/farm/log/removeSelectedPlant",
+        data: { mac_address: $("#select-mac_address").val() },  // 필요한 데이터 추가
+        success: function(response) {
+            console.log("서버에서 연결 해제 완료");
+        },
+        error: function() {
+            console.error("서버에서 연결 해제 실패");
+        }
+    });
 //    location='device_admin';
 })
 

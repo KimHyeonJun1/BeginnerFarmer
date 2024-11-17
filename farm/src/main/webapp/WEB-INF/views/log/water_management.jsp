@@ -114,6 +114,7 @@ $(document).ready(function() {
             success: function() {
             	alert("물주기 성공");
             	console.log("물주기 기록 및 Relay 상태 업데이트 완료.");
+            	$("form").submit();
             },
             error: function(xhr, status, error) {
             	alert("물주기 실패");

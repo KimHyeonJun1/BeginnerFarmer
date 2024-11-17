@@ -8,7 +8,7 @@
 <!-- to_char(time_log, 'hh24:mi') as time_log -->
 <!-- 온습조도 정보 조회 -->
 <select id="getOneTemperature" resultType="temperature">
-	select log_numb, temperature, humid, bright, moisture
+	select log_numb, temperature, humid,  moisture
 	from plants_data
 	where  userid = #{userid_log} and plant_id = #{plantid_log}
 	ORDER BY log_numb DESC 
@@ -27,7 +27,7 @@
 <!-- 온도/습도/조도/토양습도 -->
 <!-- 최근 10개의 데이터 조회 -->
 <select id="getCountByTemperature" resultType="LowerMap">
-    SELECT log_numb, temperature, humid, bright, moisture, to_char(time_log, 'hh24:mi') as time_log
+    SELECT log_numb, temperature, humid,  moisture, to_char(time_log, 'hh24:mi') as time_log
     FROM plants_log
     WHERE userid = #{userid_log} and plant_id = #{plantid_log}
     ORDER BY log_numb DESC 
