@@ -64,5 +64,8 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center mb-5">
+	<a class="btn btn-success text-white" href="<c:url value='/guide/list'/>">목록으로</a>
+</div>
 </body>
 </html>
