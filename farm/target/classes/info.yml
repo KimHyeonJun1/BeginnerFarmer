@@ -20,4 +20,4 @@ farm:
   #파일 업로드 위치
   files: d://farm/app/files/
    
-baseURL: http://localhost:8080/farm
+baseURL: http://121.179.5.33:8080/farm
